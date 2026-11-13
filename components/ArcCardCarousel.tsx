@@ -1,15 +1,9 @@
 "use client";
 
-import * as React from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-/**
- * Arc Card Carousel — photo cards hung on the rim of a wheel whose hub sits
- * off the left edge, so only a gentle arc of them shows. The card on the
- * wheel's equator lies flat; every card above it tips back and every card
- * below tips forward, each one turned to face the hub.
- */
+import { ArrowRight } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -18,356 +12,338 @@ if (typeof window !== "undefined") {
 export type ArcCardItem = {
   src: string;
   alt?: string;
-  title?: string;
+  title: string;
   meta?: string;
+  description?: string;
 };
 
 export type ArcCardCarouselProps = {
   items: ArcCardItem[];
-  height?: string;
   scrollPerCard?: number;
   step?: number;
-  radius?: number;
-  caption?: boolean;
-  loop?: boolean;
-  onIndexChange?: (index: number) => void;
   ariaLabel?: string;
   className?: string;
+  onBookItem?: (title: string) => void;
 };
 
+/** Compute ring size: repeat items so the wheel forms an endless, connected circular ring */
+export function ringSize(len: number): number {
+  return len > 0 ? Math.ceil(18 / len) * len : 0;
+}
+
+/** Distance of card `i` from position `pos`, wrapped symmetrically around the connected circle */
 export function offsetOf(i: number, pos: number, n: number): number {
   if (n <= 0) return 0;
   const d = (((i - pos) % n) + n) % n;
   return d >= n / 2 ? d - n : d;
 }
 
-export function ringSize(len: number): number {
-  return len > 0 ? Math.ceil(10 / len) * len : 0;
-}
-
+/** Wrap position to the 0..(count-1) items index */
 export function wrapIndex(i: number, n: number): number {
   if (n <= 0) return 0;
   return ((Math.round(i) % n) + n) % n;
 }
 
-export function geometry(w: number, h: number) {
-  const u = Math.min(h, w / 0.47);
-  const cardW = 0.3 * u;
-  return {
-    cardW,
-    cardH: cardW / 1.65,
-    radius: 0.71 * u,
-    hubX: 0.284 * u - 0.71 * u,
-    hubY: 0.475 * h,
-  };
-}
-
-export function place(
-  d: number,
-  stepDeg: number,
-  g: { radius: number; hubX: number; hubY: number }
-) {
-  const deg = -d * stepDeg;
-  const a = (deg * Math.PI) / 180;
-  return {
-    x: g.hubX + g.radius * Math.cos(a),
-    y: g.hubY + g.radius * Math.sin(a),
-    rot: deg,
-  };
-}
-
-export function spans(count: number, loop: boolean): number {
-  return Math.max(0, loop ? count : count - 1);
-}
-
-export function positionAt(progress: number, laps: number, steps: number): number {
-  return (progress + laps) * steps;
-}
-
-export function scrollFor(
-  i: number,
-  steps: number,
-  start: number,
-  end: number
-): number {
-  return steps > 0 ? start + (i / steps) * (end - start) : start;
-}
-
-const CSS =
-  ".acc-track{position:relative;background:#f9fbf8;--color-background:#f9fbf8;--color-foreground:#163c3d;--color-muted-foreground:#526061;--color-primary:#163c3d;--color-border:#e2eddf}" +
-  ".acc-stage{position:sticky;top:0;overflow:hidden}" +
-  ".acc-card{position:absolute;left:0;top:0;overflow:hidden;will-change:transform;cursor:pointer;" +
-  "box-shadow:0 4px 12px rgba(22,60,61,.12),0 16px 36px -10px rgba(22,60,61,.3);background:#ffffff;border:1px solid #e2eddf}" +
-  ".acc-card>img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;pointer-events:none}" +
-  ".acc-card:focus-visible{outline:2px solid #163c3d;outline-offset:3px}" +
-  ".acc-cap{position:absolute;right:6vw;transform:translateY(-50%);color:#163c3d;pointer-events:none;max-width:min(440px,42vw)}" +
-  ".acc-num{font-size:13px;letter-spacing:.08em;font-variant-numeric:tabular-nums;color:#526061;margin:0 0 16px;font-weight:600}" +
-  ".acc-title{margin:0;font-size:clamp(28px,4.5vw,72px);line-height:1.02;letter-spacing:-.035em;font-weight:600;font-family:var(--font-lora),Georgia,serif;color:#163c3d}" +
-  ".acc-meta{margin:16px 0 0;font-size:15px;color:#526061;font-weight:400;line-height:1.4}" +
-  ".acc-cap[data-narrow]{left:0 !important;right:0;top:auto !important;bottom:0;transform:none;padding:56px 20px 24px;max-width:none;" +
-  "background:linear-gradient(to top,#f9fbf8 calc(100% - 56px),transparent)}" +
-  ".acc-cap[data-narrow] .acc-num{margin-bottom:8px}" +
-  ".acc-cap[data-narrow] .acc-title{font-size:28px}" +
-  ".acc-cap[data-narrow] .acc-meta{margin-top:8px;font-size:13px}" +
-  ".acc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}";
-
 export default function ArcCardCarousel({
   items,
-  height = "100svh",
-  scrollPerCard = 0.6,
-  step = 14,
-  radius = 20,
-  caption = true,
-  loop = true,
-  onIndexChange,
+  scrollPerCard = 0.5,
+  step = 18.5, // 18.5° spacing so images are beautifully separated along the circular rim
   ariaLabel = "Photo carousel",
   className = "",
+  onBookItem,
 }: ArcCardCarouselProps) {
   const count = items.length;
-  const n = ringSize(count);
-  const cards = React.useMemo(
-    () => Array.from({ length: n }, (_, i) => items[i % count]),
+  // Ring of cards: continuous circular buffer so you NEVER see an empty end
+  const n = useMemo(() => ringSize(count), [count]);
+  const ringCards = useMemo(
+    () => Array.from({ length: n }, (_, i) => ({ ...items[i % count], originalIndex: i % count })),
     [items, n, count]
   );
-  const trackRef = React.useRef<HTMLDivElement | null>(null);
-  const stageRef = React.useRef<HTMLDivElement | null>(null);
-  const capRef = React.useRef<HTMLDivElement | null>(null);
-  const cardRefs = React.useRef<(HTMLDivElement | null)[]>([]);
-  const pos = React.useRef({ v: 0 });
-  const st = React.useRef<ScrollTrigger | null>(null);
-  const geo = React.useRef(geometry(1, 1));
-  const [index, setIndex] = React.useState(0);
-  const [narrow, setNarrow] = React.useState(false);
-  const [reduced, setReduced] = React.useState(false);
-  const onIndexRef = React.useRef(onIndexChange);
-  onIndexRef.current = onIndexChange;
-  const showCaption = caption && items.some((it) => it.title);
 
-  const placeCaption = React.useCallback(() => {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const stageRef = useRef<HTMLDivElement | null>(null);
+  const capRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const posRef = useRef({ v: 0 });
+  const stRef = useRef<ScrollTrigger | null>(null);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [stageDimensions, setStageDimensions] = useState({
+    w: 1440,
+    h: 900,
+    isMobile: false,
+  });
+
+  // Circular wheel geometry
+  const getGeometry = useCallback((w: number, h: number) => {
+    const isMobile = w < 768;
+    if (isMobile) {
+      const cardW = Math.min(300, w * 0.72);
+      const cardH = cardW / 1.5;
+      const radius = h * 0.65;
+      const equatorX = w * 0.36;
+      const hubX = equatorX - radius;
+      const hubY = h * 0.35;
+      return { cardW, cardH, radius, hubX, hubY, isMobile };
+    } else {
+      const cardW = Math.min(440, Math.max(340, w * 0.26));
+      const cardH = cardW / 1.48;
+      const radius = Math.min(850, Math.max(680, h * 0.82));
+
+      // Move equator inward from left edge for clean breathing room
+      const equatorX = Math.max(360, w * 0.28);
+      const hubX = equatorX - radius;
+      const hubY = h * 0.5;
+
+      return { cardW, cardH, radius, hubX, hubY, isMobile };
+    }
+  }, []);
+
+  // Compute placement along the circular arc
+  const getCardPlacement = useCallback(
+    (d: number, g: ReturnType<typeof getGeometry>) => {
+      const deg = -d * step;
+      const rad = (deg * Math.PI) / 180;
+      const x = g.hubX + g.radius * Math.cos(rad);
+      const y = g.hubY + g.radius * Math.sin(rad);
+      return { x, y, rot: deg };
+    },
+    [step]
+  );
+
+  // Position caption directly beside the flat equator card with generous breathing space
+  const positionCaption = useCallback(() => {
     const cap = capRef.current;
     const el = stageRef.current;
     if (!cap || !el) return;
-    const g = geo.current;
-    cap.style.top = g.hubY + "px";
-    cap.style.left =
-      g.hubX +
-      g.radius +
-      g.cardW / 2 +
-      Math.max(24, 0.06 * el.clientHeight) +
-      "px";
-  }, []);
+    const g = getGeometry(el.clientWidth, el.clientHeight);
 
-  const render = React.useCallback(() => {
-    const g = geo.current;
-    const p = pos.current.v;
-    for (let i = 0; i < n; i++) {
-      const el = cardRefs.current[i];
-      if (!el) continue;
-      const d = offsetOf(i, p, n);
-      const c = place(d, step, g);
-      el.style.transform =
-        "translate3d(" +
-        (c.x - g.cardW / 2).toFixed(2) +
-        "px," +
-        (c.y - g.cardH / 2).toFixed(2) +
-        "px,0) rotate(" +
-        c.rot.toFixed(3) +
-        "deg)";
-      el.style.zIndex = String(Math.round((n - d) * 10));
+    if (g.isMobile) {
+      cap.style.left = "24px";
+      cap.style.right = "24px";
+      cap.style.top = "auto";
+      cap.style.bottom = "32px";
+      cap.style.transform = "none";
+    } else {
+      // Shifted comfortably to the right side with generous breathing room
+      const equatorRightEdge = g.hubX + g.radius + g.cardW / 2;
+      const leftPos = Math.max(equatorRightEdge + 84, el.clientWidth * 0.48);
+      cap.style.left = `${leftPos.toFixed(1)}px`;
+      cap.style.right = "auto";
+      cap.style.top = `${g.hubY.toFixed(1)}px`;
+      cap.style.bottom = "auto";
+      cap.style.transform = "translateY(-50%)";
     }
-    const now = wrapIndex(p, count);
-    setIndex((prev) => (prev === now ? prev : now));
-  }, [n, count, step]);
+  }, [getGeometry]);
 
-  React.useEffect(() => {
-    onIndexRef.current?.(index);
-  }, [index]);
-
-  React.useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const on = () => setReduced(mq.matches);
-    on();
-    mq.addEventListener("change", on);
-    return () => mq.removeEventListener("change", on);
-  }, []);
-
-  React.useEffect(() => {
+  // Update card DOM transforms across the connected circular ring
+  const renderCards = useCallback(() => {
     const el = stageRef.current;
     if (!el) return;
-    const ro = new ResizeObserver(() => {
-      const g = geometry(el.clientWidth, el.clientHeight);
-      geo.current = g;
-      for (const c of cardRefs.current) {
-        if (!c) continue;
-        c.style.width = g.cardW + "px";
-        c.style.height = g.cardH + "px";
+    const g = getGeometry(el.clientWidth, el.clientHeight);
+    const p = posRef.current.v;
+
+    for (let i = 0; i < n; i++) {
+      const card = cardRefs.current[i];
+      if (!card) continue;
+
+      // Distance from wheel position wrapped around the connected circular ring
+      const d = offsetOf(i, p, n);
+      const c = getCardPlacement(d, g);
+      const dist = Math.abs(d);
+
+      // Only render cards that are on or near the visible arc
+      if (dist > 7) {
+        card.style.opacity = "0";
+        card.style.pointerEvents = "none";
+        continue;
       }
-      placeCaption();
-      setNarrow(el.clientWidth < 0.9 * el.clientHeight || el.clientWidth < 640);
-      render();
+
+      card.style.pointerEvents = "auto";
+      const scale = Math.max(0.74, 1 - dist * 0.055);
+      const opacity = Math.max(0.3, 1 - dist * 0.16);
+      const zIndex = Math.round(100 - dist * 10);
+
+      card.style.transform = `translate3d(${(c.x - g.cardW / 2).toFixed(
+        2
+      )}px, ${(c.y - g.cardH / 2).toFixed(2)}px, 0) rotate(${c.rot.toFixed(
+        3
+      )}deg) scale(${scale.toFixed(3)})`;
+
+      card.style.opacity = opacity.toFixed(3);
+      card.style.zIndex = String(zIndex);
+      card.style.width = `${g.cardW}px`;
+      card.style.height = `${g.cardH}px`;
+    }
+
+    // Active item index 0..(count - 1)
+    const activeItem = wrapIndex(p, count);
+    setCurrentIndex((prev) => (prev === activeItem ? prev : activeItem));
+  }, [n, count, getGeometry, getCardPlacement]);
+
+  // Window resize observer
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+
+    const ro = new ResizeObserver(() => {
+      setStageDimensions({
+        w: el.clientWidth,
+        h: el.clientHeight,
+        isMobile: el.clientWidth < 768,
+      });
+      positionCaption();
+      renderCards();
     });
+
     ro.observe(el);
     return () => ro.disconnect();
-  }, [render, placeCaption]);
+  }, [positionCaption, renderCards]);
 
-  React.useLayoutEffect(placeCaption, [showCaption, placeCaption]);
-
-  const steps = spans(count, loop);
-  React.useEffect(() => {
+  // Scrub through the count of contents (0 to count - 1), then smoothly release to next section
+  useEffect(() => {
     const track = trackRef.current;
     if (!track || count < 2) return;
-    let laps = 0;
-    let target = 0;
 
-    const trigger = ScrollTrigger.create({
-      trigger: track,
-      start: "top top",
-      end: "bottom bottom",
-      snap: reduced
-        ? undefined
-        : {
-            snapTo: 1 / steps,
-            duration: { min: 0.5, max: 1.4 },
-            delay: 0.12,
-            ease: "power2.inOut",
-          },
-      onUpdate: (self) => {
-        if (loop && self.progress >= 1 && self.direction > 0) {
-          laps += 1;
-          self.scroll(self.start + 1);
-          return;
-        }
-        target = positionAt(self.progress, laps, steps);
+    // As user scrolls through the section, pos progresses through the contents (0 to count - 1).
+    // Once the contents are completed, the section unpins and naturally continues to the next section.
+    const tween = gsap.to(posRef.current, {
+      v: count - 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: track,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.65,
+        invalidateOnRefresh: true,
+        onUpdate: () => {
+          renderCards();
+        },
       },
     });
 
-    const onWheel = (e: WheelEvent) => {
-      if (!loop || e.deltaY >= 0 || trigger.scroll() > trigger.start + 1) return;
-      const r = track.getBoundingClientRect();
-      if (r.top > 1 || r.bottom < window.innerHeight - 1) return;
-      laps -= 1;
-      trigger.scroll(trigger.end - 1);
-    };
+    stRef.current = tween.scrollTrigger ?? null;
+    renderCards();
+    positionCaption();
 
-    window.addEventListener("wheel", onWheel, { passive: true });
-    target = positionAt(trigger.progress, 0, steps);
-    pos.current.v = target;
-
-    const tick = (_t: number, dt: number) => {
-      const p = pos.current.v;
-      const next = reduced ? target : p + (target - p) * (1 - Math.exp(-dt / 110));
-      if (Math.abs(next - p) < 1e-4 && next === target) return;
-      pos.current.v = Math.abs(target - next) < 1e-4 ? target : next;
-      render();
-    };
-
-    gsap.ticker.add(tick);
-    st.current = trigger;
-    render();
+    // Re-calibrate ScrollTrigger so the start position is exact and always begins at item 1 (01 / 09)
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+      renderCards();
+    }, 150);
 
     return () => {
-      gsap.ticker.remove(tick);
-      window.removeEventListener("wheel", onWheel);
-      trigger.kill();
-      st.current = null;
+      clearTimeout(refreshTimer);
+      tween.kill();
+      stRef.current = null;
     };
-  }, [count, steps, loop, reduced, render]);
+  }, [count, renderCards, positionCaption]);
 
-  React.useEffect(() => {
+  // Caption fade transition when current content index updates
+  useEffect(() => {
     const cap = capRef.current;
-    if (!cap || reduced) return;
-    const tw = gsap.fromTo(
-      cap.querySelectorAll(".acc-num,.acc-title,.acc-meta"),
-      { y: 14, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: "power2.out", stagger: 0.05 }
-    );
-    return () => void tw.kill();
-  }, [index, reduced]);
+    if (!cap) return;
 
-  const bringFlat = (i: number) => {
-    const s = st.current;
-    if (!s) return;
-    window.scrollTo({
-      top: scrollFor(i % count, steps, s.start, s.end),
-      behavior: reduced ? "auto" : "smooth",
-    });
+    const elements = cap.querySelectorAll(".acc-title, .acc-num, .acc-meta, .acc-action");
+    gsap.fromTo(
+      elements,
+      { y: 8, opacity: 0.3 },
+      { y: 0, opacity: 1, duration: 0.45, ease: "power2.out", stagger: 0.03 }
+    );
+  }, [currentIndex]);
+
+  // Smooth scroll to bring any item flat
+  const bringFlat = (originalItemIndex: number) => {
+    const st = stRef.current;
+    if (!st) return;
+    const clamped = Math.max(0, Math.min(count - 1, originalItemIndex));
+    const targetScroll = st.start + (clamped / (count - 1)) * (st.end - st.start);
+
+    if (typeof window !== "undefined" && (window as any).__lenis) {
+      (window as any).__lenis.scrollTo(targetScroll, { duration: 1.1 });
+    } else {
+      window.scrollTo({
+        top: targetScroll,
+        behavior: "smooth",
+      });
+    }
   };
 
-  const current = items[index];
+  const currentItem = items[currentIndex] || items[0];
+  // Track height calibrated so completing the 9 contents flows directly into the next section
+  const totalTrackHeight = `${(1 + (count - 1) * scrollPerCard) * 100}vh`;
 
   return (
     <div
       ref={trackRef}
-      className={"acc-track " + className}
-      style={{
-        height: "calc(" + height + " * " + (1 + steps * scrollPerCard) + ")",
-      }}
+      className={`relative select-none bg-[#CBCFB8] ${className}`}
+      style={{ height: totalTrackHeight }}
       role="region"
-      aria-roledescription="carousel"
       aria-label={ariaLabel}
     >
-      <style>{CSS}</style>
-      <div ref={stageRef} className="acc-stage" style={{ height }}>
-        {cards.map((it, i) => (
+      {/* Sticky Fullscreen Stage Container */}
+      <div
+        ref={stageRef}
+        className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[#CBCFB8]"
+      >
+        {/* Connected Circular Ring of Cards - Never Shows an Empty End */}
+        {ringCards.map((it, i) => (
           <div
             key={i}
             ref={(el) => {
               cardRefs.current[i] = el;
             }}
-            className="acc-card"
-            style={{ borderRadius: radius }}
+            onClick={() => bringFlat(it.originalIndex)}
             role="button"
-            tabIndex={i < count ? 0 : -1}
-            aria-roledescription="slide"
-            aria-label={
-              (it.title ?? it.alt ?? "Card") +
-              ", " +
-              ((i % count) + 1) +
-              " of " +
-              count
-            }
-            onClick={() => bringFlat(i)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                bringFlat(i);
-              }
-            }}
+            tabIndex={0}
+            aria-label={`${it.title} - Item ${it.originalIndex + 1} of ${count}`}
+            className="absolute top-0 left-0 overflow-hidden will-change-transform cursor-pointer rounded-[20px] shadow-[0_16px_40px_-8px_rgba(0,0,0,0.18),0_4px_14px_-2px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_24px_50px_-6px_rgba(0,0,0,0.26)] group"
           >
             <img
               src={it.src}
-              alt={it.alt ?? ""}
+              alt={it.alt ?? it.title}
               draggable={false}
               decoding="async"
+              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-104"
             />
           </div>
         ))}
 
-        {showCaption && current && (
-          <div
-            ref={capRef}
-            className="acc-cap"
-            data-narrow={narrow ? "" : undefined}
-            style={{ zIndex: n * 20 }}
-          >
-            <p className="acc-num">
-              {String(index + 1).padStart(2, "0")} /{" "}
-              {String(count).padStart(2, "0")}
-            </p>
-            {current.title && <h3 className="acc-title">{current.title}</h3>}
-            {current.meta && <p className="acc-meta">{current.meta}</p>}
-          </div>
-        )}
+        {/* Clean, Spacious Typography Caption beside Flat Card */}
+        <div
+          ref={capRef}
+          className="absolute z-40 max-w-[580px] pointer-events-auto"
+        >
+          {/* Number Counter (01 / 09) */}
+          <p className="acc-num font-mono text-xs md:text-sm tracking-[0.22em] text-[#9B8A3E] mb-3 font-semibold uppercase">
+            {String(currentIndex + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+          </p>
 
-        <p className="acc-sr" aria-live="polite">
-          {count
-            ? "Card " +
-              (index + 1) +
-              " of " +
-              count +
-              (current?.title ? ": " + current.title : "")
-            : ""}
-        </p>
+          {/* Editorial Serif Headline */}
+          <h3 className="acc-title font-sans text-3xl sm:text-5xl lg:text-[62px] font-normal text-[#1E3227] tracking-tight leading-[1.05] mb-4">
+            {currentItem.title}
+          </h3>
+
+          {/* Meta Subtitle */}
+          {currentItem.meta && (
+            <p className="acc-meta text-sm sm:text-base text-[#3F5447] font-light tracking-wide mb-7">
+              {currentItem.meta}
+            </p>
+          )}
+
+          {/* Minimalist Explore Action */}
+          <button
+            onClick={() => onBookItem?.(currentItem.title)}
+            className="acc-action group inline-flex items-center gap-2.5 text-xs sm:text-sm font-medium uppercase tracking-wider text-[#1E3227] hover:text-[#15241c] transition-colors cursor-pointer"
+          >
+            <span className="border-b border-[#1E3227]/30 pb-0.5 group-hover:border-[#1E3227] transition-colors">
+              Explore experience
+            </span>
+            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </button>
+        </div>
+
+
       </div>
     </div>
   );

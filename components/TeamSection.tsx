@@ -51,7 +51,7 @@ export default function TeamSection({ onBookPractitioner }: TeamSectionProps) {
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#e2eddf] text-[#163c3d] text-xs font-semibold tracking-wide uppercase">
             Our Care Collective
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#163c3d]">
+          <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#163c3d]">
             Meet the Soul Circle
           </h2>
           <p className="text-base sm:text-lg text-[#526061] font-light leading-relaxed">
@@ -96,7 +96,7 @@ export default function TeamSection({ onBookPractitioner }: TeamSectionProps) {
               {/* Info Container */}
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-serif text-xl font-semibold text-[#163c3d] mb-1">
+                  <h3 className="font-sans text-xl font-semibold text-[#163c3d] mb-1">
                     {member.name}
                   </h3>
                   <div className="text-xs font-medium text-[#526061] mb-3">

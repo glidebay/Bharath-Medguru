@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MedGuru — Holistic Health & Wellness Collective",
+  title: "Bharath MedGuru — Integrated Healthcare & Wellness Collective",
   description:
-    "Healing happens when you're seen as whole. Begin your journey toward balance and vitality with certified holistic practitioners and wellness guides.",
+    "Integrated clinical care, specialist consultations, and holistic healing unified with trusted medicine.",
   keywords: [
+    "Bharath MedGuru",
+    "healthcare",
+    "pharmacy",
     "holistic health",
     "wellness",
     "sound therapy",
     "energy healing",
     "mindfulness",
     "ayurveda",
-    "life coaching",
-    "breathwork",
   ],
 };
 
@@ -28,11 +29,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans bg-[#f9fbf8] text-[#1f2d2e] antialiased selection:bg-[#163c3d] selection:text-[#e2eddf]">
+      <body className="font-sans bg-[#CBCFB8] text-[#1E3227] antialiased selection:bg-[#1E3227] selection:text-[#CBCFB8]">
         {children}
       </body>
     </html>

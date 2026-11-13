@@ -1,29 +1,51 @@
 @import "tailwindcss";
 
+@theme {
+  --font-serif: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
 @layer base {
   :root {
-    --primary: #163c3d;
-    --primary-dark: #102d2e;
-    --primary-light: #1f5051;
-    --secondary: #1f2d2e;
-    --accent: #232f30;
-    --sage: #e2eddf;
-    --sage-light: #f2f7f0;
-    --sage-muted: #b9c5c6;
-    --bg-cream: #f9fbf8;
-    --border-light: rgba(22, 60, 61, 0.12);
+    --primary: #1E3227;
+    --primary-dark: #15241c;
+    --primary-light: #2c4738;
+    --secondary: #1E3227;
+    --text-body: #3F5447;
+    --accent: #9B8A3E;
+    --sage: #CBCFB8;
+    --sage-dark: #b8bca5;
+    --sage-light: #d6dac4;
+    --border-light: rgba(30, 50, 39, 0.12);
+    --card-bg: rgba(255, 255, 255, 0.65);
+
+    /* Halora hero scale system */
+    --s: clamp(0.55px, min(calc(100vw / 2048), calc(100vh / 1152)), 1px);
+  }
+
+  *,
+  *::before,
+  *::after {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-style: normal !important;
   }
 
   body {
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--bg-cream);
-    color: var(--secondary);
-    overflow-x: hidden;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    background-color: #CBCFB8;
+    color: #1E3227;
+    overflow-x: clip;
   }
 
-  h1, h2, h3, .font-serif {
-    font-family: 'Lora', Georgia, Cambria, serif;
+  h1, h2, h3, h4, h5, h6, .font-serif, .font-sans {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    letter-spacing: -0.025em;
   }
+}
+
+.font-serif,
+[class*="font-serif"] {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
 
 @keyframes marquee {
@@ -58,17 +80,17 @@
   animation: float-slow 4s ease-in-out infinite;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar matching Halora sage */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f9fbf8;
+  background: #CBCFB8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #163c3d33;
+  background: rgba(30, 50, 39, 0.25);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #163c3d66;
+  background: rgba(30, 50, 39, 0.45);
 }

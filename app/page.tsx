@@ -9,7 +9,6 @@ import ServicesSection from "@/components/ServicesSection";
 import PathSection from "@/components/PathSection";
 import SessionsSection from "@/components/SessionsSection";
 import CtaSection from "@/components/CtaSection";
-import TeamSection from "@/components/TeamSection";
 import GallerySection from "@/components/GallerySection";
 import FaqSection from "@/components/FaqSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -42,7 +41,7 @@ export default function Home() {
 
   return (
     <SmoothScroll>
-      <main className="min-h-screen bg-[#f9fbf8] text-[#1f2d2e] selection:bg-[#163c3d] selection:text-[#e2eddf]">
+      <main className="min-h-screen bg-[#CBCFB8] text-[#1E3227] selection:bg-[#1E3227] selection:text-[#CBCFB8]">
         {/* Navigation Bar */}
         <Navbar onOpenBooking={handleOpenBooking} />
 
@@ -64,11 +63,8 @@ export default function Home() {
         {/* Call to Action Banner (#cta) */}
         <CtaSection onOpenBooking={handleOpenBooking} />
 
-        {/* Practitioners Collective / Soul Circle (#team) */}
-        <TeamSection onBookPractitioner={handleBookPractitioner} />
-
         {/* Real People Transformations Gallery (#gallery) */}
-        <GallerySection />
+        <GallerySection onSelectExperience={handleSelectService} />
 
         {/* FAQ Accordion (#faq) */}
         <FaqSection />

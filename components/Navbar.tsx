@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { ShoppingCart, Menu, X } from "lucide-react";
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -14,128 +14,162 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      setIsScrolled(window.scrollY > 30);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: "home", href: "#hero" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#service" },
-    { name: "Sessions", href: "#session" },
-    { name: "Practitioners", href: "#team" },
-    { name: "blog", href: "#blog" },
-    { name: "Contact", href: "#contact" },
+    { name: "Technology", href: "#service" },
+    { name: "Health", href: "#about" },
+    { name: "Activity", href: "#session" },
+    { name: "Insights", href: "#gallery" },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#163c3d]/90 backdrop-blur-md shadow-md border-b border-[#e2eddf]/10 py-3.5"
-          : "bg-transparent py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? "bg-[#CBCFB8]/85 backdrop-blur-md shadow-xs py-3.5 border-b border-[#1E3227]/10"
+        : "bg-transparent py-5 sm:py-6"
+        }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20">
         <div className="flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link href="#hero" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-full bg-[#e2eddf] flex items-center justify-center text-[#163c3d] shadow-sm group-hover:scale-105 transition-transform duration-200">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-5 h-5 text-[#163c3d]"
-              >
-                <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2Z" />
-                <path d="M12 6v12" />
-                <path d="M7 10c2.5 0 5-2 5-2s2.5 2 5 2" />
-                <path d="M7 14c2.5 0 5 2 5 2s2.5-2 5-2" />
-              </svg>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-2xl font-semibold tracking-tight text-[#e2eddf]">
-                MedGuru
-              </span>
-              <span className="text-[10px] uppercase tracking-widest text-[#e2eddf]/70 font-medium -mt-1">
-                Holistic Care
-              </span>
-            </div>
+
+          {/* ── LEFT: Official Bharath MedGuru Logo ── */}
+          <Link
+            href="#hero"
+            className="flex items-center gap-3 group text-decoration-none select-none py-1"
+          >
+            <img
+              src="/logo.png"
+              alt="Bharath MedGuru"
+              className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              style={{
+                filter: "drop-shadow(0 2px 4px rgba(30, 50, 39, 0.35))",
+              }}
+            />
           </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-1 bg-[#ffffff]/10 backdrop-blur-md px-5 py-2 rounded-full border border-[#e2eddf]/15 shadow-xs">
+          {/* ── CENTRE: Clean floating links (no container capsule) ── */}
+          <nav className="hidden md:flex items-center gap-8 lg:gap-12">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-[#e2eddf] hover:text-white hover:bg-white/15 px-3.5 py-1.5 rounded-full transition-all duration-200 capitalize"
+                className="font-sans text-[15px] lg:text-[16px] font-medium text-[#1E3227]/85 hover:text-[#1E3227] transition-colors relative py-1 text-decoration-none after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[1.5px] after:bg-[#1E3227] hover:after:w-full after:transition-all after:duration-200"
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
-          {/* CTA Action */}
+          {/* ── RIGHT: Translucent Moss Cart pill + Dark Shop pill ── */}
           <div className="hidden sm:flex items-center gap-3">
+
+            {/* Shop the Ring Pill (solid deep forest) */}
             <button
               onClick={onOpenBooking}
-              className="inline-flex items-center gap-2 bg-[#e2eddf] text-[#163c3d] hover:bg-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-md transition-all duration-200 hover:scale-[1.02] cursor-pointer"
+              className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs lg:text-[13px] font-medium tracking-wide transition-all duration-200 cursor-pointer active:translate-y-px"
+              style={{
+                backgroundColor: "#1E3227",
+                color: "#CBCFB8",
+                border: "none",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#15241c";
+                e.currentTarget.style.color = "#ffffff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "#1E3227";
+                e.currentTarget.style.color = "#CBCFB8";
+              }}
             >
-              <span>Book a session</span>
-              <ArrowRight className="w-4 h-4 text-[#163c3d]" />
+              Contact Us
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex sm:hidden items-center gap-2">
+          {/* ── MOBILE MENU BUTTON (Below 820px round burger button) ── */}
+          <div className="flex md:hidden items-center gap-2.5">
             <button
               onClick={onOpenBooking}
-              className="bg-[#e2eddf] text-[#163c3d] px-3.5 py-1.5 rounded-full text-xs font-semibold"
+              className="sm:hidden px-4 py-2 rounded-full text-xs font-medium tracking-wide"
+              style={{
+                backgroundColor: "#1E3227",
+                color: "#CBCFB8",
+              }}
             >
-              Book
+              Shop
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-[#e2eddf] hover:bg-white/10 transition-colors"
-              aria-label="Toggle Menu"
+              className="w-10 h-10 rounded-full flex items-center justify-center text-[#1E3227] transition-all cursor-pointer"
+              style={{
+                backgroundColor: "rgba(203, 207, 184, 0.5)",
+                backdropFilter: "blur(12px)",
+                border: "1px solid rgba(30, 50, 39, 0.15)",
+              }}
+              aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
+
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* ── FROSTED SAGE MOBILE MENU PANEL ── */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-[#163c3d] border-b border-[#e2eddf]/15 px-6 pt-3 pb-6 space-y-2.5 shadow-2xl animate-in slide-in-from-top duration-200">
-          <div className="flex flex-col space-y-1">
+        <div
+          className="md:hidden mt-3 mx-4 p-5 rounded-2xl shadow-xl space-y-4 animate-in slide-in-from-top-2 duration-200"
+          style={{
+            backgroundColor: "rgba(203, 207, 184, 0.92)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: "1px solid rgba(30, 50, 39, 0.14)",
+          }}
+        >
+          <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-[#e2eddf] hover:text-white hover:bg-white/10 px-4 py-2.5 rounded-lg transition-colors capitalize"
+                className="text-base font-medium text-[#1E3227] px-3 py-2 rounded-lg hover:bg-black/5 transition-colors"
               >
                 {link.name}
               </a>
             ))}
           </div>
-          <div className="pt-2">
+
+          <div className="pt-2 flex flex-col gap-2.5 border-t border-[#1E3227]/10">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenBooking();
               }}
-              className="w-full flex items-center justify-center gap-2 bg-[#e2eddf] text-[#163c3d] py-3 rounded-full text-sm font-semibold shadow-md"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full text-xs font-medium"
+              style={{
+                backgroundColor: "rgba(62, 86, 70, 0.52)",
+                color: "#CBCFB8",
+              }}
             >
-              <span>Book a session</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>Cart</span>
+              <ShoppingCart className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenBooking();
+              }}
+              className="w-full flex items-center justify-center py-2.5 rounded-full text-xs font-medium"
+              style={{
+                backgroundColor: "#1E3227",
+                color: "#CBCFB8",
+              }}
+            >
+              Shop the Ring
             </button>
           </div>
         </div>

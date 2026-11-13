@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface PathSectionProps {
   onOpenBooking: () => void;
@@ -39,18 +39,18 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
   ];
 
   return (
-    <section id="path" className="py-28 bg-white relative overflow-hidden">
+    <section id="path" className="py-28 bg-[#CBCFB8] relative overflow-hidden">
       <div className="max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-24 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#e2eddf] text-[#163c3d] text-xs font-semibold tracking-wide uppercase">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
             Simple 3-Step Journey
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#163c3d]">
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
             A Simple Path to Healing <br />
-            <span className="italic font-normal text-[#1f2d2e]">Starts Here</span>
+            <span className="font-normal text-[#1E3227]">Starts Here</span>
           </h2>
-          <p className="text-base sm:text-lg text-[#526061] font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
             No stress. No confusion. Whether you're new to holistic wellness or a returning seeker, our 3-step
             flow ensures your journey is smooth, safe, and supportive.
           </p>
@@ -58,7 +58,7 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
 
         {/* 3 Alternating Steps */}
         <div className="space-y-20 lg:space-y-28">
-          {steps.map((item, index) => (
+          {steps.map((item) => (
             <div
               key={item.step}
               className={`flex flex-col ${
@@ -67,7 +67,7 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
             >
               {/* Image Frame */}
               <div className="w-full lg:w-1/2 flex justify-center">
-                <div className="relative w-full max-w-[464px] aspect-[464/330] rounded-[30px] overflow-hidden bg-[#e2eddf]/30 shadow-lg border border-[#163c3d]/10 group">
+                <div className="relative w-full max-w-[464px] aspect-[464/330] rounded-[28px] overflow-hidden bg-white/20 shadow-xl border-4 border-white/50 group">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -81,26 +81,28 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
               <div className="w-full lg:w-1/2 flex items-start gap-6 sm:gap-8">
                 {/* Number & Vertical Accent Line */}
                 <div className="flex flex-col items-center flex-shrink-0">
-                  <div className="font-serif text-4xl sm:text-5xl font-bold text-[#163c3d] leading-none mb-3">
+                  <div className="font-sans text-4xl sm:text-5xl font-light text-[#1E3227] leading-none mb-3">
                     {item.step}
                   </div>
-                  <div className="w-[2px] h-24 bg-gradient-to-b from-[#163c3d] via-[#163c3d]/40 to-transparent rounded-full" />
+                  <div className="w-[2px] h-24 bg-gradient-to-b from-[#1E3227] via-[#1E3227]/40 to-transparent rounded-full" />
                 </div>
 
                 {/* Text Content */}
                 <div className="space-y-4 pt-1">
-                  <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-[#163c3d] leading-snug">
+                  <h3 className="font-sans text-2xl sm:text-3xl font-semibold text-[#1E3227] leading-snug">
                     {item.title}
                   </h3>
-                  <p className="text-base sm:text-lg text-[#526061] font-light leading-relaxed">
+                  <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
                     {item.description}
                   </p>
                   <div className="pt-2">
                     <button
                       onClick={onOpenBooking}
-                      className="inline-flex items-center gap-2 text-xs font-semibold text-[#163c3d] hover:text-[#102d2e] uppercase tracking-wider group cursor-pointer"
+                      className="inline-flex items-center gap-2 text-xs font-semibold text-[#1E3227] hover:text-[#15241c] uppercase tracking-wider group cursor-pointer"
                     >
-                      <span>Get started with Step {item.step}</span>
+                      <span className="border-b border-[#1E3227]/30 pb-0.5 group-hover:border-[#1E3227] transition-colors">
+                        Get started with Step {item.step}
+                      </span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>

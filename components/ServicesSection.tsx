@@ -177,7 +177,7 @@ function TunnelCard({
       onClick={() => onSelectService(card.item.title)}
       className="pointer-events-auto absolute left-1/2 top-1/2 aspect-[4/5] will-change-transform select-none cursor-pointer"
     >
-      <div className="group relative h-full w-full overflow-hidden rounded-[24px] bg-[#163c3d] shadow-2xl border border-[#e2eddf]/30 transition-all duration-300 hover:scale-105 hover:border-white">
+      <div className="group relative h-full w-full overflow-hidden rounded-[24px] bg-[#1E3227] shadow-2xl border border-[#CBCFB8]/30 transition-all duration-300 hover:scale-105 hover:border-white">
         <img
           src={card.item.src}
           alt={card.item.title}
@@ -186,15 +186,15 @@ function TunnelCard({
         />
 
         {/* Card Overlay with Clean Simple Content */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#163c3d] via-[#163c3d]/40 to-transparent flex flex-col justify-end p-5">
-          <span className="text-[11px] uppercase tracking-wider text-[#e2eddf]/90 font-medium mb-1 drop-shadow-sm">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1E3227] via-[#1E3227]/40 to-transparent flex flex-col justify-end p-5">
+          <span className="text-[11px] uppercase tracking-wider text-[#9B8A3E] font-medium mb-1 drop-shadow-sm">
             {card.item.subtitle}
           </span>
           <div className="flex items-center justify-between gap-2">
-            <h4 className="text-base sm:text-lg font-serif font-semibold text-white drop-shadow-md">
+            <h4 className="text-base sm:text-lg font-sans font-semibold text-white drop-shadow-md">
               {card.item.title}
             </h4>
-            <div className="w-7 h-7 rounded-full bg-[#e2eddf] text-[#163c3d] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div className="w-7 h-7 rounded-full bg-[#CBCFB8] text-[#1E3227] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </div>
@@ -250,23 +250,23 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
     <section
       id="service"
       ref={containerRef}
-      className="relative h-[280vh] bg-[#163c3d] text-[#e2eddf]"
+      className="relative h-[280vh] bg-[#1E3227] text-[#CBCFB8]"
     >
       {/* Sticky Fullscreen 3D Viewport driven by Global Page Scroll */}
       <div
-        className="sticky top-0 h-screen w-full overflow-hidden select-none flex items-center justify-center border-y border-[#e2eddf]/15"
+        className="sticky top-0 h-screen w-full overflow-hidden select-none flex items-center justify-center border-y border-[#CBCFB8]/15"
         style={{
           perspective: stage.isMobile ? "900px" : "1200px",
           transformStyle: "preserve-3d",
         }}
       >
         {/* Background Grid & Subtle Ambient Glow */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e2eddf_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_50%,transparent_100%)] opacity-20" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(226,237,223,0.12)_0%,transparent_70%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#CBCFB8_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_50%,transparent_100%)] opacity-20" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(203,207,184,0.12)_0%,transparent_70%)]" />
 
         {/* Concentric Guide Rings */}
-        <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-[#e2eddf]/20" />
-        <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-[#e2eddf]/15" />
+        <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-[#CBCFB8]/20" />
+        <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-[#CBCFB8]/15" />
 
         {/* Central Anchor Typography - Clean & Simple */}
         <motion.div
@@ -274,9 +274,9 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
           className="pointer-events-none z-0 flex flex-col items-center text-center px-6 max-w-xl"
         >
 
-          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.08] text-[#e2eddf]">
+          <h2 className="font-sans text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.08] text-[#CBCFB8]">
             Explore Modalities <br />
-            <span className="italic font-normal text-white">for Every Journey</span>
+            <span className="font-normal text-white">for Every Journey</span>
           </h2>
 
 
@@ -287,7 +287,7 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
               <button
                 key={idx}
                 onClick={() => onSelectService(m.title)}
-                className="text-xs bg-white/10 hover:bg-white text-[#e2eddf] hover:text-[#163c3d] px-3.5 py-1 rounded-full transition-colors font-medium border border-white/10 cursor-pointer"
+                className="text-xs bg-white/10 hover:bg-white text-[#CBCFB8] hover:text-[#1E3227] px-3.5 py-1 rounded-full transition-colors font-medium border border-white/10 cursor-pointer"
               >
                 {m.title}
               </button>
@@ -298,13 +298,13 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
         {/* Scroll Prompt Indicator */}
         <motion.div
           style={{ opacity: promptOpacity }}
-          className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-[#e2eddf]/80"
+          className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-[#CBCFB8]/80"
         >
           <div className="flex items-center gap-1.5">
-            <Compass className="w-3.5 h-3.5 text-[#e2eddf]" />
+            <Compass className="w-3.5 h-3.5 text-[#CBCFB8]" />
             <span>Scroll to Explore</span>
           </div>
-          <div className="h-6 w-px bg-gradient-to-b from-[#e2eddf] to-transparent animate-pulse" />
+          <div className="h-6 w-px bg-gradient-to-b from-[#CBCFB8] to-transparent animate-pulse" />
         </motion.div>
 
         {/* 3D Z-Space Corridor Cards */}

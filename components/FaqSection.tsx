@@ -44,18 +44,22 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-[#f9fbf8] relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="py-24 bg-[#CBCFB8] relative overflow-hidden">
+      {/* Ambient glass refraction glows */}
+      <div className="pointer-events-none absolute top-1/3 left-1/10 w-[450px] h-[350px] bg-white/30 rounded-full blur-3xl opacity-75" />
+      <div className="pointer-events-none absolute bottom-1/4 right-1/10 w-[450px] h-[350px] bg-[#9B8A3E]/15 rounded-full blur-3xl opacity-60" />
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#e2eddf] text-[#163c3d] text-xs font-semibold tracking-wide uppercase">
-            <HelpCircle className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
+            <HelpCircle className="w-3.5 h-3.5 text-[#9B8A3E]" />
             <span>Got Questions?</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#163c3d]">
+          <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1E3227]">
             We Have Answers
           </h2>
-          <p className="text-base sm:text-lg text-[#526061] font-light leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed max-w-2xl mx-auto">
             Explore some of the most common questions our community asks. If you still need help, feel free
             to contact us directly — we're here to support you.
           </p>
@@ -68,25 +72,34 @@ export default function FaqSection() {
             return (
               <div
                 key={index}
-                className={`rounded-[20px] border transition-all duration-300 overflow-hidden ${
-                  isOpen
-                    ? "bg-white border-[#163c3d]/30 shadow-md"
-                    : "bg-white/70 border-[#163c3d]/10 hover:border-[#163c3d]/25 hover:bg-white"
-                }`}
+                style={{
+                  background: isOpen
+                    ? "linear-gradient(135deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.25) 100%)"
+                    : "linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.16) 100%)",
+                  backdropFilter: "blur(28px)",
+                  WebkitBackdropFilter: "blur(28px)",
+                  border: "1px solid rgba(255, 255, 255, 0.65)",
+                  borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
+                  borderLeft: "1.5px solid rgba(255, 255, 255, 0.85)",
+                  boxShadow: isOpen
+                    ? "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95), 0 14px 34px -4px rgba(30, 50, 39, 0.08), 0 3px 10px rgba(30, 50, 39, 0.04)"
+                    : "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95), 0 8px 24px -4px rgba(30, 50, 39, 0.05)",
+                }}
+                className="rounded-[22px] transition-all duration-300 overflow-hidden"
               >
                 <button
                   onClick={() => toggleAccordion(index)}
                   className="w-full flex items-center justify-between p-6 sm:p-7 text-left gap-4 cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-serif text-lg sm:text-xl font-medium text-[#163c3d]">
+                  <span className="font-sans text-lg sm:text-xl font-medium text-[#1E3227]">
                     {faq.question}
                   </span>
                   <div
                     className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 ${
                       isOpen
-                        ? "bg-[#163c3d] text-[#e2eddf] rotate-180"
-                        : "bg-[#e2eddf] text-[#163c3d]"
+                        ? "bg-[#1E3227] text-[#CBCFB8] rotate-180"
+                        : "bg-[#CBCFB8]/80 text-[#1E3227]"
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -94,7 +107,7 @@ export default function FaqSection() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-sm sm:text-base text-[#526061] font-light leading-relaxed border-t border-[#163c3d]/10 pt-4 animate-in fade-in duration-200">
+                  <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-sm sm:text-base text-[#3F5447] font-light leading-relaxed border-t border-[#1E3227]/10 pt-4 animate-in fade-in duration-200">
                     <p>{faq.answer}</p>
                   </div>
                 )}
@@ -104,18 +117,30 @@ export default function FaqSection() {
         </div>
 
         {/* Still have questions banner */}
-        <div className="mt-12 text-center p-6 bg-[#e2eddf]/60 rounded-2xl border border-[#163c3d]/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div
+          className="mt-12 text-center p-6 sm:p-8 rounded-[24px] flex flex-col sm:flex-row items-center justify-between gap-4"
+          style={{
+            background: "linear-gradient(135deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.20) 100%)",
+            backdropFilter: "blur(28px)",
+            WebkitBackdropFilter: "blur(28px)",
+            border: "1px solid rgba(255, 255, 255, 0.65)",
+            borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
+            borderLeft: "1.5px solid rgba(255, 255, 255, 0.85)",
+            boxShadow:
+              "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 2px 0 rgba(30, 50, 39, 0.05), 0 14px 34px -4px rgba(30, 50, 39, 0.08), 0 3px 10px rgba(30, 50, 39, 0.04)",
+          }}
+        >
           <div className="text-left">
-            <h4 className="font-serif text-lg font-semibold text-[#163c3d]">
+            <h4 className="font-sans text-lg font-semibold text-[#1E3227]">
               Still have questions on your mind?
             </h4>
-            <p className="text-xs text-[#526061]">
+            <p className="text-xs text-[#3F5447]">
               Our wellness counselors are available 6 days a week to guide you.
             </p>
           </div>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 bg-[#163c3d] text-[#e2eddf] px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#102d2e] transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-2 bg-[#1E3227] text-[#CBCFB8] px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#15241c] hover:text-white transition-colors whitespace-nowrap"
           >
             <MessageCircle className="w-3.5 h-3.5" />
             <span>Chat With Us</span>

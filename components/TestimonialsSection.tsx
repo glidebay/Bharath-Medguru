@@ -53,18 +53,22 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <section id="testimonial" className="py-28 bg-[#e2eddf] relative overflow-hidden">
-      <div className="max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+    <section id="testimonial" className="py-28 bg-[#CBCFB8] relative overflow-hidden">
+      {/* Ambient glass refraction glows */}
+      <div className="pointer-events-none absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[350px] bg-white/30 rounded-full blur-3xl opacity-80" />
+      <div className="pointer-events-none absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[350px] bg-[#9B8A3E]/15 rounded-full blur-3xl opacity-60" />
+
+      <div className="max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/70 text-[#163c3d] text-xs font-semibold tracking-wide uppercase border border-[#163c3d]/10">
-            <MessageSquareHeart className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
+            <MessageSquareHeart className="w-3.5 h-3.5 text-[#9B8A3E]" />
             <span>Seeker Voices</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#163c3d]">
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
             What are they talking about?
           </h2>
-          <p className="text-base sm:text-lg text-[#1f2d2e]/80 font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
             Hear from clients who’ve found healing, clarity, and balance through our holistic offerings.
           </p>
         </div>
@@ -73,47 +77,57 @@ export default function TestimonialsSection() {
       {/* Infinite Horizontal Gliding Marquee */}
       <div className="relative w-full overflow-hidden">
         {/* Edge fade gradients */}
-        <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#e2eddf] to-transparent z-10 pointer-events-none" />
-        <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#e2eddf] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-[#CBCFB8] to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-[#CBCFB8] to-transparent z-10 pointer-events-none" />
 
         <div className="animate-marquee flex gap-6 pb-6">
           {[...testimonials, ...testimonials].map((item, index) => (
             <div
               key={index}
-              className="w-[380px] sm:w-[440px] bg-white rounded-[26px] p-8 border border-[#163c3d]/10 hover:border-[#163c3d]/30 transition-all duration-300 shadow-md hover:shadow-xl flex flex-col justify-between flex-shrink-0"
+              style={{
+                background: "linear-gradient(135deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.18) 100%)",
+                backdropFilter: "blur(28px)",
+                WebkitBackdropFilter: "blur(28px)",
+                border: "1px solid rgba(255, 255, 255, 0.65)",
+                borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
+                borderLeft: "1.5px solid rgba(255, 255, 255, 0.85)",
+                boxShadow:
+                  "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 2px 0 rgba(30, 50, 39, 0.05), 0 14px 34px -4px rgba(30, 50, 39, 0.08), 0 3px 10px rgba(30, 50, 39, 0.04)",
+              }}
+              className="w-[380px] sm:w-[440px] rounded-[24px] p-8 hover:scale-[1.01] transition-all duration-300 flex flex-col justify-between flex-shrink-0"
             >
               <div>
                 {/* Rating & Modality */}
                 <div className="flex items-center justify-between mb-5">
                   <div className="flex gap-1">
                     {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
                     ))}
                   </div>
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-[#163c3d] bg-[#f2f7f0] px-3 py-1 rounded-full border border-[#163c3d]/10">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-[#1E3227] bg-[#9B8A3E]/15 px-3 py-1 rounded-full border border-[#9B8A3E]/20">
                     {item.modality}
                   </span>
                 </div>
 
                 {/* Quote */}
-                <p className="text-base text-[#1f2d2e] font-light leading-relaxed mb-6 italic">
+                <p className="text-base text-[#3F5447] font-light leading-relaxed mb-6">
                   "{item.quote}"
                 </p>
               </div>
 
               {/* Author Row */}
-              <div className="flex items-center gap-3.5 pt-4 border-t border-[#163c3d]/10">
+              <div className="flex items-center gap-3.5 pt-4 border-t border-[#1E3227]/10">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-[#163c3d]/20"
+                  className="w-12 h-12 rounded-full object-cover border-2 border-[#1E3227]/20"
                   loading="lazy"
                 />
                 <div>
-                  <h4 className="font-serif text-base font-semibold text-[#163c3d]">
+                  <h4 className="font-sans text-base font-semibold text-[#1E3227]">
                     {item.name}
                   </h4>
-                  <p className="text-xs text-[#526061]">{item.role}</p>
+                  <p className="text-xs text-[#3F5447]">{item.role}</p>
                 </div>
               </div>
             </div>
