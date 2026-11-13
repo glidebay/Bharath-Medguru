@@ -136,11 +136,11 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                 }}
                 style={{
                   position: "sticky",
-                  top: `calc(96px + ${index * 24}px)`,
+                  top: `calc(76px + ${index * 14}px)`,
                   zIndex: index + 10,
-                  marginBottom: index === sessions.length - 1 ? "40px" : "30vh",
+                  marginBottom: index === sessions.length - 1 ? "32px" : "12vh",
                   transformOrigin: "top center",
-                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.28) 100%)",
+                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.30) 100%)",
                   backdropFilter: "blur(28px)",
                   WebkitBackdropFilter: "blur(28px)",
                   border: "1px solid rgba(255, 255, 255, 0.70)",
@@ -149,7 +149,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                   boxShadow:
                     "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 2px 0 rgba(30, 50, 39, 0.05), 0 20px 48px -6px rgba(30, 50, 39, 0.14), 0 4px 14px rgba(30, 50, 39, 0.06)",
                 }}
-                className="w-full rounded-[28px] p-6 sm:p-10 md:p-12 transition-shadow duration-300 overflow-hidden will-change-transform"
+                className="w-full rounded-[24px] sm:rounded-[28px] p-5 sm:p-7 md:p-9 transition-shadow duration-300 overflow-hidden will-change-transform"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
                   {/* Left Column: Practitioner Photo */}

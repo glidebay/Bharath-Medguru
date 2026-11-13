@@ -76,8 +76,8 @@ interface TunnelCardData {
 
 const TUNNEL_CARDS: TunnelCardData[] = MODALITY_CARDS_DATA.map((item, i) => {
   const goldenAngle = i * 137.5 * (Math.PI / 180);
-  const radiusFactorX = 0.28 + (i % 3) * 0.08;
-  const radiusFactorY = 0.26 + (i % 2) * 0.09;
+  const radiusFactorX = 0.18 + (i % 3) * 0.05;
+  const radiusFactorY = 0.16 + (i % 2) * 0.05;
 
   return {
     item,
@@ -85,7 +85,7 @@ const TUNNEL_CARDS: TunnelCardData[] = MODALITY_CARDS_DATA.map((item, i) => {
     angleSin: Math.sin(goldenAngle),
     radiusFactorX,
     radiusFactorY,
-    rotationZ: (i % 2 === 0 ? 1 : -1) * (3 + (i % 5) * 2),
+    rotationZ: (i % 2 === 0 ? 1 : -1) * (2 + (i % 4) * 2),
     index: i,
   };
 });

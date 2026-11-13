@@ -78,20 +78,20 @@ export default function ArcCardCarousel({
   const getGeometry = useCallback((w: number, h: number) => {
     const isMobile = w < 768;
     if (isMobile) {
-      const cardW = Math.min(300, w * 0.72);
-      const cardH = cardW / 1.5;
-      const radius = h * 0.65;
-      const equatorX = w * 0.36;
+      const cardW = Math.min(280, w * 0.78);
+      const cardH = cardW / 1.45;
+      const radius = Math.min(h * 0.55, 380);
+      const equatorX = w * 0.5;
       const hubX = equatorX - radius;
-      const hubY = h * 0.35;
+      const hubY = Math.max(cardH / 2 + 60, h * 0.30);
       return { cardW, cardH, radius, hubX, hubY, isMobile };
     } else {
-      const cardW = Math.min(440, Math.max(340, w * 0.26));
+      const cardW = Math.min(420, Math.max(300, w * 0.25));
       const cardH = cardW / 1.48;
-      const radius = Math.min(850, Math.max(680, h * 0.82));
+      const radius = Math.min(800, Math.max(600, h * 0.75));
 
       // Move equator inward from left edge for clean breathing room
-      const equatorX = Math.max(360, w * 0.28);
+      const equatorX = Math.max(320, w * 0.25);
       const hubX = equatorX - radius;
       const hubY = h * 0.5;
 
@@ -119,20 +119,22 @@ export default function ArcCardCarousel({
     const g = getGeometry(el.clientWidth, el.clientHeight);
 
     if (g.isMobile) {
-      cap.style.left = "24px";
-      cap.style.right = "24px";
+      cap.style.left = "20px";
+      cap.style.right = "20px";
       cap.style.top = "auto";
-      cap.style.bottom = "32px";
+      cap.style.bottom = "24px";
       cap.style.transform = "none";
+      cap.style.maxWidth = "calc(100% - 40px)";
     } else {
       // Shifted comfortably to the right side with generous breathing room
       const equatorRightEdge = g.hubX + g.radius + g.cardW / 2;
-      const leftPos = Math.max(equatorRightEdge + 84, el.clientWidth * 0.48);
+      const leftPos = Math.max(equatorRightEdge + 48, el.clientWidth * 0.44);
       cap.style.left = `${leftPos.toFixed(1)}px`;
       cap.style.right = "auto";
       cap.style.top = `${g.hubY.toFixed(1)}px`;
       cap.style.bottom = "auto";
       cap.style.transform = "translateY(-50%)";
+      cap.style.maxWidth = `calc(100% - ${leftPos.toFixed(1)}px - 40px)`;
     }
   }, [getGeometry]);
 
