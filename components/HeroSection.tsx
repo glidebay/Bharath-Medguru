@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { ArrowRight, Stethoscope, Heart, Activity, Sparkles } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { ArrowRight, Stethoscope, Heart, Activity } from "lucide-react";
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
@@ -12,40 +12,42 @@ interface GlassCardProps {
   label: string;
   value: React.ReactNode;
   unit: string;
-  gold?: boolean;
+  unitHighlight?: boolean;
 }
 
-function GlassCard({ icon, label, value, unit, gold }: GlassCardProps) {
+function GlassCard({ icon, label, value, unit, unitHighlight }: GlassCardProps) {
   return (
     <div
-      className="w-full sm:w-[210px] lg:w-[224px] p-4 sm:p-5 rounded-2xl flex flex-col justify-between gap-2.5 transition-all duration-300 hover:scale-[1.02]"
+      data-anim="card"
+      className="w-[155px] sm:w-[165px] lg:w-[175px] min-h-[96px] sm:min-h-[104px] lg:min-h-[110px] p-3.5 sm:p-4 rounded-[20px] flex flex-col justify-between transition-all duration-300 hover:scale-[1.02]"
       style={{
         background:
-          "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.28) 100%)",
-        backdropFilter: "blur(28px)",
-        WebkitBackdropFilter: "blur(28px)",
-        border: "1px solid rgba(255, 255, 255, 0.75)",
+          "linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.38) 100%)",
+        backdropFilter: "blur(24px)",
+        WebkitBackdropFilter: "blur(24px)",
+        border: "1px solid rgba(255, 255, 255, 0.85)",
         borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
-        borderLeft: "1.5px solid rgba(255, 255, 255, 0.85)",
+        borderLeft: "1.5px solid rgba(255, 255, 255, 0.90)",
         boxShadow:
-          "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 2px 0 rgba(30, 50, 39, 0.05), 0 14px 34px -4px rgba(30, 50, 39, 0.10), 0 3px 10px rgba(30, 50, 39, 0.04)",
+          "inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), 0 10px 25px -4px rgba(30, 50, 39, 0.08)",
       }}
     >
       {/* Label: Icon + Text */}
-      <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-semibold tracking-[0.14em] uppercase text-[#1E3227]/80">
+      <div className="flex items-center gap-1.5 text-[9px] font-semibold tracking-[0.12em] uppercase text-[#1E3227]/70">
         <span className="text-[#1E3227]">{icon}</span>
         <span>{label}</span>
       </div>
 
       {/* Big Numeral / Value */}
-      <div className="text-xl sm:text-2xl lg:text-[26px] font-normal text-[#1E3227] tracking-tight leading-tight">
+      <div className="text-base sm:text-lg lg:text-[19px] font-normal text-[#1E3227] tracking-tight leading-tight my-0.5">
         {value}
       </div>
 
       {/* Unit / Rating */}
       <div
-        className={`text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase ${gold ? "text-[#9B8A3E]" : "text-[#1E3227]/60"
-          }`}
+        className={`text-[8px] sm:text-[8.5px] font-semibold tracking-wider uppercase leading-tight ${
+          unitHighlight ? "text-[#9B8A3E]" : "text-[#1E3227]/55"
+        }`}
       >
         {unit}
       </div>
@@ -54,110 +56,237 @@ function GlassCard({ icon, label, value, unit, gold }: GlassCardProps) {
 }
 
 export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
+  const secRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const sec = secRef.current;
+    if (!sec) return;
+    const anims: Animation[] = [];
+    let done = false;
+
+    const run = () => {
+      if (done) return;
+      // Smooth cubic bezier matching editorial iOS/Framer motion
+      const ease = {
+        easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+        fill: "backwards" as FillMode,
+      };
+      let t = 60; // Timeline time cursor in milliseconds
+
+      const push = (el: Element | null, dur: number, from: Keyframe) => {
+        if (!el) return;
+        anims.push(
+          el.animate([from, { opacity: 1, transform: "none" }], {
+            ...ease,
+            duration: dur,
+            delay: t,
+          })
+        );
+      };
+
+      // 1. Background image & ambient wash fade in (0ms)
+      const bg = sec.querySelector("[data-anim=bg]");
+      if (bg) {
+        anims.push(
+          bg.animate([{ opacity: 0 }, { opacity: 1 }], {
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "backwards",
+            duration: 850,
+            delay: 0,
+          })
+        );
+      }
+
+      // 2. Tracking Dot blooms via circular clip-path (+90ms)
+      const dot = sec.querySelector("[data-anim=dot]");
+      if (dot) {
+        anims.push(
+          dot.animate(
+            [
+              { opacity: 0, transform: "scale(0)" },
+              { opacity: 1, transform: "scale(1)" },
+            ],
+            {
+              ...ease,
+              duration: 350,
+              delay: t,
+            }
+          )
+        );
+      }
+      t += 90;
+
+      // 3. Eyebrow slides in from the left (+115ms)
+      push(sec.querySelector("[data-anim=eyebrow]"), 440, {
+        opacity: 0,
+        transform: "translateX(-14px)",
+      });
+      t += 115;
+
+      // 4. Headline lines rise inside hidden masks (+120ms each)
+      sec.querySelectorAll("[data-anim=h1line]").forEach((line) => {
+        push(line, 700, { opacity: 0, transform: "translateY(100%)" });
+        t += 120;
+      });
+
+      // 5. Paragraph & CTA button float up (+95ms)
+      push(sec.querySelector("[data-anim=para]"), 540, {
+        opacity: 0,
+        transform: "translateY(20px)",
+      });
+      t += 95;
+
+      push(sec.querySelector("[data-anim=cta]"), 540, {
+        opacity: 0,
+        transform: "translateY(20px)",
+      });
+      t += 95;
+
+      // 6. The 3 Frosted Glass metric cards cascade up one by one (+100ms each)
+      sec.querySelectorAll("[data-anim=card]").forEach((card) => {
+        push(card, 580, { opacity: 0, transform: "translateY(32px)" });
+        t += 100;
+      });
+
+      // Cleanup: Automatically cancels itself once done so styles don't conflict
+      anims.at(-1)?.finished.then(() => {
+        done = true;
+        anims.forEach((a) => a.cancel());
+      });
+    };
+
+    // Wait until fonts are loaded before starting to avoid layout shifts (FOUT)
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(run);
+    } else {
+      setTimeout(run, 150);
+    }
+
+    return () => {
+      done = true;
+      anims.forEach((a) => a.cancel());
+    };
+  }, []);
+
   return (
     <section
+      ref={secRef}
       id="hero"
       className="relative w-full min-h-[100dvh] bg-[#CBCFB8] overflow-hidden flex flex-col justify-center"
     >
       {/* ── LAYER 0: Ambient Reception Background ── */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none z-0">
-        {/* Soft background blurred wallpaper */}
+      <div
+        data-anim="bg"
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none z-0"
+      >
+        {/* Clean, sharp reception center focal */}
         <div
-          className="absolute inset-0 bg-cover bg-center filter blur-xl opacity-60 scale-105"
-          style={{ backgroundImage: "url('/hero-reception.png')" }}
-        />
-
-        {/* Hero clinic reception center focal */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-multiply"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
           style={{
             backgroundImage: "url('/hero-reception.png')",
-            maskImage:
-              "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 95%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 95%)",
           }}
         />
 
-        {/* Sage atmospheric wash */}
-        <div className="absolute inset-0 bg-[#CBCFB8]/40" />
+        {/* Soft, clean atmospheric tint */}
+        <div className="absolute inset-0 bg-[#CBCFB8]/28" />
 
-        {/* Subtle decorative glass circle arc */}
-        <div className="hidden lg:block absolute top-1/2 left-1/2 -translate-x-[40%] -translate-y-1/2 w-[520px] h-[520px] rounded-full border border-white/30 pointer-events-none" />
+        {/* Left legibility gradient framing the copy */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#CBCFB8] via-[#CBCFB8]/85 to-transparent lg:w-[58%]" />
 
-        {/* Left & Right Legibility Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#CBCFB8] via-[#CBCFB8]/80 to-transparent lg:w-[65%]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#CBCFB8] via-transparent to-[#CBCFB8]/60" />
+        {/* Right subtle gradient framing the metric cards */}
+        <div className="absolute inset-0 bg-gradient-to-l from-[#CBCFB8] via-[#CBCFB8]/70 to-transparent lg:w-[32%] ml-auto" />
+
+        {/* Gentle bottom boundary fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-[#CBCFB8] via-[#CBCFB8]/40 to-transparent" />
       </div>
 
       {/* ── LAYER 1: Main Responsive Content Layout ── */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-28 sm:pt-32 pb-16 flex-1 flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center my-auto">
-          {/* LEFT: Copy block */}
-          <div className="lg:col-span-7 xl:col-span-8 flex flex-col items-start space-y-6 sm:space-y-8 max-w-2xl">
+          {/* LEFT: Copy block with refined font sizes from reference image */}
+          <div className="lg:col-span-7 xl:col-span-8 flex flex-col items-start space-y-5 sm:space-y-6 max-w-xl">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/40 border border-white/60 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-[#1E3227] animate-pulse" />
-              <span className="text-xs font-semibold tracking-wider uppercase text-[#1E3227]">
-                Modern Facilities · Trusted Doctors
-              </span>
+            <div
+              data-anim="eyebrow"
+              className="flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase text-[#1E3227]"
+            >
+              <span
+                data-anim="dot"
+                className="w-2 h-2 bg-[#1E3227] rounded-xs inline-block"
+              />
+              <span>Modern Facilities · Trusted Doctors</span>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl xl:text-[76px] font-medium tracking-tight text-[#1E3227] leading-[1.06]">
-              Beyond Treatment. <br />
-              <span className="font-normal text-[#1E3227]/90">We Care for You.</span>
+            {/* Headline with Masked Rise: Refined font size & lighter weight */}
+            <h1 className="text-4xl sm:text-5xl lg:text-[58px] xl:text-[64px] font-medium tracking-tight text-[#1E3227] leading-[1.08]">
+              <span className="block overflow-hidden py-0.5">
+                <span data-anim="h1line" className="block">
+                  Beyond Treatment.
+                </span>
+              </span>
+              <span className="block overflow-hidden py-0.5">
+                <span
+                  data-anim="h1line"
+                  className="block font-normal text-[#1E3227]/90"
+                >
+                  We Care for You.
+                </span>
+              </span>
             </h1>
 
-            {/* Paragraph */}
-            <p className="text-base sm:text-lg md:text-xl text-[#2C3E33] font-normal leading-relaxed max-w-xl">
-              Expert consultations, preventive care, medical diagnosis, and personalised treatment — all focused on keeping you and your family healthy.
+            {/* Paragraph: Refined font size matching reference */}
+            <p
+              data-anim="para"
+              className="text-sm sm:text-[15px] text-[#3F5447] font-normal leading-relaxed max-w-lg"
+            >
+              Expert consultations, preventive care, medical diagnosis, and
+              personalised treatment — all focused on keeping you and your
+              family healthy.
             </p>
 
             {/* CTA Button */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div data-anim="cta" className="pt-2 flex flex-wrap items-center gap-4">
               <button
                 onClick={onOpenBooking}
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1E3227] hover:bg-[#15241c] text-[#CBCFB8] hover:text-white font-medium text-sm sm:text-base shadow-lg transition-all duration-300 cursor-pointer"
+                className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#1E3227] hover:bg-[#15241c] text-[#CBCFB8] hover:text-white font-medium text-sm shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.02]"
               >
                 <span>Book Consultation</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
-
-
             </div>
           </div>
 
-          {/* RIGHT: Frosted Glass Medical Metric Cards */}
-          <div className="lg:col-span-5 xl:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 sm:gap-5 items-stretch sm:items-center lg:items-end justify-center w-full">
-
+          {/* RIGHT: Frosted Glass Metric Cards with refined compact font scaling */}
+          <div className="lg:col-span-5 xl:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-2.5 sm:gap-3 items-stretch sm:items-center lg:items-end justify-center w-full">
             {/* Card 1: Medical Care */}
             <GlassCard
-              icon={<Stethoscope className="w-4 h-4" />}
+              icon={<Stethoscope className="w-3 h-3" />}
               label="CONSULTATIONS"
               value="Expert"
               unit="PROFESSIONAL MEDICAL CARE"
-              gold={true}
+              unitHighlight={true}
             />
 
             {/* Card 2: Healthcare */}
             <GlassCard
-              icon={<Heart className="w-4 h-4" />}
+              icon={<Heart className="w-3 h-3" />}
               label="HEALTHCARE"
               value="Personal"
               unit="PATIENT-CENTRED CARE"
-              gold={true}
+              unitHighlight={true}
             />
 
             {/* Card 3: Diagnosis */}
             <GlassCard
-              icon={<Activity className="w-4 h-4" />}
+              icon={<Activity className="w-3 h-3" />}
               label="DIAGNOSTICS"
               value="Advanced"
               unit="QUALITY MEDICAL SUPPORT"
-              gold={false}
+              unitHighlight={false}
             />
-
           </div>
         </div>
       </div>

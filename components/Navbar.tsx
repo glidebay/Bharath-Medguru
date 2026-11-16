@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -91,18 +91,8 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             </button>
           </div>
 
-          {/* ── MOBILE MENU BUTTON (Below 820px round burger button) ── */}
-          <div className="flex md:hidden items-center gap-2.5">
-            <button
-              onClick={onOpenBooking}
-              className="sm:hidden px-4 py-2 rounded-full text-xs font-medium tracking-wide"
-              style={{
-                backgroundColor: "#1E3227",
-                color: "#CBCFB8",
-              }}
-            >
-              Shop
-            </button>
+          {/* ── MOBILE MENU BUTTON (Round burger button) ── */}
+          <div className="flex md:hidden items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="w-10 h-10 rounded-full flex items-center justify-center text-[#1E3227] transition-all cursor-pointer"
@@ -150,27 +140,13 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                 setMobileMenuOpen(false);
                 onOpenBooking();
               }}
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full text-xs font-medium"
-              style={{
-                backgroundColor: "rgba(62, 86, 70, 0.52)",
-                color: "#CBCFB8",
-              }}
-            >
-              <span>Cart</span>
-              <ShoppingCart className="w-3.5 h-3.5" />
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenBooking();
-              }}
-              className="w-full flex items-center justify-center py-2.5 rounded-full text-xs font-medium"
+              className="w-full flex items-center justify-center py-3 rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer"
               style={{
                 backgroundColor: "#1E3227",
                 color: "#CBCFB8",
               }}
             >
-              Shop the Ring
+              Contact Us
             </button>
           </div>
         </div>

@@ -11,7 +11,7 @@ export default function CtaSection({ onOpenBooking }: CtaSectionProps) {
   return (
     <section id="cta" className="py-20 bg-[#CBCFB8] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-[32px] overflow-hidden bg-[#1E3227] text-white p-8 sm:p-12 md:p-16 shadow-2xl border border-white/10">
+        <div className="relative rounded-[32px] overflow-hidden bg-[#1E3227] text-white p-8 sm:p-12 md:p-16 shadow-xl border border-white/10">
           {/* Background image with blend mode */}
           <div className="absolute inset-0 z-0 opacity-15 mix-blend-overlay">
             <img
