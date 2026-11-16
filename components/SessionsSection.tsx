@@ -20,23 +20,23 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
   const sessions = [
     {
       id: "card1",
-      name: "Dr. Maya Varen",
-      specialty: "Specialized in Life Coaching",
-      format: "In-person/online",
-      duration: "90 minutes",
+      name: "Dr. Roshna",
+      specialty: "Specialized in General Medicine",
+      format: "In-person",
+      duration: "Medical Consultant",
       rating: "5.0",
       reviews: "128",
       image:
         "https://framerusercontent.com/images/5uKjhPMJVcFmUVuASA2n1GkX1C8.png?width=476&height=443",
       description:
-        "Personalised Life & NLP Coaching sessions in Sydney or online to help you overcome limiting beliefs, boost confidence, gain clarity, and create lasting change.",
+        "Personalised medical consultations and healthcare services to help you understand your health, receive the right treatment, and maintain a healthier lifestyle.",
     },
     {
       id: "card2",
       name: "Lena Hart",
-      specialty: "Specialized in Holistic Massage",
-      format: "In-person/online",
-      duration: "90 minutes",
+      specialty: "Specialized in Cardiology",
+      format: "In-person",
+      duration: "Medical Consultant",
       rating: "4.9",
       reviews: "94",
       image:
@@ -47,9 +47,9 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
     {
       id: "card3",
       name: "Aarav Desai",
-      specialty: "Specialized in Holistic Health Coaching",
-      format: "In-person/online",
-      duration: "90 minutes",
+      specialty: "Specialized in Neurology",
+      format: "In-person",
+      duration: "Medical Consultant",
       rating: "5.0",
       reviews: "115",
       image:
@@ -60,9 +60,9 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
     {
       id: "card4",
       name: "Sofia Callen",
-      specialty: "Specialized in Biofield Tuning",
-      format: "In-person/online",
-      duration: "90 minutes",
+      specialty: "Specialized in Gastroenterology",
+      format: "In-person",
+      duration: "Medical Consultant",
       rating: "4.9",
       reviews: "142",
       image:
@@ -113,14 +113,14 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-            Personalized Sessions
+            Patient-Centred Care
           </div>
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
-            Personalized Sessions, <br />
-            <span className="font-normal text-[#1E3227]">In-Person or Online</span>
+            Medical Consultations, <br />
+            <span className="font-normal text-[#1E3227]">Right Here at Our Clinic</span>
           </h2>
           <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
-            Choose from a range of healing sessions that match your energy, goals, and needs.
+            Our dedicated medical team provides attentive care and reliable support to help you maintain better health.
           </p>
         </div>
 
@@ -205,7 +205,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                     {/* Action Button */}
                     <div className="pt-4 border-t border-[#1E3227]/12 flex flex-wrap items-center justify-between gap-4">
                       <div className="text-xs text-[#3F5447]">
-                        Free 15-min discovery call included
+                        Free Initial Health Consultation Available
                       </div>
                       <button
                         onClick={() => onBookPractitioner(item.name, item.specialty)}

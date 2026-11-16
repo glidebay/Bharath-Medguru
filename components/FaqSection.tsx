@@ -1,41 +1,46 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChevronDown, HelpCircle, MessageCircle } from "lucide-react";
+import { ChevronDown, HelpCircle, PhoneCall } from "lucide-react";
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqs = [
     {
-      question: "What is holistic wellness?",
+      question: "What healthcare services does Bharath MedGuru offer?",
       answer:
-        "Holistic wellness is an integrative approach that cares for the mind, body, and spirit together. Rather than merely suppressing symptoms, it combines physical vitality, mental clarity, emotional balance, and spiritual growth into a complete, restorative healing experience.",
+        "Bharath MedGuru provides a comprehensive, integrated healthcare ecosystem designed for families across Kerala. Our services encompass four interconnected pillars: Multi-Specialty Outpatient (OPD) Clinics with specialist doctor consultations, an NABL-benchmark Automated Diagnostic Laboratory, a 24/7 In-Clinic Pharmacy, and an expanding network of retail community pharmacies offering doorstep delivery.",
     },
     {
-      question: "How do I book a session with a practitioner?",
+      question: "How do I schedule an appointment with your specialist doctors?",
       answer:
-        "You can explore our verified practitioners on the platform, choose the specialty that aligns with your healing goals, and book directly online. You will receive an immediate confirmation with preparation tips and a secure link for virtual sessions or studio directions for in-person appointments.",
+        "Booking a consultation is quick and convenient. You can book online directly through our website by selecting your specialty and doctor, or call our clinic reception desk. We provide dedicated appointment slots across General Medicine, Cardiology, Neurology, Gastroenterology, Orthopedics, and Pediatrics with minimal wait times.",
     },
     {
-      question: "What types of services do you offer?",
+      question: "What diagnostic tests and lab facilities are available on-site?",
       answer:
-        "We offer an extensive selection of modalities including Usui Reiki & Biofield Energy Healing, Tibetan Singing Bowl Sound Therapy, Holistic & NLP Life Coaching, Somatic Myofascial Bodywork, and Mindful Breathwork & Pranayama.",
+        "Our advanced diagnostic laboratory features automated 5-part hematology and clinical biochemistry analyzers, high-resolution digital radiography (X-Ray), and 2D Doppler echocardiograms. We conduct routine blood screenings, comprehensive master health checkups, and specialized clinical investigations with rapid, verified same-day digital reports sent straight to your phone.",
     },
     {
-      question: "Are your practitioners certified or verified?",
+      question: "Is the in-clinic pharmacy open 24/7, and are medications authentic?",
       answer:
-        "Yes, every practitioner on our platform undergoes rigorous credential verification, background validation, and standard-of-care assessment to ensure you receive compassionate, authentic, and professional guidance.",
+        "Yes, our in-clinic pharmacy is open 24 hours a day, 7 days a week for both routine prescriptions and emergency medical needs. All medications are 100% genuine and sourced directly from certified manufacturers, stored in strict temperature-controlled refrigeration to ensure the potency of critical drugs, pediatric formulations, and specialized treatments.",
     },
     {
-      question: "Can I have sessions online or only in person?",
+      question: "How does your retail pharmacy chain and doorstep delivery work?",
       answer:
-        "We offer both formats. Modalities such as holistic counseling, life coaching, sound relaxation, and guided breathwork are seamlessly conducted worldwide via secure HD video. Somatic bodywork and tactile therapies are hosted at our tranquil in-person studio.",
+        "Our retail pharmacy network extends across Kerala and South India. You can submit your doctor's prescription digitally or via WhatsApp to have genuine medications delivered directly to your doorstep. We also offer automated monthly refills for chronic prescriptions—including diabetes, cardiac, and hypertension medications—so you never run out.",
     },
     {
-      question: "How do I know which service is right for me?",
+      question: "Can I consult doctors online, or are appointments only in-person?",
       answer:
-        "If you are unsure where to begin, you can book our complimentary 15-minute discovery consultation. Our wellness advisor will listen to your current challenges and guide you to the practitioner and modality best aligned with your needs.",
+        "We offer both flexible options. You can visit our modern healthcare clinic for comprehensive in-person evaluations, diagnostics, and physical checkups, or book secure virtual HD consultations for follow-ups, routine reviews, prescription renewals, and second opinions from the comfort of your home.",
+    },
+    {
+      question: "Are all doctors and healthcare specialists certified?",
+      answer:
+        "Yes. Every medical practitioner and specialist at Bharath MedGuru possesses verified board certifications, high-level clinical credentials, and extensive hospital experience. Our healthcare team follows strict clinical protocols to ensure compassionate, evidence-based, and patient-centered care for your entire family.",
     },
   ];
 
@@ -60,8 +65,7 @@ export default function FaqSection() {
             We Have Answers
           </h2>
           <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed max-w-2xl mx-auto">
-            Explore some of the most common questions our community asks. If you still need help, feel free
-            to contact us directly — we're here to support you.
+            Explore common questions about our multi-specialty clinic, automated diagnostic lab, 24/7 in-clinic pharmacy, and doorstep medicine delivery.
           </p>
         </div>
 
@@ -135,15 +139,15 @@ export default function FaqSection() {
               Still have questions on your mind?
             </h4>
             <p className="text-xs text-[#3F5447]">
-              Our wellness counselors are available 6 days a week to guide you.
+              Our clinic desk and patient care counselors are available to assist you.
             </p>
           </div>
           <a
             href="#contact"
             className="inline-flex items-center gap-2 bg-[#1E3227] text-[#CBCFB8] px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#15241c] hover:text-white transition-colors whitespace-nowrap"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
-            <span>Chat With Us</span>
+            <PhoneCall className="w-3.5 h-3.5" />
+            <span>Contact Clinic Desk</span>
           </a>
         </div>
       </div>

@@ -11,27 +11,27 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
   const steps = [
     {
       step: "01",
-      title: "Explore Our Holistic Space",
+      title: "Explore Our Medical Facilities",
       description:
-        "Browse a wide range of healing modalities and certified practitioners—from energy work to emotional counseling—all in one place.",
+        "Explore a wide range of medical services and qualified healthcare professionals—from general consultations to specialised treatments—all in one place.",
       image:
         "https://framerusercontent.com/images/679tInF0XPNSXngXGtZkQWznfPs.png?width=464&height=330",
       reversed: false,
     },
     {
       step: "02",
-      title: "Choose the Right Practitioner",
+      title: "Meet Our Medical Experts",
       description:
-        "View detailed profiles, read testimonials, and connect with a healer who resonates with your journey and needs.",
+        "Explore doctor profiles, read patient reviews, and connect with the right doctor for your health and well-being.",
       image:
         "https://framerusercontent.com/images/aCqdBiZcEPK1pOkSLlwQgcYNE.png?width=464&height=330",
       reversed: true,
     },
     {
       step: "03",
-      title: "Book a Session That Fits You",
+      title: "Book Your Medical Appointment",
       description:
-        "Easily schedule your session—online or in-person. Feel empowered, supported, and guided toward better well-being.",
+        "Easily book your appointment online or in person. Receive personalised medical care and compassionate support throughout your healthcare journey.",
       image:
         "https://framerusercontent.com/images/IwBKwYFuoz1J3GZT94nyRs6HOjM.png?width=464&height=330",
       reversed: false,
@@ -44,15 +44,14 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-24 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-            Simple 3-Step Journey
+            Your Healthcare Journey
           </div>
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
-            A Simple Path to Healing <br />
+            Your Journey to Better Health <br />
             <span className="font-normal text-[#1E3227]">Starts Here</span>
           </h2>
           <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
-            No stress. No confusion. Whether you're new to holistic wellness or a returning seeker, our 3-step
-            flow ensures your journey is smooth, safe, and supportive.
+            Getting quality healthcare should be simple. Our easy three-step process helps you connect with the right medical professionals and receive the care you need.
           </p>
         </div>
 

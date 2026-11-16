@@ -10,7 +10,7 @@ interface TeamSectionProps {
 export default function TeamSection({ onBookPractitioner }: TeamSectionProps) {
   const members = [
     {
-      name: "Dr. Maya Varen",
+      name: "Dr. Roshna",
       role: "Life & NLP Transformation Guide",
       experience: "12+ Yrs Experience",
       image: "https://framerusercontent.com/images/qvKeGHHrYFfC66e9wyyeA7VvoA8.png",

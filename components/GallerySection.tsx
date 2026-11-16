@@ -7,60 +7,38 @@ interface GallerySectionProps {
   onSelectExperience?: (title: string) => void;
 }
 
-const GALLERY_ITEMS: ArcCardItem[] = [
+const HEALTHCARE_SERVICES: ArcCardItem[] = [
   {
-    src: "https://framerusercontent.com/images/yCRt3JWrUCUUWjU7eSIahGzcys.jpg",
-    title: "Mindful Meditation & Stillness",
-    meta: "Retreat Circle • 90 mins Guided Session",
-    alt: "Mindful meditation session",
+    src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+    title: "Multi-Specialty Medical Clinic",
+    meta: "Specialist OPD • General Medicine, Orthopedics, Cardiology, Pediatrics",
+    description:
+      "Expert outpatient clinical consultations led by our senior Kerala specialists Dr. Roshna K. Nair, Dr. Harikrishnan Nambiar, Dr. Anoop Kurian, and Dr. Parvathy Warrier. Seamless appointment flow with zero wait times and comprehensive patient care.",
+    alt: "Bharath MedGuru Multi-Specialty Medical Clinic",
   },
   {
-    src: "https://framerusercontent.com/images/Sc3B21P6V6DNn4QF6gkok1Wk4.jpg",
-    title: "Himalayan Singing Bowls",
-    meta: "Vibrational Sound • Studio Sanctuary Immersion",
-    alt: "Himalayan singing bowls immersion",
+    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
+    title: "Automated Diagnostic Laboratory",
+    meta: "NABL Benchmark • Automated Pathology, 2D Echo & Digital X-Ray",
+    description:
+      "High-precision diagnostic testing equipped with automated 5-part hematology and clinical biochemistry analyzers, high-resolution digital radiography, 2D Doppler echocardiograms, and rapid verified same-day digital reports.",
+    alt: "Bharath MedGuru Automated Diagnostic Laboratory",
   },
   {
-    src: "https://framerusercontent.com/images/KOFYjpJSluBo7AfRE2dGghVTU2Q.jpg",
-    title: "Somatic Tension Release",
-    meta: "Myofascial Touch • Somatic Trauma Unwinding",
-    alt: "Somatic tension release bodywork",
+    src: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=80",
+    title: "24/7 In-Clinic Pharmacy",
+    meta: "Licensed Pharmacy • 100% Genuine Temperature-Controlled Formulations",
+    description:
+      "Round-the-clock licensed pharmacy dispensary ensuring immediate access to authentic medications, specialized chronic disease treatments, pediatric formulations, and surgical consumables directly on clinic premises.",
+    alt: "Bharath MedGuru 24/7 In-Clinic Pharmacy",
   },
   {
-    src: "https://framerusercontent.com/images/ddTNmZbKLYRzPNpgDogmBjbEKcM.jpg",
-    title: "Nature Grounding Immersion",
-    meta: "Earthing Retreat • Forest Bathing Sanctuary",
-    alt: "Nature grounding and earthing",
-  },
-  {
-    src: "https://framerusercontent.com/images/M7SBXEfppMeQJQZLqBQ41fZa1Qk.jpg",
-    title: "Holistic Herbal Lounge",
-    meta: "Herbal Botanical Alchemy • Mindful Consultation",
-    alt: "Holistic lounge and tea circle",
-  },
-  {
-    src: "https://framerusercontent.com/images/1hU7z9C918JEaJ2dQgRQ4fYoz8.jpg",
-    title: "Transformative Breathwork",
-    meta: "Pranayama • Autonomic Nervous System Reset",
-    alt: "Breathwork immersion workshop",
-  },
-  {
-    src: "https://framerusercontent.com/images/7dbfLsGUA6CZBOUpmyxUT7kroIY.jpg",
-    title: "Botanical Plant Alchemy",
-    meta: "Ayurvedic Herbal Oils • Organic Plant Therapy",
-    alt: "Botanical oils and natural remedies",
-  },
-  {
-    src: "https://framerusercontent.com/images/wFcUakLojNor8oggBVBAYfeLsQ.jpg",
-    title: "Chakra Alignment Retreat",
-    meta: "Usui Reiki Master • Subtle Biofield Harmony",
-    alt: "Chakra alignment energy healing",
-  },
-  {
-    src: "https://framerusercontent.com/images/1XwFW5Yt8F3DlAYFljpjPBL9MJY.jpg",
-    title: "Restorative Sound Harmony",
-    meta: "Harmonic Acoustic Resonance • Deep Cellular Calm",
-    alt: "Restorative sound harmony session",
+    src: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=1200&q=80",
+    title: "Chain of Retail Pharmacies",
+    meta: "Retail Network • Doorstep Delivery & Stores across Kerala",
+    description:
+      "Our expanding trusted chain of retail community pharmacies serving families across Kerala and South India. Reliable prescription fulfillment, scheduled chronic medicine refills, authentic pharmaceutical distribution, and prompt home delivery.",
+    alt: "Bharath MedGuru Chain of Retail Pharmacies",
   },
 ];
 
@@ -69,8 +47,8 @@ export default function GallerySection({ onSelectExperience }: GallerySectionPro
     <section id="gallery" className="relative bg-[#CBCFB8] overflow-visible">
       {/* Arc Card Carousel - Continuous Connected Ring */}
       <ArcCardCarousel
-        items={GALLERY_ITEMS}
-        ariaLabel="Visual gallery of holistic healing experiences"
+        items={HEALTHCARE_SERVICES}
+        ariaLabel="Visual tour of Bharath MedGuru clinic, pharmacy, diagnostic lab, and chain of pharmacies"
         onBookItem={onSelectExperience}
       />
     </section>

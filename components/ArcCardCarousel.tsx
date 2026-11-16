@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState, useCallback, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
@@ -8,6 +8,8 @@ import { ArrowRight } from "lucide-react";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export type ArcCardItem = {
   src: string;
@@ -68,32 +70,29 @@ export default function ArcCardCarousel({
   const stRef = useRef<ScrollTrigger | null>(null);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [stageDimensions, setStageDimensions] = useState({
-    w: 1440,
-    h: 900,
-    isMobile: false,
-  });
 
   // Circular wheel geometry
   const getGeometry = useCallback((w: number, h: number) => {
-    const isMobile = w < 768;
+    const viewW = w > 0 ? w : (typeof window !== "undefined" ? window.innerWidth : 1440);
+    const viewH = h > 0 ? h : (typeof window !== "undefined" ? window.innerHeight : 900);
+    const isMobile = viewW < 768;
     if (isMobile) {
-      const cardW = Math.min(280, w * 0.78);
+      const cardW = Math.min(280, viewW * 0.78);
       const cardH = cardW / 1.45;
-      const radius = Math.min(h * 0.55, 380);
-      const equatorX = w * 0.5;
+      const radius = Math.min(viewH * 0.55, 380);
+      const equatorX = viewW * 0.5;
       const hubX = equatorX - radius;
-      const hubY = Math.max(cardH / 2 + 60, h * 0.30);
+      const hubY = Math.max(cardH / 2 + 60, viewH * 0.30);
       return { cardW, cardH, radius, hubX, hubY, isMobile };
     } else {
-      const cardW = Math.min(420, Math.max(300, w * 0.25));
+      const cardW = Math.min(420, Math.max(300, viewW * 0.25));
       const cardH = cardW / 1.48;
-      const radius = Math.min(800, Math.max(600, h * 0.75));
+      const radius = Math.min(800, Math.max(600, viewH * 0.75));
 
       // Move equator inward from left edge for clean breathing room
-      const equatorX = Math.max(320, w * 0.25);
+      const equatorX = Math.max(320, viewW * 0.25);
       const hubX = equatorX - radius;
-      const hubY = h * 0.5;
+      const hubY = viewH * 0.5;
 
       return { cardW, cardH, radius, hubX, hubY, isMobile };
     }
@@ -115,8 +114,10 @@ export default function ArcCardCarousel({
   const positionCaption = useCallback(() => {
     const cap = capRef.current;
     const el = stageRef.current;
-    if (!cap || !el) return;
-    const g = getGeometry(el.clientWidth, el.clientHeight);
+    if (!cap) return;
+    const w = el?.clientWidth || (typeof window !== "undefined" ? window.innerWidth : 1440);
+    const h = el?.clientHeight || (typeof window !== "undefined" ? window.innerHeight : 900);
+    const g = getGeometry(w, h);
 
     if (g.isMobile) {
       cap.style.left = "20px";
@@ -128,7 +129,7 @@ export default function ArcCardCarousel({
     } else {
       // Shifted comfortably to the right side with generous breathing room
       const equatorRightEdge = g.hubX + g.radius + g.cardW / 2;
-      const leftPos = Math.max(equatorRightEdge + 48, el.clientWidth * 0.44);
+      const leftPos = Math.max(equatorRightEdge + 48, w * 0.44);
       cap.style.left = `${leftPos.toFixed(1)}px`;
       cap.style.right = "auto";
       cap.style.top = `${g.hubY.toFixed(1)}px`;
@@ -141,8 +142,9 @@ export default function ArcCardCarousel({
   // Update card DOM transforms across the connected circular ring
   const renderCards = useCallback(() => {
     const el = stageRef.current;
-    if (!el) return;
-    const g = getGeometry(el.clientWidth, el.clientHeight);
+    const w = el?.clientWidth || (typeof window !== "undefined" ? window.innerWidth : 1440);
+    const h = el?.clientHeight || (typeof window !== "undefined" ? window.innerHeight : 900);
+    const g = getGeometry(w, h);
     const p = posRef.current.v;
 
     for (let i = 0; i < n; i++) {
@@ -183,17 +185,18 @@ export default function ArcCardCarousel({
     setCurrentIndex((prev) => (prev === activeItem ? prev : activeItem));
   }, [n, count, getGeometry, getCardPlacement]);
 
+  // Synchronous layout effect before paint to immediately position cards and caption
+  useIsomorphicLayoutEffect(() => {
+    positionCaption();
+    renderCards();
+  }, [positionCaption, renderCards]);
+
   // Window resize observer
   useEffect(() => {
     const el = stageRef.current;
     if (!el) return;
 
     const ro = new ResizeObserver(() => {
-      setStageDimensions({
-        w: el.clientWidth,
-        h: el.clientHeight,
-        isMobile: el.clientWidth < 768,
-      });
       positionCaption();
       renderCards();
     });
@@ -202,41 +205,66 @@ export default function ArcCardCarousel({
     return () => ro.disconnect();
   }, [positionCaption, renderCards]);
 
-  // Scrub through the count of contents (0 to count - 1), then smoothly release to next section
+  // Scrub smoothly through the count of contents (0 to count - 1), resilient on page reload/refresh
   useEffect(() => {
     const track = trackRef.current;
     if (!track || count < 2) return;
 
-    // As user scrolls through the section, pos progresses through the contents (0 to count - 1).
-    // Once the contents are completed, the section unpins and naturally continues to the next section.
-    const tween = gsap.to(posRef.current, {
-      v: count - 1,
-      ease: "none",
-      scrollTrigger: {
+    const totalSteps = count - 1;
+    let target = 0;
+
+    const ctx = gsap.context(() => {
+      const trigger = ScrollTrigger.create({
         trigger: track,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.65,
-        invalidateOnRefresh: true,
-        onUpdate: () => {
-          renderCards();
+        onUpdate: (self) => {
+          target = self.progress * totalSteps;
         },
-      },
-    });
+        onRefresh: (self) => {
+          // Immediately recalibrate to current scroll position on refresh
+          target = self.progress * totalSteps;
+          posRef.current.v = target;
+          renderCards();
+          positionCaption();
+        },
+      });
 
-    stRef.current = tween.scrollTrigger ?? null;
-    renderCards();
-    positionCaption();
+      stRef.current = trigger;
 
-    // Re-calibrate ScrollTrigger so the start position is exact and always begins at item 1 (01 / 09)
+      // Sync position immediately upon mounting/restoring scroll position
+      target = trigger.progress * totalSteps;
+      posRef.current.v = target;
+      renderCards();
+      positionCaption();
+
+      // Smooth ticker interpolation for frame-perfect, jank-free scrubbing
+      const tick = (_t: number, dt: number) => {
+        const p = posRef.current.v;
+        // Frame-rate independent exponential smoothing
+        const next = p + (target - p) * (1 - Math.exp(-dt / 85));
+        if (Math.abs(next - p) < 1e-4 && next === target) return;
+        posRef.current.v = Math.abs(target - next) < 1e-4 ? target : next;
+        renderCards();
+      };
+
+      gsap.ticker.add(tick);
+
+      return () => {
+        gsap.ticker.remove(tick);
+      };
+    }, trackRef);
+
+    // Initial settle refresh after layout settling
     const refreshTimer = setTimeout(() => {
       ScrollTrigger.refresh();
       renderCards();
+      positionCaption();
     }, 150);
 
     return () => {
       clearTimeout(refreshTimer);
-      tween.kill();
+      ctx.revert();
       stRef.current = null;
     };
   }, [count, renderCards, positionCaption]);
@@ -275,6 +303,13 @@ export default function ArcCardCarousel({
   // Track height calibrated so completing the 9 contents flows directly into the next section
   const totalTrackHeight = `${(1 + (count - 1) * scrollPerCard) * 100}vh`;
 
+  // Pre-calculated default geometry for SSR & pre-hydration stability
+  const initG = useMemo(() => getGeometry(1440, 900), [getGeometry]);
+  const initCapLeft = useMemo(() => {
+    const eqRight = initG.hubX + initG.radius + initG.cardW / 2;
+    return Math.max(eqRight + 48, 1440 * 0.44);
+  }, [initG]);
+
   return (
     <div
       ref={trackRef}
@@ -289,31 +324,54 @@ export default function ArcCardCarousel({
         className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[#CBCFB8]"
       >
         {/* Connected Circular Ring of Cards - Never Shows an Empty End */}
-        {ringCards.map((it, i) => (
-          <div
-            key={i}
-            ref={(el) => {
-              cardRefs.current[i] = el;
-            }}
-            onClick={() => bringFlat(it.originalIndex)}
-            role="button"
-            tabIndex={0}
-            aria-label={`${it.title} - Item ${it.originalIndex + 1} of ${count}`}
-            className="absolute top-0 left-0 overflow-hidden will-change-transform cursor-pointer rounded-[20px] shadow-[0_16px_40px_-8px_rgba(0,0,0,0.18),0_4px_14px_-2px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_24px_50px_-6px_rgba(0,0,0,0.26)] group"
-          >
-            <img
-              src={it.src}
-              alt={it.alt ?? it.title}
-              draggable={false}
-              decoding="async"
-              className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-104"
-            />
-          </div>
-        ))}
+        {ringCards.map((it, i) => {
+          const d0 = offsetOf(i, 0, n);
+          const c0 = getCardPlacement(d0, initG);
+          const dist0 = Math.abs(d0);
+          const scale0 = Math.max(0.74, 1 - dist0 * 0.055);
+          const opacity0 = dist0 > 7 ? 0 : Math.max(0.3, 1 - dist0 * 0.16);
+          const zIndex0 = Math.round(100 - dist0 * 10);
+
+          return (
+            <div
+              key={i}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              onClick={() => bringFlat(it.originalIndex)}
+              role="button"
+              tabIndex={0}
+              aria-label={`${it.title} - Item ${it.originalIndex + 1} of ${count}`}
+              style={{
+                width: `${initG.cardW}px`,
+                height: `${initG.cardH}px`,
+                transform: `translate3d(${(c0.x - initG.cardW / 2).toFixed(2)}px, ${(c0.y - initG.cardH / 2).toFixed(2)}px, 0) rotate(${c0.rot.toFixed(3)}deg) scale(${scale0.toFixed(3)})`,
+                opacity: opacity0,
+                zIndex: zIndex0,
+                pointerEvents: dist0 > 7 ? "none" : "auto",
+              }}
+              className="absolute top-0 left-0 overflow-hidden will-change-transform cursor-pointer rounded-[20px] shadow-[0_16px_40px_-8px_rgba(0,0,0,0.18),0_4px_14px_-2px_rgba(0,0,0,0.08)] transition-shadow duration-300 hover:shadow-[0_24px_50px_-6px_rgba(0,0,0,0.26)] group"
+            >
+              <img
+                src={it.src}
+                alt={it.alt ?? it.title}
+                draggable={false}
+                decoding="async"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-104"
+              />
+            </div>
+          );
+        })}
 
         {/* Clean, Spacious Typography Caption beside Flat Card */}
         <div
           ref={capRef}
+          style={{
+            left: `${initCapLeft.toFixed(1)}px`,
+            top: `${initG.hubY.toFixed(1)}px`,
+            transform: "translateY(-50%)",
+            maxWidth: `calc(100% - ${initCapLeft.toFixed(1)}px - 40px)`,
+          }}
           className="absolute z-40 max-w-[580px] pointer-events-auto"
         >
           {/* Number Counter (01 / 09) */}
@@ -328,8 +386,15 @@ export default function ArcCardCarousel({
 
           {/* Meta Subtitle */}
           {currentItem.meta && (
-            <p className="acc-meta text-sm sm:text-base text-[#3F5447] font-light tracking-wide mb-7">
+            <p className="acc-meta text-sm sm:text-base text-[#3F5447] font-light tracking-wide mb-3">
               {currentItem.meta}
+            </p>
+          )}
+
+          {/* Service Description */}
+          {currentItem.description && (
+            <p className="acc-desc text-xs sm:text-sm md:text-base text-[#3F5447]/90 font-light leading-relaxed mb-6 max-w-lg">
+              {currentItem.description}
             </p>
           )}
 
@@ -338,14 +403,12 @@ export default function ArcCardCarousel({
             onClick={() => onBookItem?.(currentItem.title)}
             className="acc-action group inline-flex items-center gap-2.5 text-xs sm:text-sm font-medium uppercase tracking-wider text-[#1E3227] hover:text-[#15241c] transition-colors cursor-pointer"
           >
-            <span className="border-b border-[#1E3227]/30 pb-0.5 group-hover:border-[#1E3227] transition-colors">
-              Explore experience
+            <span className="border-b border-[#1E3227]/30 pb-0.5 group-hover:border-[#1E3227] transition-colors font-semibold">
+              EXPLORE SERVICE
             </span>
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
           </button>
         </div>
-
-
       </div>
     </div>
   );

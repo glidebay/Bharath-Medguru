@@ -19,12 +19,12 @@ import BookingModal from "@/components/BookingModal";
 
 export default function Home() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [selectedPractitioner, setSelectedPractitioner] = useState("Dr. Maya Varen");
-  const [selectedService, setSelectedService] = useState("Energy Healing");
+  const [selectedPractitioner, setSelectedPractitioner] = useState("Dr. Roshna");
+  const [selectedService, setSelectedService] = useState("Comprehensive Lab Test");
 
   const handleOpenBooking = () => {
-    setSelectedPractitioner("Dr. Maya Varen");
-    setSelectedService("Holistic Discovery Consultation");
+    setSelectedPractitioner("Dr. Roshna");
+    setSelectedService("Doctor Consultation & Diagnostics");
     setIsBookingOpen(true);
   };
 
@@ -34,8 +34,8 @@ export default function Home() {
     setIsBookingOpen(true);
   };
 
-  const handleSelectService = (serviceName: string) => {
-    setSelectedService(serviceName);
+  const handleSelectService = (serviceName?: string) => {
+    setSelectedService(serviceName || "Comprehensive Lab Test");
     setIsBookingOpen(true);
   };
 
@@ -72,8 +72,8 @@ export default function Home() {
         {/* Seeker Reviews & Testimonials Marquee (#testimonial) */}
         <TestimonialsSection />
 
-        {/* Blog & Healing Insights (#blog) */}
-        <BlogSection />
+        {/* Comprehensive Lab Test Services (#blog) */}
+        <BlogSection onOpenBooking={handleSelectService} />
 
         {/* Contact & Inquiry Form (#contact) */}
         <ContactSection />

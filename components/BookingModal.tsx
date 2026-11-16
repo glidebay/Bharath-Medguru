@@ -35,6 +35,25 @@ export default function BookingModal({
 
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const formattedText =
+      `*New Appointment Booking - Bharath MedGuru*\n\n` +
+      `*Patient Name:* ${fullName}\n` +
+      `*Phone Number:* ${phone || "Not provided"}\n` +
+      `*Email:* ${email}\n` +
+      `*Service / Department:* ${service}\n` +
+      `*Practitioner:* ${practitioner}\n` +
+      `*Preferred Date:* ${date}\n` +
+      `*Time Slot:* ${time}\n` +
+      `*Format:* ${format}`;
+
+    const whatsappUrl = `https://wa.me/917994066647?text=${encodeURIComponent(formattedText)}`;
+    try {
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    } catch (err) {
+      console.error("Popup blocked:", err);
+    }
+
     setConfirmed(true);
   };
 
@@ -141,7 +160,7 @@ export default function BookingModal({
                 onChange={(e) => setPractitioner(e.target.value)}
                 className="w-full bg-white/80 px-3.5 py-2.5 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none focus:ring-2 focus:ring-[#1E3227]/30"
               >
-                <option value="Dr. Maya Varen">Dr. Maya Varen (Life &amp; NLP Coaching)</option>
+                <option value="Dr. Roshna">Dr. Roshna (Life &amp; NLP Coaching)</option>
                 <option value="Lena Hart">Lena Hart (Holistic Somatic Massage)</option>
                 <option value="Aarav Desai">Aarav Desai (Ayurvedic Health &amp; Vitality)</option>
                 <option value="Sofia Callen">Sofia Callen (Biofield Tuning &amp; Reiki)</option>
@@ -158,11 +177,10 @@ export default function BookingModal({
                 <button
                   type="button"
                   onClick={() => setFormat("Virtual HD Zoom")}
-                  className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${
-                    format === "Virtual HD Zoom"
-                      ? "bg-[#1E3227] text-[#CBCFB8] border-[#1E3227]"
-                      : "bg-white/60 text-[#3F5447] border-[#1E3227]/15 hover:bg-white"
-                  }`}
+                  className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${format === "Virtual HD Zoom"
+                    ? "bg-[#1E3227] text-[#CBCFB8] border-[#1E3227]"
+                    : "bg-white/60 text-[#3F5447] border-[#1E3227]/15 hover:bg-white"
+                    }`}
                 >
                   <Video className="w-3.5 h-3.5" />
                   <span>Virtual HD Zoom</span>
@@ -170,11 +188,10 @@ export default function BookingModal({
                 <button
                   type="button"
                   onClick={() => setFormat("In-Studio Sanctuary")}
-                  className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${
-                    format === "In-Studio Sanctuary"
-                      ? "bg-[#1E3227] text-[#CBCFB8] border-[#1E3227]"
-                      : "bg-white/60 text-[#3F5447] border-[#1E3227]/15 hover:bg-white"
-                  }`}
+                  className={`flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-medium border transition-colors cursor-pointer ${format === "In-Studio Sanctuary"
+                    ? "bg-[#1E3227] text-[#CBCFB8] border-[#1E3227]"
+                    : "bg-white/60 text-[#3F5447] border-[#1E3227]/15 hover:bg-white"
+                    }`}
                 >
                   <MapPin className="w-3.5 h-3.5" />
                   <span>In-Studio Sanctuary</span>
@@ -250,7 +267,7 @@ export default function BookingModal({
                   </label>
                   <input
                     type="tel"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+91 79940 66647"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="w-full bg-white/80 px-3.5 py-2.5 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none"

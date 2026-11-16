@@ -21,10 +21,11 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { name: "Technology", href: "#service" },
-    { name: "Health", href: "#about" },
-    { name: "Activity", href: "#session" },
-    { name: "Insights", href: "#gallery" },
+    { name: "About", href: "/#about" },
+    { name: "Services", href: "/#service" },
+    { name: "Doctors", href: "/#session" },
+    { name: "Lab Investigations", href: "/#blog" },
+    { name: "FAQ", href: "/#faq" },
   ];
 
   return (
@@ -39,7 +40,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
           {/* ── LEFT: Official Bharath MedGuru Logo ── */}
           <Link
-            href="#hero"
+            href="/"
             className="flex items-center gap-3 group text-decoration-none select-none py-1"
           >
             <img

@@ -8,7 +8,7 @@ export default function ContactSection() {
     name: "",
     email: "",
     phone: "",
-    service: "Energy Healing",
+    service: "Doctor Consultation",
     message: "",
   });
 
@@ -23,11 +23,28 @@ export default function ContactSection() {
     const extractedFirst = formData.name.trim().split(" ")[0] || "Friend";
     setFirstName(extractedFirst);
 
-    // Simulate swift confirmation
+    // Format pre-filled WhatsApp message for Bharath MedGuru
+    const formattedText =
+      `*New Inquiry - Bharath MedGuru*\n\n` +
+      `*Patient Name:* ${formData.name}\n` +
+      `*Phone Number:* ${formData.phone || "Not provided"}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Service Required:* ${formData.service}\n` +
+      `*Message:* ${formData.message}`;
+
+    const whatsappUrl = `https://wa.me/917994066647?text=${encodeURIComponent(formattedText)}`;
+
+    // Open WhatsApp in a separate tab so the current website never navigates away
+    try {
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    } catch (err) {
+      console.error("Popup blocker prevented opening WhatsApp:", err);
+    }
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 600);
+    }, 400);
   };
 
   const handleReset = () => {
@@ -36,7 +53,7 @@ export default function ContactSection() {
       name: "",
       email: "",
       phone: "",
-      service: "Energy Healing",
+      service: "Doctor Consultation",
       message: "",
     });
   };
@@ -57,11 +74,10 @@ export default function ContactSection() {
               </div>
               <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1E3227] leading-tight">
                 We’re Here to Support <br />
-                <span className="font-normal text-[#1E3227]">Your Healing Journey</span>
+                <span className="font-normal text-[#1E3227]">Your Healthcare Needs</span>
               </h2>
               <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
-                Have questions about our modalities, need advice on choosing a practitioner, or just want to
-                say hello? Reach out anytime. Our compassionate care team is eager to assist you.
+                Connect with our clinic reception, diagnostic laboratory, or pharmacy desk. Our dedicated healthcare team is available to assist you with appointments, test inquiries, and medicine orders.
               </p>
             </div>
 
@@ -88,12 +104,12 @@ export default function ContactSection() {
                     Direct Phone &amp; WhatsApp
                   </div>
                   <a
-                    href="tel:+15552348900"
+                    href="tel:+917994066647"
                     className="font-sans text-lg font-semibold text-[#1E3227] hover:underline"
                   >
-                    +1 (555) 234-8900
+                    +91 79940 66647
                   </a>
-                  <p className="text-xs text-[#3F5447] mt-0.5">Toll-free customer guidance</p>
+                   
                 </div>
               </div>
 
@@ -118,12 +134,12 @@ export default function ContactSection() {
                     Email Inquiries
                   </div>
                   <a
-                    href="mailto:care@medguru.health"
+                    href="mailto:admin@bharathmedguru.com"
                     className="font-sans text-lg font-semibold text-[#1E3227] hover:underline"
                   >
-                    care@medguru.health
+                    admin@bharathmedguru.com
                   </a>
-                  <p className="text-xs text-[#3F5447] mt-0.5">Quick responses within 24 hours</p>
+                  <p className="text-xs text-[#3F5447] mt-0.5">Official clinic &amp; healthcare inquiries</p>
                 </div>
               </div>
 
@@ -145,12 +161,14 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-[#9B8A3E] uppercase tracking-wider">
-                    Studio &amp; Retreat Center
+                    Clinic, Lab &amp; Pharmacy Location
                   </div>
-                  <div className="font-sans text-base font-semibold text-[#1E3227]">
-                    742 Evergreen Wellness Ave, Suite 300
+                  <div className="font-sans text-sm font-semibold text-[#1E3227]">
+                    Door No: 23/589, 2, A&amp;P Centre
                   </div>
-                  <p className="text-xs text-[#3F5447] mt-0.5">Boulder, Colorado 80302, USA</p>
+                  <p className="text-xs text-[#3F5447] mt-0.5">
+                    Kunnathurmedu, North Stadium Bypass Road,<br />Palakkad 678 001, Kerala
+                  </p>
                 </div>
               </div>
 
@@ -172,12 +190,16 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <div className="text-xs font-semibold text-[#9B8A3E] uppercase tracking-wider">
-                    Office Hours
+                    Working Hours
                   </div>
                   <div className="text-sm font-semibold text-[#1E3227]">
-                    Monday – Saturday: 8:00 AM – 7:00 PM EST
+                    General Facility: 7:00 AM – 8:00 PM
                   </div>
-                  <p className="text-xs text-[#3F5447] mt-0.5">Sunday: By Special Appointment</p>
+                  <div className="text-xs text-[#3F5447] mt-1 space-y-0.5">
+                    <p><span className="font-medium text-[#1E3227]">Diagnostic Lab:</span> 7:00 AM – 7:00 PM</p>
+                    <p><span className="font-medium text-[#1E3227]">Pharmacy:</span> 8:00 AM – 8:00 PM</p>
+                    <p><span className="font-medium text-[#1E3227]">Doctor Consultations:</span> By Appointment</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -221,12 +243,24 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                <button
-                  onClick={handleReset}
-                  className="inline-flex items-center gap-2 bg-[#1E3227] text-[#CBCFB8] px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider hover:bg-[#15241c] hover:text-white transition-colors cursor-pointer"
-                >
-                  Send Another Message
-                </button>
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={`https://wa.me/917994066647?text=${encodeURIComponent(
+                      `*New Inquiry - Bharath MedGuru*\n\n*Patient Name:* ${formData.name}\n*Phone:* ${formData.phone || "Not provided"}\n*Email:* ${formData.email}\n*Service:* ${formData.service}\n*Message:* ${formData.message}`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#1E3227] text-white hover:bg-[#15241c] px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm"
+                  >
+                    <span>Chat on WhatsApp (+91 79940 66647)</span>
+                  </a>
+                  <button
+                    onClick={handleReset}
+                    className="inline-flex items-center gap-2 bg-white/80 text-[#1E3227] hover:bg-white border border-[#1E3227]/15 px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
+                  >
+                    Send Another Message
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -261,7 +295,7 @@ export default function ContactSection() {
                     <input
                       type="email"
                       required
-                      placeholder="eleanor@example.com"
+                      placeholder="admin@bharathmedguru.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-white/80 px-4 py-3 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none focus:ring-2 focus:ring-[#1E3227]/30 focus:border-[#1E3227] transition-all"
@@ -273,7 +307,7 @@ export default function ContactSection() {
                     </label>
                     <input
                       type="tel"
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="+91 79940 66647"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full bg-white/80 px-4 py-3 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none focus:ring-2 focus:ring-[#1E3227]/30 focus:border-[#1E3227] transition-all"
@@ -283,19 +317,17 @@ export default function ContactSection() {
 
                 <div>
                   <label className="block text-xs font-semibold text-[#1E3227] uppercase tracking-wider mb-1.5">
-                    Modality / Interest *
+                    Service of Interest *
                   </label>
                   <select
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                     className="w-full bg-white/80 px-4 py-3 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none focus:ring-2 focus:ring-[#1E3227]/30 focus:border-[#1E3227] transition-all"
                   >
-                    <option value="Energy Healing">Energy Healing (Reiki &amp; Chakra)</option>
-                    <option value="Sound Therapy">Sound Therapy (Bowls &amp; Gongs)</option>
-                    <option value="Holistic Counseling">Holistic &amp; NLP Life Coaching</option>
-                    <option value="Bodywork &amp; Massage">Somatic Bodywork &amp; Deep Massage</option>
-                    <option value="Meditation &amp; Breathwork">Breathwork &amp; Guided Meditation</option>
-                    <option value="General Discovery Call">15-Min Free Discovery Call</option>
+                    <option value="Doctor Consultation">Doctor Consultation (Specialist OPD)</option>
+                    <option value="Diagnostic Lab Testing">Diagnostic Lab Testing &amp; Profiles</option>
+                    <option value="Pharmacy & Home Delivery">Pharmacy &amp; Prescription Home Delivery</option>
+                    <option value="General Health Inquiry">General Health &amp; Clinic Inquiry</option>
                   </select>
                 </div>
 
