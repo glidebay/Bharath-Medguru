@@ -275,8 +275,8 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
         >
 
           <h2 className="font-sans text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.08] text-[#CBCFB8]">
-            Explore Modalities <br />
-            <span className="font-normal text-white">for Every Journey</span>
+            Explore Our <br />
+            <span className="font-normal text-white">Medical Services</span>
           </h2>
 
 

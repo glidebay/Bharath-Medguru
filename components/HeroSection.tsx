@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Moon, Flame, Activity, Sparkles } from "lucide-react";
+import { ArrowRight, Stethoscope, Heart, Activity, Sparkles } from "lucide-react";
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
@@ -37,16 +37,15 @@ function GlassCard({ icon, label, value, unit, gold }: GlassCardProps) {
         <span>{label}</span>
       </div>
 
-      {/* Big Numeral */}
-      <div className="text-3xl sm:text-4xl lg:text-[44px] font-light text-[#1E3227] tracking-tight leading-none">
+      {/* Big Numeral / Value */}
+      <div className="text-xl sm:text-2xl lg:text-[26px] font-normal text-[#1E3227] tracking-tight leading-tight">
         {value}
       </div>
 
       {/* Unit / Rating */}
       <div
-        className={`text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase ${
-          gold ? "text-[#9B8A3E]" : "text-[#1E3227]/60"
-        }`}
+        className={`text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase ${gold ? "text-[#9B8A3E]" : "text-[#1E3227]/60"
+          }`}
       >
         {unit}
       </div>
@@ -100,19 +99,19 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/40 border border-white/60 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-[#1E3227] animate-pulse" />
               <span className="text-xs font-semibold tracking-wider uppercase text-[#1E3227]">
-                Tracking 24/7 · Clinical Diagnostics
+                Modern Facilities · Trusted Doctors
               </span>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-6xl md:text-7xl xl:text-[76px] font-medium tracking-tight text-[#1E3227] leading-[1.06]">
-              Know Your Body. <br />
-              <span className="font-normal text-[#1E3227]/90">Move With It.</span>
+              Beyond Treatment. <br />
+              <span className="font-normal text-[#1E3227]/90">We Care for You.</span>
             </h1>
 
             {/* Paragraph */}
             <p className="text-base sm:text-lg md:text-xl text-[#2C3E33] font-normal leading-relaxed max-w-xl">
-              Sleep, recovery, stress, heart rate and activity — tracked continuously and turned into clinical insights you can actually use.
+              Expert consultations, preventive care, medical diagnosis, and personalised treatment — all focused on keeping you and your family healthy.
             </p>
 
             {/* CTA Button */}
@@ -121,52 +120,44 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
                 onClick={onOpenBooking}
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1E3227] hover:bg-[#15241c] text-[#CBCFB8] hover:text-white font-medium text-sm sm:text-base shadow-lg transition-all duration-300 cursor-pointer"
               >
-                <span>Explore More</span>
+                <span>Book Consultation</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
 
-              <a
-                href="#about"
-                className="inline-flex items-center gap-2 px-6 py-4 rounded-full bg-white/30 hover:bg-white/50 text-[#1E3227] font-medium text-sm sm:text-base border border-white/50 transition-colors"
-              >
-                <span>How It Works</span>
-              </a>
+
             </div>
           </div>
 
-          {/* RIGHT: Frosted Glass Metric Cards */}
+          {/* RIGHT: Frosted Glass Medical Metric Cards */}
           <div className="lg:col-span-5 xl:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-4 sm:gap-5 items-stretch sm:items-center lg:items-end justify-center w-full">
-            {/* Card 1: Sleep */}
+
+            {/* Card 1: Medical Care */}
             <GlassCard
-              icon={<Moon className="w-4 h-4" />}
-              label="SLEEP"
-              value={
-                <span>
-                  7<span className="text-xl sm:text-2xl mr-1 ml-0.5">H</span>
-                  42<span className="text-xl sm:text-2xl ml-0.5">M</span>
-                </span>
-              }
-              unit="OPTIMAL RECOVERY"
+              icon={<Stethoscope className="w-4 h-4" />}
+              label="CONSULTATIONS"
+              value="Expert"
+              unit="PROFESSIONAL MEDICAL CARE"
               gold={true}
             />
 
-            {/* Card 2: Calories */}
+            {/* Card 2: Healthcare */}
             <GlassCard
-              icon={<Flame className="w-4 h-4" />}
-              label="CALORIES"
-              value="1,642"
-              unit="ACTIVE KCAL"
+              icon={<Heart className="w-4 h-4" />}
+              label="HEALTHCARE"
+              value="Personal"
+              unit="PATIENT-CENTRED CARE"
               gold={true}
             />
 
-            {/* Card 3: HRV */}
+            {/* Card 3: Diagnosis */}
             <GlassCard
               icon={<Activity className="w-4 h-4" />}
-              label="HEART RATE"
-              value="68"
-              unit="RESTING BPM"
+              label="DIAGNOSTICS"
+              value="Advanced"
+              unit="QUALITY MEDICAL SUPPORT"
               gold={false}
             />
+
           </div>
         </div>
       </div>

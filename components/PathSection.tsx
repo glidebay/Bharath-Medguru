@@ -61,9 +61,8 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
           {steps.map((item) => (
             <div
               key={item.step}
-              className={`flex flex-col ${
-                item.reversed ? "lg:flex-row-reverse" : "lg:flex-row"
-              } items-center gap-10 lg:gap-20`}
+              className={`flex flex-col ${item.reversed ? "lg:flex-row-reverse" : "lg:flex-row"
+                } items-center gap-10 lg:gap-20`}
             >
               {/* Image Frame */}
               <div className="w-full lg:w-1/2 flex justify-center">

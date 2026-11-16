@@ -22,8 +22,8 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
 
       const counterInterval = setInterval(() => {
         step++;
-        setCount1(Math.min(50, Math.floor((50 / steps) * step)));
-        setCount2(Math.min(10, Math.floor((10 / steps) * step)));
+        setCount1(Math.min(10, Math.floor((10 / steps) * step)));
+        setCount2(Math.min(10, Math.floor((5 / steps) * step)));
         setCount3(Math.min(98, Math.floor((98 / steps) * step)));
 
         if (step >= steps) {
@@ -40,26 +40,26 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
   const stats = [
     {
       icon: <Users className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
-      label: "HEALERS ONBOARD",
+      label: "MEDICAL PROFESSIONALS",
       value: `${count1}+`,
-      sub: "VETTED MASTERS",
-      desc: "Across ancient & modern modalities",
+      sub: "HEALTHCARE EXPERTS",
+      desc: "Dedicated to quality patient care.",
       gold: true,
     },
     {
       icon: <Activity className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
-      label: "SESSIONS COMPLETED",
+      label: "CONSULTATIONS COMPLETED",
       value: `${count2}k+`,
-      sub: "GLOBAL NETWORK",
-      desc: "One-on-one virtual & studio care",
+      sub: "PATIENT CARE",
+      desc: "Dedicated to accessible and quality healthcare.",
       gold: true,
     },
     {
       icon: <HeartHandshake className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
-      label: "LIVES TOUCHED",
+      label: "PATIENT SATISFACTION",
       value: `${count3}%+`,
-      sub: "WELLBEING TRANSFORMATION",
-      desc: "Reported positive emotional reset",
+      sub: "QUALITY HEALTHCARE",
+      desc: "Committed to compassionate patient care.",
       gold: false,
     },
   ];
@@ -101,11 +101,11 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
                 <div className="flex items-center gap-2 mb-1.5">
                   <ShieldCheck className="w-5 h-5 text-[#9B8A3E]" />
                   <span className="font-semibold text-xs tracking-wider uppercase text-[#1E3227]">
-                    Accredited
+                    Qualified Doctors
                   </span>
                 </div>
                 <p className="text-xs text-[#3F5447] leading-snug">
-                  100% verified certifications &amp; background checks.
+                  Verified medical expertise &amp; professional healthcare.
                 </p>
               </div>
             </div>
@@ -118,24 +118,18 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
             </div>
 
             <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227] leading-tight">
-              Creating a Safe Space for <br />
-              <span className="font-normal text-[#1E3227]">Holistic Health</span>
+              Where Expert Care Meets <br />
+              <span className="font-normal text-[#1E3227]">Compassionate Healthcare</span>
             </h2>
 
             <div className="space-y-4 text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
               <p>
-                With over a decade of experience, our commitment is to guide you through life's challenges.
-                Embracing integrative wellness and virtual sessions, we have made mental health and energetic
-                support easily accessible in today's digital age.
+                With years of dedication to healthcare, our commitment is to provide quality medical services through expert consultations and compassionate care. Combining medical expertise with modern facilities, we make healthcare more accessible and convenient for everyone.
               </p>
               <p>
-                Whether it's anxiety, emotional burnout, relationship harmony, or personal growth, our
-                expertise is your pathway to a happier, healthier life.
+                Whether it's routine check-ups, preventive healthcare, medical consultations, or specialised treatments, our experienced team is dedicated to guiding you towards a healthier, happier life.
               </p>
-              <p className="text-sm font-normal text-[#1E3227] border-l-2 border-[#1E3227] pl-4">
-                “We believe everyone deserves access to trusted, compassionate holistic care. Our platform
-                bridges seekers with certified practitioners dedicated to healing and transformation.”
-              </p>
+              
             </div>
 
             <div className="pt-2">
@@ -143,7 +137,7 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
                 onClick={onOpenBooking}
                 className="inline-flex items-center gap-2 bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white px-7 py-3.5 rounded-full text-sm font-medium shadow-sm transition-all duration-200 hover:scale-[1.02] cursor-pointer"
               >
-                <span>Learn Our Story</span>
+                <span>Discover Our Services</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
