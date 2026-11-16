@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -15,56 +15,47 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
-import BookingModal from "@/components/BookingModal";
 
 export default function Home() {
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [selectedPractitioner, setSelectedPractitioner] = useState("Dr. Roshna");
-  const [selectedService, setSelectedService] = useState("Comprehensive Lab Test");
-
-  const handleOpenBooking = () => {
-    setSelectedPractitioner("Dr. Roshna");
-    setSelectedService("Doctor Consultation & Diagnostics");
-    setIsBookingOpen(true);
-  };
-
-  const handleBookPractitioner = (name: string, roleOrSpecialty: string) => {
-    setSelectedPractitioner(name);
-    setSelectedService(roleOrSpecialty);
-    setIsBookingOpen(true);
-  };
-
-  const handleSelectService = (serviceName?: string) => {
-    setSelectedService(serviceName || "Comprehensive Lab Test");
-    setIsBookingOpen(true);
+  const scrollToContact = () => {
+    const element = document.getElementById("contact");
+    if (element) {
+      if (typeof window !== "undefined" && (window as any).__lenis) {
+        (window as any).__lenis.scrollTo(element, { offset: -30, duration: 1.2 });
+      } else {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.location.hash = "#contact";
+    }
   };
 
   return (
     <SmoothScroll>
       <main className="min-h-screen bg-[#CBCFB8] text-[#1E3227] selection:bg-[#1E3227] selection:text-[#CBCFB8]">
         {/* Navigation Bar */}
-        <Navbar onOpenBooking={handleOpenBooking} />
+        <Navbar onOpenBooking={scrollToContact} />
 
         {/* Hero Section (#hero) */}
-        <HeroSection onOpenBooking={handleOpenBooking} />
+        <HeroSection onOpenBooking={scrollToContact} />
 
         {/* About Section (#about) */}
-        <AboutSection onOpenBooking={handleOpenBooking} />
+        <AboutSection onOpenBooking={scrollToContact} />
 
         {/* Services / Modalities 3D Spatial Corridor (#service) */}
-        <ServicesSection onSelectService={handleSelectService} />
+        <ServicesSection onSelectService={scrollToContact} />
 
         {/* 3-Step Path Section (#path) */}
-        <PathSection onOpenBooking={handleOpenBooking} />
+        <PathSection onOpenBooking={scrollToContact} />
 
         {/* Personalized Sessions (#session) */}
-        <SessionsSection onBookPractitioner={handleBookPractitioner} />
+        <SessionsSection onBookPractitioner={scrollToContact} />
 
         {/* Call to Action Banner (#cta) */}
-        <CtaSection onOpenBooking={handleOpenBooking} />
+        <CtaSection onOpenBooking={scrollToContact} />
 
         {/* Real People Transformations Gallery (#gallery) */}
-        <GallerySection onSelectExperience={handleSelectService} />
+        <GallerySection onSelectExperience={scrollToContact} />
 
         {/* FAQ Accordion (#faq) */}
         <FaqSection />
@@ -73,21 +64,13 @@ export default function Home() {
         <TestimonialsSection />
 
         {/* Comprehensive Lab Test Services (#blog) */}
-        <BlogSection onOpenBooking={handleSelectService} />
+        <BlogSection onOpenBooking={scrollToContact} />
 
         {/* Contact & Inquiry Form (#contact) */}
         <ContactSection />
 
         {/* Footer & Legal (#footer) */}
         <FooterSection />
-
-        {/* Interactive Booking Modal */}
-        <BookingModal
-          isOpen={isBookingOpen}
-          onClose={() => setIsBookingOpen(false)}
-          initialPractitioner={selectedPractitioner}
-          initialService={selectedService}
-        />
       </main>
     </SmoothScroll>
   );

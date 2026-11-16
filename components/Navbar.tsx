@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 interface NavbarProps {
-  onOpenBooking: () => void;
+  onOpenBooking?: () => void;
 }
 
 export default function Navbar({ onOpenBooking }: NavbarProps) {
@@ -20,8 +20,24 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToContact = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    setMobileMenuOpen(false);
+    const element = document.getElementById("contact");
+    if (element) {
+      if (typeof window !== "undefined" && (window as any).__lenis) {
+        (window as any).__lenis.scrollTo(element, { offset: -30, duration: 1.2 });
+      } else {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.location.hash = "#contact";
+    }
+  };
+
   const navLinks = [
     { name: "About", href: "/#about" },
+    { name: "Gallery", href: "/#gallery" },
     { name: "Services", href: "/#service" },
     { name: "Doctors", href: "/#session" },
     { name: "Lab Investigations", href: "/#blog" },
@@ -66,26 +82,11 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             ))}
           </nav>
 
-          {/* ── RIGHT: Translucent Moss Cart pill + Dark Shop pill ── */}
+          {/* ── RIGHT: Contact Us Pill (scrolls directly to Get in Touch) ── */}
           <div className="hidden sm:flex items-center gap-3">
-
-            {/* Shop the Ring Pill (solid deep forest) */}
             <button
-              onClick={onOpenBooking}
-              className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs lg:text-[13px] font-medium tracking-wide transition-all duration-200 cursor-pointer active:translate-y-px"
-              style={{
-                backgroundColor: "#1E3227",
-                color: "#CBCFB8",
-                border: "none",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "#15241c";
-                e.currentTarget.style.color = "#ffffff";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "#1E3227";
-                e.currentTarget.style.color = "#CBCFB8";
-              }}
+              onClick={scrollToContact}
+              className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs lg:text-[13px] font-medium tracking-wide transition-all duration-200 cursor-pointer active:translate-y-px bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white shadow-xs"
             >
               Contact Us
             </button>
@@ -136,15 +137,8 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
           <div className="pt-2 flex flex-col gap-2.5 border-t border-[#1E3227]/10">
             <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenBooking();
-              }}
-              className="w-full flex items-center justify-center py-3 rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer"
-              style={{
-                backgroundColor: "#1E3227",
-                color: "#CBCFB8",
-              }}
+              onClick={scrollToContact}
+              className="w-full flex items-center justify-center py-3 rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white transition-colors shadow-xs"
             >
               Contact Us
             </button>

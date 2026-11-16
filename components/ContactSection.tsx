@@ -266,10 +266,10 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="border-b border-[#1E3227]/10 pb-4 mb-2">
                   <h3 className="font-sans text-2xl font-semibold text-[#1E3227]">
-                    Send Us an Inquiry
+                    Book a Consultation or Inquiry
                   </h3>
                   <p className="text-xs text-[#3F5447]">
-                    Fill in your details and we will connect you directly with a dedicated wellness guide.
+                    Fill in your details below to schedule an appointment with our specialist doctors, book laboratory tests, or order medicines.
                   </p>
                 </div>
 
@@ -280,7 +280,7 @@ export default function ContactSection() {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Eleanor Vance"
+                    placeholder="e.g. Ananya Suresh"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full bg-white/80 px-4 py-3 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none focus:ring-2 focus:ring-[#1E3227]/30 focus:border-[#1E3227] transition-all"
@@ -351,10 +351,10 @@ export default function ContactSection() {
                   className="w-full inline-flex items-center justify-center gap-2 bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white py-4 rounded-xl text-sm font-semibold tracking-wide uppercase transition-all duration-200 shadow-md hover:shadow-lg hover:scale-[1.01] cursor-pointer"
                 >
                   {isSubmitting ? (
-                    <span>Sending message...</span>
+                    <span>Submitting request...</span>
                   ) : (
                     <>
-                      <span>Send message</span>
+                      <span>Submit Consultation / Inquiry</span>
                       <Send className="w-4 h-4" />
                     </>
                   )}

@@ -10,57 +10,57 @@ import {
   useSpring,
   MotionValue,
 } from "framer-motion";
-import { Sparkles, ArrowRight, Compass } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface ServicesSectionProps {
   onSelectService: (serviceName: string) => void;
 }
 
-const MODALITY_CARDS_DATA = [
+const SERVICES_CARDS_DATA = [
   {
-    src: "https://framerusercontent.com/images/aarfBVywLAN5Eq5YKVwCEONkaI.jpg",
-    title: "Energy Healing",
-    subtitle: "Reiki & Chakra Balance",
+    src: "/images/services/service-doctor-chamber.jpg",
+    title: "General Medicine & Diabetology",
+    subtitle: "Specialist OPD & Chronic Care",
   },
   {
-    src: "https://framerusercontent.com/images/CPxMN4M7oVR32cxiuPW6ZyBqZk4.jpg",
-    title: "Sound Therapy",
-    subtitle: "Bowls & Gong Vibrations",
+    src: "/images/services/service-clinic-exterior.jpg",
+    title: "Automated Diagnostic Lab",
+    subtitle: "Biochemistry, Pathology & Blood Tests",
   },
   {
-    src: "https://framerusercontent.com/images/N6o6ZLH0yVENL5EJ2RfmAOBFDU.png?width=588&height=564",
-    title: "Holistic Counseling",
-    subtitle: "Mind & Life Clarity",
+    src: "/images/services/service-pharmacy-counter.jpg",
+    title: "24/7 In-Clinic Pharmacy",
+    subtitle: "Licensed Authentic Formulations",
   },
   {
-    src: "https://framerusercontent.com/images/KOFYjpJSluBo7AfRE2dGghVTU2Q.jpg",
-    title: "Bodywork & Massage",
-    subtitle: "Somatic Tension Release",
+    src: "/images/services/service-exam-room.jpg",
+    title: "Cardiology & Heart Care",
+    subtitle: "ECG, 2D Echo & Specialist Review",
   },
   {
-    src: "https://framerusercontent.com/images/1hU7z9C918JEaJ2dQgRQ4fYoz8.jpg",
-    title: "Breathwork",
-    subtitle: "Pranayama & Calm",
+    src: "/images/services/service-reception-lounge.jpg",
+    title: "Clinical Reception & Wellness",
+    subtitle: "Zero Wait Times & Priority Triage",
   },
   {
-    src: "https://framerusercontent.com/images/3Y2Dt689F5ZJob56LwquzJmgulo.jpg",
-    title: "Ayurvedic Health",
-    subtitle: "Dosha & Vitality",
+    src: "/images/services/service-doctor-chamber.jpg",
+    title: "Orthopedics & Joint Health",
+    subtitle: "Musculoskeletal & Bone Care",
   },
   {
-    src: "https://framerusercontent.com/images/ddTNmZbKLYRzPNpgDogmBjbEKcM.jpg",
-    title: "Nature Grounding",
-    subtitle: "Earthing & Balance",
+    src: "/images/services/service-exam-room.jpg",
+    title: "Pediatrics & Child Wellness",
+    subtitle: "Comprehensive Child Healthcare",
   },
   {
-    src: "https://framerusercontent.com/images/wFcUakLojNor8oggBVBAYfeLsQ.jpg",
-    title: "Biofield Tuning",
-    subtitle: "Frequency Alignment",
+    src: "/images/services/service-pharmacy-counter.jpg",
+    title: "Chain of Retail Pharmacies",
+    subtitle: "Kerala Network & Doorstep Delivery",
   },
   {
-    src: "https://framerusercontent.com/images/yCRt3JWrUCUUWjU7eSIahGzcys.jpg",
-    title: "Meditation",
-    subtitle: "Stillness & Peace",
+    src: "/images/services/service-clinic-exterior.jpg",
+    title: "Executive Health Packages",
+    subtitle: "Full Body Diagnostic Profiles",
   },
 ];
 
@@ -74,7 +74,7 @@ interface TunnelCardData {
   index: number;
 }
 
-const TUNNEL_CARDS: TunnelCardData[] = MODALITY_CARDS_DATA.map((item, i) => {
+const TUNNEL_CARDS: TunnelCardData[] = SERVICES_CARDS_DATA.map((item, i) => {
   const goldenAngle = i * 137.5 * (Math.PI / 180);
   const radiusFactorX = 0.18 + (i % 3) * 0.05;
   const radiusFactorY = 0.16 + (i % 2) * 0.05;
@@ -147,8 +147,8 @@ function TunnelCard({
   const opacity = useTransform(localProgress, [0, 0.18, 0.82, 0.98], [0, 1, 1, 0]);
 
   const cardWidth = stage.isMobile
-    ? Math.max(140, Math.min(190, stage.width * 0.4))
-    : Math.max(200, Math.min(280, stage.width * 0.18));
+    ? Math.max(160, Math.min(220, stage.width * 0.44))
+    : Math.max(220, Math.min(300, stage.width * 0.2));
 
   const baseX = card.angleCos * (stage.width * card.radiusFactorX);
   const baseY = card.angleSin * (stage.height * card.radiusFactorY);
@@ -178,6 +178,7 @@ function TunnelCard({
       className="pointer-events-auto absolute left-1/2 top-1/2 aspect-[4/5] will-change-transform select-none cursor-pointer"
     >
       <div className="group relative h-full w-full overflow-hidden rounded-[24px] bg-[#1E3227] shadow-2xl border border-[#CBCFB8]/30 transition-all duration-300 hover:scale-105 hover:border-white">
+        {/* Real Clinic Photo */}
         <img
           src={card.item.src}
           alt={card.item.title}
@@ -185,16 +186,21 @@ function TunnelCard({
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
 
-        {/* Card Overlay with Clean Simple Content */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1E3227] via-[#1E3227]/40 to-transparent flex flex-col justify-end p-5">
-          <span className="text-[11px] uppercase tracking-wider text-[#9B8A3E] font-medium mb-1 drop-shadow-sm">
+        {/* Top Badge: Sequential Service Number */}
+        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-white text-[10px] font-mono tracking-widest uppercase pointer-events-none">
+          Service {String(card.index + 1).padStart(2, "0")}
+        </div>
+
+        {/* Card Overlay with Title and Subtitle */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1E3227] via-[#1E3227]/55 to-transparent flex flex-col justify-end p-4 sm:p-5">
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#9B8A3E] font-medium mb-1 drop-shadow-sm">
             {card.item.subtitle}
           </span>
           <div className="flex items-center justify-between gap-2">
-            <h4 className="text-base sm:text-lg font-sans font-semibold text-white drop-shadow-md">
+            <h4 className="text-sm sm:text-base lg:text-lg font-sans font-semibold text-white drop-shadow-md leading-snug">
               {card.item.title}
             </h4>
-            <div className="w-7 h-7 rounded-full bg-[#CBCFB8] text-[#1E3227] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            <div className="w-7 h-7 rounded-full bg-[#CBCFB8] text-[#1E3227] flex items-center justify-center flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
               <ArrowRight className="w-3.5 h-3.5" />
             </div>
           </div>
@@ -243,12 +249,11 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
   const pointer = useCameraParallax(!reduce);
 
   const titleScale = useTransform(smoothProgress, [0, 0.5, 1], [0.85, 1, 1.25]);
-  const titleOpacity = useTransform(smoothProgress, [0, 0.15, 0.85, 1], [0.4, 1, 1, 0.1]);
-  const promptOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
+  const titleOpacity = useTransform(smoothProgress, [0, 0.15, 0.85, 1], [0.4, 1, 1, 0.15]);
 
   return (
     <section
-      id="service"
+      id="gallery"
       ref={containerRef}
       className="relative h-[280vh] bg-[#1E3227] text-[#CBCFB8]"
     >
@@ -268,43 +273,19 @@ export default function ServicesSection({ onSelectService }: ServicesSectionProp
         <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-[#CBCFB8]/20" />
         <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-[#CBCFB8]/15" />
 
-        {/* Central Anchor Typography - Clean & Simple */}
+        {/* Central Anchor Typography - Explore Our Gallery */}
         <motion.div
           style={{ scale: titleScale, opacity: titleOpacity }}
           className="pointer-events-none z-0 flex flex-col items-center text-center px-6 max-w-xl"
         >
-
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-[#CBCFB8] text-[11px] font-semibold tracking-wider uppercase mb-3 border border-white/15 backdrop-blur-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#9B8A3E]" />
+            Visual Tour
+          </div>
           <h2 className="font-sans text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.08] text-[#CBCFB8]">
             Explore Our <br />
-            <span className="font-normal text-white">Medical Services</span>
+            <span className="font-normal text-white">Gallery</span>
           </h2>
-
-
-
-          {/* Quick Filter Modality Pills */}
-          <div className="flex flex-wrap justify-center items-center gap-2 mt-6 pointer-events-auto">
-            {MODALITY_CARDS_DATA.slice(0, 5).map((m, idx) => (
-              <button
-                key={idx}
-                onClick={() => onSelectService(m.title)}
-                className="text-xs bg-white/10 hover:bg-white text-[#CBCFB8] hover:text-[#1E3227] px-3.5 py-1 rounded-full transition-colors font-medium border border-white/10 cursor-pointer"
-              >
-                {m.title}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Scroll Prompt Indicator */}
-        <motion.div
-          style={{ opacity: promptOpacity }}
-          className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 text-xs font-mono uppercase tracking-[0.3em] text-[#CBCFB8]/80"
-        >
-          <div className="flex items-center gap-1.5">
-            <Compass className="w-3.5 h-3.5 text-[#CBCFB8]" />
-            <span>Scroll to Explore</span>
-          </div>
-          <div className="h-6 w-px bg-gradient-to-b from-[#CBCFB8] to-transparent animate-pulse" />
         </motion.div>
 
         {/* 3D Z-Space Corridor Cards */}

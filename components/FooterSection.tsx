@@ -130,12 +130,12 @@ export default function FooterSection() {
             </h4>
             <ul className="space-y-2.5 text-xs text-[#CBCFB8]/75">
               <li>
-                <a href="/#gallery" className="hover:text-white transition-colors">
+                <a href="/#service" className="hover:text-white transition-colors">
                   Home Delivery
                 </a>
               </li>
               <li>
-                <a href="/#gallery" className="hover:text-white transition-colors">
+                <a href="/#service" className="hover:text-white transition-colors">
                   Online Order Facility
                 </a>
               </li>

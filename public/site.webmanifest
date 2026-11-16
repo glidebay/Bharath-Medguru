@@ -1,0 +1,19 @@
+{
+  "name": "Bharath MedGuru",
+  "short_name": "MedGuru",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#1E3227",
+  "background_color": "#CBCFB8",
+  "display": "standalone"
+}
