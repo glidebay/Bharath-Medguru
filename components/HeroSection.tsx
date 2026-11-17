@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ArrowRight, Stethoscope, Heart, Activity } from "lucide-react";
+import { ArrowRight, Pill, Truck, Building2, ShieldCheck, MapPin } from "lucide-react";
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
@@ -217,14 +217,14 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
                 data-anim="dot"
                 className="w-2 h-2 bg-[#1E3227] rounded-xs inline-block"
               />
-              <span>Modern Facilities · Trusted Doctors</span>
+              <span>Chain of Pharmacies · Doorstep Delivery</span>
             </div>
 
             {/* Headline with Masked Rise: Refined font size & lighter weight */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[58px] xl:text-[64px] font-medium tracking-tight text-[#1E3227] leading-[1.08]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-medium tracking-tight text-[#1E3227] leading-[1.08]">
               <span className="block overflow-hidden py-0.5">
                 <span data-anim="h1line" className="block">
-                  Beyond Treatment.
+                  Your Trusted Pharmacy Chain.
                 </span>
               </span>
               <span className="block overflow-hidden py-0.5">
@@ -232,7 +232,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
                   data-anim="h1line"
                   className="block font-normal text-[#1E3227]/90"
                 >
-                  We Care for You.
+                  Delivering to Your Doorstep.
                 </span>
               </span>
             </h1>
@@ -242,49 +242,54 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
               data-anim="para"
               className="text-sm sm:text-[15px] text-[#3F5447] font-normal leading-relaxed max-w-lg"
             >
-              Expert consultations, preventive care, medical diagnosis, and
-              personalised treatment — all focused on keeping you and your
-              family healthy.
+              An expanding network of pharmacies across multiple branch locations with 100% genuine medicines. Enquire with your prescription to receive prompt medicine stock delivery directly to your location, backed by integrated clinical consultations and diagnostics.
             </p>
 
             {/* CTA Button */}
-            <div data-anim="cta" className="pt-2 flex flex-wrap items-center gap-4">
+            <div data-anim="cta" className="pt-2 flex flex-wrap items-center gap-3.5">
               <button
                 onClick={onOpenBooking}
                 className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#1E3227] hover:bg-[#15241c] text-[#CBCFB8] hover:text-white font-medium text-sm shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.02]"
               >
-                <span>Book Consultation</span>
+                <span>Enquire &amp; Order Medicines</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
+              <a
+                href="#service"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#1E3227]/25 text-[#1E3227] hover:bg-[#1E3227]/10 font-medium text-sm transition-all duration-300"
+              >
+                <MapPin className="w-4 h-4 text-[#1E3227]" />
+                <span>Our Branch Network</span>
+              </a>
             </div>
           </div>
 
           {/* RIGHT: Frosted Glass Metric Cards with refined compact font scaling */}
           <div className="lg:col-span-5 xl:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-2.5 sm:gap-3 items-stretch sm:items-center lg:items-end justify-center w-full">
-            {/* Card 1: Medical Care */}
+            {/* Card 1: Pharmacy Chain */}
             <GlassCard
-              icon={<Stethoscope className="w-3 h-3" />}
-              label="CONSULTATIONS"
-              value="Expert"
-              unit="PROFESSIONAL MEDICAL CARE"
+              icon={<Building2 className="w-3 h-3" />}
+              label="PHARMACY CHAIN"
+              value="Multi-Branch"
+              unit="EXPANDING REGIONAL NETWORK"
               unitHighlight={true}
             />
 
-            {/* Card 2: Healthcare */}
+            {/* Card 2: Doorstep Delivery */}
             <GlassCard
-              icon={<Heart className="w-3 h-3" />}
-              label="HEALTHCARE"
-              value="Personal"
-              unit="PATIENT-CENTRED CARE"
+              icon={<Truck className="w-3 h-3" />}
+              label="DOORSTEP DELIVERY"
+              value="On Enquiry"
+              unit="MEDICINE STOCK TO YOUR DOOR"
               unitHighlight={true}
             />
 
-            {/* Card 3: Diagnosis */}
+            {/* Card 3: 100% Genuine */}
             <GlassCard
-              icon={<Activity className="w-3 h-3" />}
-              label="DIAGNOSTICS"
-              value="Advanced"
-              unit="QUALITY MEDICAL SUPPORT"
+              icon={<ShieldCheck className="w-3 h-3" />}
+              label="ASSURED QUALITY"
+              value="100% Genuine"
+              unit="VERIFIED &amp; CERTIFIED STOCK"
               unitHighlight={false}
             />
           </div>

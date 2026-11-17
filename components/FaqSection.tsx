@@ -8,34 +8,34 @@ export default function FaqSection() {
 
   const faqs = [
     {
-      question: "What healthcare services does Bharath MedGuru offer?",
+      question: "Is Bharath MedGuru primarily a pharmacy chain?",
       answer:
-        "Bharath MedGuru provides a comprehensive, integrated healthcare ecosystem designed for families across Kerala. Our services encompass four interconnected pillars: Multi-Specialty Outpatient (OPD) Clinics with specialist doctor consultations, an NABL-benchmark Automated Diagnostic Laboratory, a 24/7 In-Clinic Pharmacy, and an expanding network of retail community pharmacies offering doorstep delivery.",
+        "Yes, Bharath MedGuru is primarily an established and rapidly expanding chain of retail community pharmacies with multiple branch locations situated across various regions. Our primary operation is ensuring reliable access to 100% genuine medications, chronic illness therapies, pediatric formulations, surgical items, and wellness essentials.",
     },
     {
-      question: "How do I schedule an appointment with your specialist doctors?",
+      question: "How does your medicine delivery on enquiry work?",
       answer:
-        "Booking a consultation is quick and convenient. You can book online directly through our website by selecting your specialty and doctor, or call our clinic reception desk. We provide dedicated appointment slots across General Medicine, Cardiology, Neurology, Gastroenterology, Orthopedics, and Pediatrics with minimal wait times.",
+        "If you enquire with us via WhatsApp (+91 79940 66647), phone, or through our website form, our licensed pharmacists immediately review your medicine list or prescription. We verify branch stock availability and dispatch genuine sealed medications directly to your home or office address promptly.",
     },
     {
-      question: "What diagnostic tests and lab facilities are available on-site?",
+      question: "Are you launching an online e-commerce pharmacy web app?",
       answer:
-        "Our advanced diagnostic laboratory features automated 5-part hematology and clinical biochemistry analyzers, high-resolution digital radiography (X-Ray), and 2D Doppler echocardiograms. We conduct routine blood screenings, comprehensive master health checkups, and specialized clinical investigations with rapid, verified same-day digital reports sent straight to your phone.",
+        "Yes! We are actively upgrading our pharmacy chain to include a full e-commerce web and mobile platform, inspired by leading online pharmacy systems like Apollo Pharmacy. This will enable instant medicine search, 1-click prescription upload, automated monthly refill subscriptions, and real-time live order tracking from your nearest branch.",
     },
     {
-      question: "Is the in-clinic pharmacy open 24/7, and are medications authentic?",
+      question: "Do you also provide clinic and diagnostic lab services?",
       answer:
-        "Yes, our in-clinic pharmacy is open 24 hours a day, 7 days a week for both routine prescriptions and emergency medical needs. All medications are 100% genuine and sourced directly from certified manufacturers, stored in strict temperature-controlled refrigeration to ensure the potency of critical drugs, pediatric formulations, and specialized treatments.",
+        "Yes. While retail pharmacy and doorstep medicine distribution form our core business, we also offer supportive healthcare services including outpatient specialist doctor consultations (General Medicine, Cardiology, Pediatrics, Orthopedics) and an automated diagnostic laboratory for routine blood tests and health screenings.",
     },
     {
-      question: "How does your retail pharmacy chain and doorstep delivery work?",
+      question: "Are all medications 100% genuine and authentic?",
       answer:
-        "Our retail pharmacy network extends across Kerala and South India. You can submit your doctor's prescription digitally or via WhatsApp to have genuine medications delivered directly to your doorstep. We also offer automated monthly refills for chronic prescriptions—including diabetes, cardiac, and hypertension medications—so you never run out.",
+        "Absolutely. All pharmaceuticals across all our pharmacy branch locations are 100% genuine and sourced directly from certified, licensed manufacturers. We adhere to rigorous temperature-controlled cold-chain storage to guarantee the safety, potency, and integrity of every medicine dispensed.",
     },
     {
-      question: "Can I consult doctors online, or are appointments only in-person?",
+      question: "Can I set up scheduled monthly refills for chronic medications?",
       answer:
-        "We offer both flexible options. You can visit our modern healthcare clinic for comprehensive in-person evaluations, diagnostics, and physical checkups, or book secure virtual HD consultations for follow-ups, routine reviews, prescription renewals, and second opinions from the comfort of your home.",
+        "Yes! We regularly provide scheduled monthly refills for patients with chronic medical conditions such as diabetes, hypertension, and heart care. Just share your prescription with our pharmacy team, and we ensure your stock is delivered to your doorstep every month before you run out.",
     },
     {
       question: "Are all doctors and healthcare specialists certified?",

@@ -5,14 +5,15 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import ServicesSection from "@/components/ServicesSection";
+import GallerySection from "@/components/GallerySection";
 import PathSection from "@/components/PathSection";
+import ComingSoonSection from "@/components/ComingSoonSection";
+import ServicesSection from "@/components/ServicesSection";
 import SessionsSection from "@/components/SessionsSection";
 import CtaSection from "@/components/CtaSection";
-import GallerySection from "@/components/GallerySection";
+import BlogSection from "@/components/BlogSection";
 import FaqSection from "@/components/FaqSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
 
@@ -39,34 +40,37 @@ export default function Home() {
         {/* Hero Section (#hero) */}
         <HeroSection onOpenBooking={scrollToContact} />
 
-        {/* About Section (#about) */}
+        {/* About Section (#about) with Mission & Vision */}
         <AboutSection onOpenBooking={scrollToContact} />
 
-        {/* Services / Modalities 3D Spatial Corridor (#service) */}
-        <ServicesSection onSelectService={scrollToContact} />
+        {/* Pharmacy & Healthcare Services Carousel (#service) */}
+        <GallerySection onSelectExperience={scrollToContact} />
 
-        {/* 3-Step Path Section (#path) */}
+        {/* 3-Step Process for Medicine & Delivery (#path) */}
         <PathSection onOpenBooking={scrollToContact} />
 
-        {/* Personalized Sessions (#session) */}
+        {/* Online E-Commerce Pharmacy Coming Soon (#coming-soon) */}
+        <ComingSoonSection onOpenBooking={scrollToContact} />
+
+        {/* 3D Visual Gallery Corridor (#gallery) */}
+        <ServicesSection onSelectService={scrollToContact} />
+
+        {/* Outpatient Doctors & Consultants (#session) */}
         <SessionsSection onBookPractitioner={scrollToContact} />
 
         {/* Call to Action Banner (#cta) */}
         <CtaSection onOpenBooking={scrollToContact} />
 
-        {/* Real People Transformations Gallery (#gallery) */}
-        <GallerySection onSelectExperience={scrollToContact} />
+        {/* Comprehensive Lab Test Services (#blog) */}
+        <BlogSection onOpenBooking={scrollToContact} />
 
         {/* FAQ Accordion (#faq) */}
         <FaqSection />
 
-        {/* Seeker Reviews & Testimonials Marquee (#testimonial) */}
+        {/* Customer & Patient Reviews (#testimonial) */}
         <TestimonialsSection />
 
-        {/* Comprehensive Lab Test Services (#blog) */}
-        <BlogSection onOpenBooking={scrollToContact} />
-
-        {/* Contact & Inquiry Form (#contact) */}
+        {/* Contact & Medicine Delivery Inquiry Form (#contact) */}
         <ContactSection />
 
         {/* Footer & Legal (#footer) */}

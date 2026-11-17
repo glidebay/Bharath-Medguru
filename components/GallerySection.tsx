@@ -9,36 +9,36 @@ interface GallerySectionProps {
 
 const HEALTHCARE_SERVICES: ArcCardItem[] = [
   {
-    src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
-    title: "Multi-Specialty Medical Clinic",
-    meta: "Specialist OPD • General Medicine, Orthopedics, Cardiology, Pediatrics",
+    src: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=1200&q=80",
+    title: "Chain of Retail Pharmacies",
+    meta: "Core Network • Multi-Branch Locations & 100% Genuine Medicines",
     description:
-      "Expert outpatient clinical consultations led by our senior Kerala specialists Dr. Roshna K. Nair, Dr. Harikrishnan Nambiar, Dr. Anoop Kurian, and Dr. Parvathy Warrier. Seamless appointment flow with zero wait times and comprehensive patient care.",
-    alt: "Bharath MedGuru Multi-Specialty Medical Clinic",
+      "Our expanding chain of trusted retail pharmacies operates across different branch locations, stocking authenticated, licensed pharmaceuticals, chronic medications, surgical supplies, and wellness products under strict climate-controlled conditions.",
+    alt: "Bharath MedGuru Chain of Retail Pharmacies across Different Locations",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=80",
+    title: "Medicine Delivery on Enquiry",
+    meta: "Fast Doorstep Dispatch • WhatsApp / Call / Online Prescription Enquiry",
+    description:
+      "Simply enquire with your medicine list or prescription. Our pharmacists verify stock across our branch network, dispense genuine sealed medications, and promptly deliver directly to your home or office location.",
+    alt: "Bharath MedGuru Medicine Stock Delivery to Your Location",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+    title: "Outpatient Clinic Consultations",
+    meta: "Supportive Healthcare • Specialist Doctor Consultations",
+    description:
+      "In addition to our pharmacy chain, our connected medical clinical chambers offer expert doctor consultations in General Medicine, Cardiology, Orthopedics, and Pediatrics for accurate diagnosis and prescription guidance.",
+    alt: "Bharath MedGuru Outpatient Doctor Consultations",
   },
   {
     src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
     title: "Automated Diagnostic Laboratory",
-    meta: "NABL Benchmark • Automated Pathology, 2D Echo & Digital X-Ray",
+    meta: "Supportive Diagnostics • Biochemistry, Pathology & Blood Screening",
     description:
-      "High-precision diagnostic testing equipped with automated 5-part hematology and clinical biochemistry analyzers, high-resolution digital radiography, 2D Doppler echocardiograms, and rapid verified same-day digital reports.",
+      "Supporting our clinical ecosystem, our automated diagnostic lab performs hematology, biochemistry, routine blood profiles, and wellness investigations with accurate digital reports sent straight to your phone.",
     alt: "Bharath MedGuru Automated Diagnostic Laboratory",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=1200&q=80",
-    title: "24/7 In-Clinic Pharmacy",
-    meta: "Licensed Pharmacy • 100% Genuine Temperature-Controlled Formulations",
-    description:
-      "Round-the-clock licensed pharmacy dispensary ensuring immediate access to authentic medications, specialized chronic disease treatments, pediatric formulations, and surgical consumables directly on clinic premises.",
-    alt: "Bharath MedGuru 24/7 In-Clinic Pharmacy",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=1200&q=80",
-    title: "Chain of Retail Pharmacies",
-    meta: "Retail Network • Doorstep Delivery & Stores across Kerala",
-    description:
-      "Our expanding trusted chain of retail community pharmacies serving families across Kerala and South India. Reliable prescription fulfillment, scheduled chronic medicine refills, authentic pharmaceutical distribution, and prompt home delivery.",
-    alt: "Bharath MedGuru Chain of Retail Pharmacies",
   },
 ];
 
@@ -48,14 +48,14 @@ export default function GallerySection({ onSelectExperience }: GallerySectionPro
       {/* Header: Clean & Simple, Matching PathSection */}
       <div className="text-center max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14 space-y-3 sm:space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-          Healthcare Services
+          Our Services
         </div>
         <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
-          Comprehensive Healthcare <br />
-          <span className="font-normal text-[#1E3227]">Services</span>
+          Pharmacy Chain &amp; <br />
+          <span className="font-normal text-[#1E3227]">Healthcare Services</span>
         </h2>
         <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed max-w-xl mx-auto">
-          Quality healthcare made simple — from expert doctor consultations and lab diagnostics to 24/7 pharmacy care.
+          Our core retail pharmacy chain brings genuine medicines and doorstep delivery on enquiry, with clinic and lab support when you need medical care.
         </p>
       </div>
 

@@ -36,11 +36,12 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
   };
 
   const navLinks = [
-    { name: "About", href: "/#about" },
+    { name: "About", href: "/about" },
+    { name: "Pharmacy & Services", href: "/#service" },
+    { name: "Online Store (Coming Soon)", href: "/#coming-soon" },
     { name: "Gallery", href: "/#gallery" },
-    { name: "Services", href: "/#service" },
-    { name: "Doctors", href: "/#session" },
-    { name: "Lab Investigations", href: "/#blog" },
+    { name: "Pharmacy Care", href: "/#session" },
+    { name: "Medicine Categories", href: "/#blog" },
     { name: "FAQ", href: "/#faq" },
   ];
 
@@ -88,7 +89,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
               onClick={scrollToContact}
               className="inline-flex items-center justify-center px-6 py-2.5 rounded-full text-xs lg:text-[13px] font-medium tracking-wide transition-all duration-200 cursor-pointer active:translate-y-px bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white shadow-xs"
             >
-              Contact Us
+              Order / Enquire
             </button>
           </div>
 

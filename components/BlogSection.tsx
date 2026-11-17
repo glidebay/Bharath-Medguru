@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import {
-  FlaskConical,
+  Pill,
   CheckCircle2,
   ArrowRight,
-  Microscope,
+  ShieldCheck,
   CalendarCheck,
   Clock,
   X,
@@ -14,13 +14,15 @@ import {
   FileText,
   Activity,
   Sparkles,
+  Truck,
+  Building2,
 } from "lucide-react";
 
 interface BlogSectionProps {
   onOpenBooking?: (serviceName?: string) => void;
 }
 
-interface LabCardData {
+interface PharmacyCategoryCardData {
   id: string;
   badge: string;
   subTagline: string;
@@ -34,7 +36,7 @@ interface LabCardData {
     description: string;
   }[];
   footer: {
-    iconType: "microscope" | "calendar" | "clock";
+    iconType: "pill" | "calendar" | "clock";
     title: string;
     subtitle: string;
   };
@@ -43,157 +45,157 @@ interface LabCardData {
   turnaroundTime: string;
 }
 
-const LAB_INVESTIGATIONS_CARDS: LabCardData[] = [
+const PHARMACY_CATEGORY_CARDS: PharmacyCategoryCardData[] = [
   {
-    id: "specialized-tests",
-    badge: "SPECIALIZED TESTS",
-    subTagline: "Diagnostic Screening • Infection Testing",
-    title: "Infertility, Infection & Screening Tests",
+    id: "prescription-medicines",
+    badge: "PRESCRIPTION MEDICINES",
+    subTagline: "Chronic Care • Specialized Formulations",
+    title: "Prescription Drugs & Specialized Chronic Care",
     excerpt:
-      "Targeted diagnostic screening covering hormonal fertility markers, viral and bacterial infectious serology, vital vitamins & minerals, and maternal fetal screening.",
-    image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80",
-    alt: "Infertility, Infection and Screening Tests at Bharath MedGuru",
+      "100% genuine medications for diabetes, cardiology, neurology, respiratory health, and chronic illness stored under strict temperature-controlled cold chains.",
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+    alt: "Prescription Medicines and Chronic Disease Treatments at Bharath MedGuru",
     checklist: [
-      "Infertility Markers (FSH, LH, Estradiol, AMH)",
-      "Infectious Diseases (HIV, Hepatitis, Dengue, etc.)",
-      "Vitamins & Minerals (Ferritin, Vitamin D3, B12, etc.)",
-      "Immuno Hematology (Blood Group, Coombs Test)",
-      "Screening for Down's Syndrome (Double, Triple, Quadruple)",
+      "Diabetic Care (Insulins, Metformin, Gliptins)",
+      "Cardiovascular & BP (Statins, ARBs, Beta Blockers)",
+      "Neurology & Mental Health Formulations",
+      "Respiratory & Asthma Inhalers / Rotacaps",
+      "Critical Care Antibiotics & Antivirals",
     ],
     detailedSections: [
       {
-        heading: "Infertility & Reproductive Hormones",
+        heading: "Diabetes & Endocrine Therapies",
         description:
-          "Quantitative evaluation of Anti-Müllerian Hormone (AMH), Follicle Stimulating Hormone (FSH), Luteinizing Hormone (LH), Estradiol, Progesterone, and Prolactin to assess ovarian reserve and endocrine reproductive health.",
+          "Cold-chain insulin cartridges, prefilled pens, GLP-1 receptor agonists, DPP-4 inhibitors, and oral hypoglycemic agents sourced directly from certified global pharmaceutical manufacturers.",
       },
       {
-        heading: "Infectious Disease Serology",
+        heading: "Cardiovascular & Blood Pressure Management",
         description:
-          "High-sensitivity automated chemiluminescence screening for HIV I & II, Hepatitis B surface antigen (HBsAg), Hepatitis C (HCV), Dengue NS1 antigen and antibodies (IgM/IgG), Typhoid, and Syphilis (VDRL).",
+          "Complete spectrum of anti-hypertensives, beta-blockers, ACE inhibitors, calcium channel blockers, lipid-lowering statins, and blood thinners with batch-tested verification.",
       },
       {
-        heading: "Vitamins, Minerals & Hematology",
+        heading: "Neurology, Respiratory & Chronic Health",
         description:
-          "Serum Ferritin, Total Iron Binding Capacity, Vitamin D3 (25-OH), and Active Vitamin B12 paired with ABO/Rh Blood Grouping and direct/indirect Coombs testing for pre-surgical and chronic deficiency screening.",
+          "Certified anticonvulsants, anti-migraine therapies, metered-dose inhalers (MDI), respules, and long-acting bronchodilators for chronic pulmonary and nervous system care.",
       },
       {
-        heading: "Maternal Fetal Screening",
+        heading: "Critical Care & Antibiotic Formulations",
         description:
-          "Prenatal maternal biochemical risk screening including Double Marker (first trimester), Triple Marker, and Quadruple Marker (second trimester) for fetal aneuploidy and Down's syndrome risk calculation.",
+          "Full clinical dispensary of authentic oral and injectable antibiotics, antifungals, immunosuppressants, and post-operative medications dispensed under licensed pharmacist supervision.",
       },
     ],
     footer: {
-      iconType: "microscope",
-      title: "Wide Range of Tests",
-      subtitle: "For all age groups",
+      iconType: "pill",
+      title: "10,000+ Formulations",
+      subtitle: "Direct from Certified Makers",
     },
-    sampleType: "Venous Blood / Serum (EDTA / Plain)",
-    fastingGuidelines: "8–10 hours fasting recommended for vitamin & mineral panels; non-fasting for infectious serology",
-    turnaroundTime: "Same-day verified digital report dispatch (within 4 to 6 hours)",
+    sampleType: "Available across all branch locations & on enquiry",
+    fastingGuidelines: "Strict 2°C–8°C cold chain and humidity-regulated storage",
+    turnaroundTime: "Same-day doorstep delivery to your location upon enquiry",
   },
   {
-    id: "essential-health-tests",
-    badge: "ESSENTIAL HEALTH TESTS",
-    subTagline: "Routine Check-ups • Organ Function • Hormone Tests",
-    title: "Biochemistry, Organ Function & Hormone Tests",
+    id: "essential-wellness-tests",
+    badge: "DAILY WELLNESS & OTC",
+    subTagline: "Vitamins • Nutrition • Preventive Health",
+    title: "Vitamins, Supplements & Preventive Wellness",
     excerpt:
-      "Core clinical biochemistry evaluating fasting glucose, lipid fractionations, liver enzymes (LFT), complete thyroid panels, and ionic electrolyte equilibria.",
-    image: "/images/biochemistry-analyzer-hd.jpg",
-    alt: "Biochemistry, Organ Function and Hormone Tests automated analyzer",
+      "Certified dietary supplements, immunity boosters, ayurvedic preparations, and health nutrition products curated to support everyday health and family vitality.",
+    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
+    alt: "Wellness and Over the Counter Health Supplies at Bharath MedGuru",
     checklist: [
-      "Biochemistry (Blood Sugar, Urea, Creatinine, etc.)",
-      "Lipid Profile (Cholesterol, HDL, LDL, Triglycerides)",
-      "Liver Function Test (Bilirubin, SGOT, SGPT, etc.)",
-      "Thyroid Profile (T3, T4, Free T3, Free T4)",
-      "Electrolytes (Sodium, Potassium, Chloride, etc.)",
+      "Multivitamins, Minerals & Antioxidant Complexes",
+      "Bone & Joint Health (Calcium, Vitamin D3, Glucosamine)",
+      "Herbal, Ayurvedic & Natural Wellness Formulations",
+      "Protein Powders & Specialized Geriatric Nutrition",
+      "Pediatric Growth Supplements & Drops",
     ],
     detailedSections: [
       {
-        heading: "Comprehensive Blood Biochemistry",
+        heading: "Vitamins & Micronutrient Essentials",
         description:
-          "Fasting Blood Sugar (FBS), Postprandial Blood Sugar (PPBS), Glucose Tolerance Test (GTT), Glucose Challenge Test (GCT), HbA1c (Glycated Hemoglobin), Blood Urea, Serum Creatinine, Uric Acid, Calcium, Phosphorous, Magnesium, CPK, CPK-MB, LDH, Amylase, Lipase, Ammonia, ADA, C-Peptide, and Fasting Insulin.",
+          "High-absorption Vitamin D3 (60k IU), active Methylcobalamin B12, Vitamin C, Zinc, and therapeutic multi-mineral formulations for sustained energy and immune resilience.",
       },
       {
-        heading: "Lipid Profile & Heart Health",
+        heading: "Bone, Joint & Musculoskeletal Vitality",
         description:
-          "Total Serum Cholesterol, High-Density Lipoprotein (HDL - 'good' cholesterol), Low-Density Lipoprotein (LDL - 'bad' cholesterol), Serum Triglycerides, and VLDL with Atherogenic Index calculation for cardiovascular assessment.",
+          "Clinically validated Calcium Carbonate / Citrate, Collagen peptides, Glucosamine, and chondroitin therapies to maintain joint mobility and bone density.",
       },
       {
-        heading: "Liver Function Tests (LFT)",
+        heading: "Ayurvedic & Natural Formulations",
         description:
-          "Total Bilirubin, Direct & Indirect Bilirubin, SGOT (AST), SGPT (ALT), Alkaline Phosphatase, Gamma GT (GGT), and Total Protein with Albumin/Globulin ratio to evaluate hepatic cellular integrity and biliary clearance.",
+          "Standardized herbal extracts, Chyawanprash, digestive wellness tonics, and natural immunity boosters compliant with verified health benchmarks.",
       },
       {
-        heading: "Thyroid & Electrolyte Profile",
+        heading: "Specialized Family & Geriatric Nutrition",
         description:
-          "Complete thyroid assessment including Free T3, Free T4, Total T3, Total T4, TSH, Anti-TPO Antibody, and Anti-Thyroglobulin, alongside Serum Electrolytes (Sodium, Potassium, Bicarbonate, and Chloride) for ionic cellular balance.",
+          "Diabetic-friendly nutritional shakes, high-protein supplements, pediatric electrolyte solutions, and balanced meal replacers for elderly patient recuperation.",
       },
     ],
     footer: {
       iconType: "calendar",
-      title: "Complete Health Assessment",
-      subtitle: "Key screenings for early detection",
+      title: "Daily Health & Immunity",
+      subtitle: "Certified brands & formulations",
     },
-    sampleType: "Serum / Fluoride Plasma / Whole Blood",
-    fastingGuidelines: "10–12 hours overnight fasting mandatory for Lipid Profile & Fasting Blood Sugar (plain water permitted)",
-    turnaroundTime: "Same-day verified report delivered within 3 to 4 hours",
+    sampleType: "In-stock across all branch retail counters",
+    fastingGuidelines: "Quality-tested, sealed packaging with clear usage guidelines",
+    turnaroundTime: "Immediate counter purchase or fast doorstep delivery",
   },
   {
-    id: "advanced-special-tests",
-    badge: "ADVANCED & SPECIAL TESTS",
-    subTagline: "Specialized Diagnostics • Cancer Markers • Cardiac Tests",
-    title: "Cardiac, Tumor Markers & Other Investigations",
+    id: "surgicals-devices",
+    badge: "SURGICALS & MEDICAL DEVICES",
+    subTagline: "Diagnostic Monitors • Mobility • Home Care",
+    title: "Home Medical Devices & Surgical Supplies",
     excerpt:
-      "High-sensitivity cardiac troponin, oncology tumor screening, microbiological culture & sensitivity, clinical mycology, and real-time PCR molecular assays.",
-    image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80",
-    alt: "Cardiac, Tumor Markers and Specialized Diagnostic Investigations",
+      "Precision home health diagnostic instruments, surgical disposables, wound care dressing materials, and orthopedic aids for post-operative and home patient care.",
+    image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=800&q=80",
+    alt: "Home Medical Devices and Surgical Supplies at Bharath MedGuru",
     checklist: [
-      "Cardiac Marker (Troponin I)",
-      "Tumor Markers & Hormones (Beta hCG, PSA, AFP, CA 125)",
-      "Culture & Sensitivity (Urine, Stool, Sputum, Blood, etc.)",
-      "Stool, Mycology & Other Tests (R/E, Occult Blood, Fungal Culture)",
-      "Molecular Diagnosis (HPV PCR, HCV PCR, TB PCR, etc.)",
+      "Digital BP Monitors & Fingertip Pulse Oximeters",
+      "Blood Glucose Monitors (Glucometers) & Test Strips",
+      "Compressor Nebulizers & Respiratory Vaporizers",
+      "Sterile Gauze, Bandages & Advanced Wound Care",
+      "Orthopedic Belts, Lumbar Supports & Walking Aids",
     ],
     detailedSections: [
       {
-        heading: "Emergency Cardiac Biomarkers",
+        heading: "Vital Sign & Diagnostic Monitors",
         description:
-          "High-Sensitivity Troponin I (hs-cTnI) testing for rapid, accurate clinical detection of acute myocardial infarction, ischemia, and cardiac muscle strain with rapid STAT processing.",
+          "Clinically validated digital blood pressure monitors, infrared non-contact thermometers, and fingertip pulse oximeters with manufacturer warranty for reliable home vital tracking.",
       },
       {
-        heading: "Oncology Tumor Markers & Hormones",
+        heading: "Blood Glucose & Diabetes Monitoring",
         description:
-          "Quantitative chemiluminescence assays for Beta hCG, Total PSA (Prostate-Specific Antigen), AFP (Alpha-Fetoprotein), CA 125 (Ovarian cancer marker), CA 19.9 (GI/Pancreatic marker), CEA (Carcinoembryonic Antigen), Parathyroid Hormone (PTH), and Serum Cortisol.",
+          "High-accuracy glucometer starter kits, calibrated test strips, lancets, and lancing devices for painless daily blood sugar tracking.",
       },
       {
-        heading: "Microbiology, Culture & Sensitivity",
+        heading: "Respiratory Home Care & Inhalation",
         description:
-          "Aerobic and automated culture identification for Urine, Stool, Sputum, Blood, and Pus with automated Minimum Inhibitory Concentration (MIC) antibiotic sensitivity panels for targeted therapy.",
+          "Heavy-duty compressor nebulizers, adult and pediatric masks, steam vaporizers, and spacer chambers for effective bronchodilator delivery.",
       },
       {
-        heading: "Clinical Microscopy & Molecular PCR",
+        heading: "Surgical Consumables & Orthopedic Support",
         description:
-          "Routine and microscopic stool examination (R/E), Fecal Occult Blood Test (FOBT), fungal KOH mount, fungal mycology cultures, and real-time qualitative/quantitative PCR assays for HPV DNA, HCV RNA, and TB PCR.",
+          "Sterile surgical dressings, micropore tapes, antiseptic solutions, lumbar sacral (LS) belts, knee braces, cervical collars, and mobility walking sticks.",
       },
     ],
     footer: {
       iconType: "clock",
-      title: "Lab Timings",
-      subtitle: "Mon - Sat: 7 am - 7 pm | Sun: 8 am - 12 pm",
+      title: "Pharmacy Branch Hours",
+      subtitle: "Mon - Sat: 8 am - 8 pm | Sun: 9 am - 5 pm",
     },
-    sampleType: "Whole Blood, Serum, Sterile Mid-Stream Urine, Sputum, Swabs",
-    fastingGuidelines: "No fasting required for cardiac markers, cultures, or routine tumor markers",
-    turnaroundTime: "Emergency Troponin I within 45–60 min; PCR & Tumor Markers 24 hrs; Cultures 48–72 hrs",
+    sampleType: "Comprehensive inventory in all pharmacy branches",
+    fastingGuidelines: "Sterile sealed units with full manufacturer warranty",
+    turnaroundTime: "Dispatched to your location upon enquiry",
   },
 ];
 
 export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
-  const [activeCard, setActiveCard] = useState<LabCardData | null>(null);
+  const [activeCard, setActiveCard] = useState<PharmacyCategoryCardData | null>(null);
 
-  const renderFooterIcon = (iconType: "microscope" | "calendar" | "clock") => {
+  const renderFooterIcon = (iconType: "pill" | "calendar" | "clock") => {
     switch (iconType) {
-      case "microscope":
-        return <Microscope className="w-4 h-4 text-[#1E3227]" />;
+      case "pill":
+        return <Pill className="w-4 h-4 text-[#1E3227]" />;
       case "calendar":
         return <CalendarCheck className="w-4 h-4 text-[#1E3227]" />;
       case "clock":
@@ -211,22 +213,22 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-            <FlaskConical className="w-3.5 h-3.5 text-[#1E3227]" />
-            <span>LAB Test</span>
+            <Pill className="w-3.5 h-3.5 text-[#9B8A3E]" />
+            <span>Pharmacy Categories</span>
           </div>
 
           <h2 className="font-sans text-3xl sm:text-4xl lg:text-[46px] font-semibold tracking-tight text-[#1E3227] leading-[1.14]">
-            Comprehensive Lab Test Services
+            Comprehensive Pharmacy &amp; Healthcare Supplies
           </h2>
 
           <p className="text-base sm:text-lg text-[#3F5447] font-normal leading-relaxed max-w-2xl mx-auto">
-            A wide range of diagnostic tests for accurate results, early detection, and better health management.
+            A wide range of genuine prescription medicines, chronic disease formulations, wellness supplements, and surgical essentials available across our pharmacy branches and for delivery.
           </p>
         </div>
 
-        {/* 3-Card Grid (Maintaining the compact old card height & content length) */}
+        {/* 3-Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-          {LAB_INVESTIGATIONS_CARDS.map((card) => (
+          {PHARMACY_CATEGORY_CARDS.map((card) => (
             <article
               key={card.id}
               onClick={() => setActiveCard(card)}
@@ -257,43 +259,57 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
                   </div>
                 </div>
 
-                {/* Content Area (Concise length matching the old card) */}
-                <div className="p-6 sm:p-7">
-                  {/* Sub-tagline */}
-                  <div className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[#3F5447]/90 mb-2">
+                {/* Content Area */}
+                <div className="p-6 sm:p-7 space-y-3.5">
+                  <div className="text-[11px] font-semibold tracking-wider uppercase text-[#9B8A3E]">
                     {card.subTagline}
                   </div>
 
-                  {/* Title */}
-                  <h3 className="font-sans text-xl font-bold text-[#1E3227] leading-snug mb-3 group-hover:text-[#15241c] transition-colors line-clamp-2">
+                  <h3 className="font-sans text-xl sm:text-2xl font-semibold text-[#1E3227] leading-tight group-hover:text-[#15241c] transition-colors">
                     {card.title}
                   </h3>
 
-                  {/* Excerpt - Standard compact length */}
-                  <p className="text-xs sm:text-[13px] text-[#3F5447] font-light leading-relaxed line-clamp-3">
+                  <p className="text-sm text-[#3F5447] font-light leading-relaxed line-clamp-3">
                     {card.excerpt}
                   </p>
+
+                  {/* Top 3 Checklist Preview */}
+                  <div className="pt-2 space-y-2 border-t border-[#1E3227]/10">
+                    {card.checklist.slice(0, 3).map((item, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-xs text-[#1E3227] font-medium">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#1E3227] flex-shrink-0" />
+                        <span className="truncate">{item}</span>
+                      </div>
+                    ))}
+                    {card.checklist.length > 3 && (
+                      <div className="text-[11px] text-[#9B8A3E] font-semibold pt-1">
+                        +{card.checklist.length - 3} more product lines included
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              {/* Card Footer with Icon and Arrow Button */}
-              <div className="px-6 pb-6 pt-4 sm:px-7 sm:pb-7 border-t border-[#1E3227]/10 flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-[#1E3227]/10 flex items-center justify-center flex-shrink-0">
-                    {renderFooterIcon(card.footer.iconType)}
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-[#1E3227] leading-tight">
-                      {card.footer.title}
+              {/* Card Footer with Meta + View Arrow */}
+              <div className="p-6 sm:p-7 pt-0">
+                <div className="pt-4 border-t border-[#1E3227]/10 flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-full bg-white/60 border border-[#1E3227]/10 flex items-center justify-center flex-shrink-0">
+                      {renderFooterIcon(card.footer.iconType)}
                     </div>
-                    <div className="text-[11px] text-[#3F5447] leading-tight mt-0.5">
-                      {card.footer.subtitle}
+                    <div>
+                      <div className="text-xs font-semibold text-[#1E3227]">
+                        {card.footer.title}
+                      </div>
+                      <div className="text-[10px] text-[#3F5447]">
+                        {card.footer.subtitle}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="w-8 h-8 rounded-full bg-[#1E3227]/10 text-[#1E3227] group-hover:bg-[#1E3227] group-hover:text-[#CBCFB8] flex items-center justify-center transition-all duration-200 group-hover:translate-x-0.5 flex-shrink-0">
-                  <ArrowRight className="w-4 h-4" />
+                  <div className="w-9 h-9 rounded-full bg-[#1E3227] text-white flex items-center justify-center group-hover:scale-110 group-hover:bg-[#15241c] transition-all flex-shrink-0 shadow-sm">
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
                 </div>
               </div>
             </article>
@@ -301,49 +317,44 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
         </div>
       </div>
 
-      {/* ── EXPANSIVE DETAIL MODAL (Opens on click with the whole details like before) ── */}
+      {/* Detail Slideover / Modal for Pharmacy Category */}
       {activeCard && (
-        <div
-          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
-          onClick={() => setActiveCard(null)}
-        >
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl border border-white/60"
             style={{
-              background: "linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.60) 100%)",
+              background: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 246, 240, 0.98) 100%)",
               backdropFilter: "blur(32px)",
-              WebkitBackdropFilter: "blur(32px)",
-              border: "1px solid rgba(255, 255, 255, 0.85)",
-              borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
-              boxShadow:
-                "inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95), 0 24px 60px rgba(30, 50, 39, 0.20)",
+              color: "#1E3227",
             }}
-            className="rounded-[28px] max-w-2xl w-full max-h-[88vh] overflow-y-auto p-6 sm:p-9 relative"
-            onClick={(e) => e.stopPropagation()}
           >
-            {/* Close button */}
+            {/* Modal Close Button */}
             <button
               onClick={() => setActiveCard(null)}
-              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#1E3227]/10 text-[#1E3227] hover:bg-[#1E3227] hover:text-[#CBCFB8] flex items-center justify-center transition-colors cursor-pointer"
+              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-[#1E3227] flex items-center justify-center border border-[#1E3227]/15 shadow-sm transition-all cursor-pointer z-10"
+              aria-label="Close"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
 
-            <div className="space-y-6">
-              {/* Badge & Sub-tagline */}
-              <div>
-                <span className="inline-block text-[10px] font-bold px-3 py-1 rounded-full bg-[#1E3227] text-white uppercase tracking-wider mb-2">
-                  {activeCard.badge}
-                </span>
-                <h3 className="font-sans text-2xl sm:text-3xl font-bold text-[#1E3227] leading-tight">
-                  {activeCard.title}
-                </h3>
-                <p className="text-xs text-[#3F5447] font-medium uppercase tracking-wider mt-1">
-                  {activeCard.subTagline}
-                </p>
+            {/* Modal Header */}
+            <div className="space-y-2 pr-10">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-[11px] font-semibold tracking-wider uppercase">
+                <Sparkles className="w-3 h-3 text-[#9B8A3E]" />
+                <span>{activeCard.badge}</span>
               </div>
+              <h3 className="font-sans text-2xl sm:text-3xl font-bold text-[#1E3227] leading-snug">
+                {activeCard.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#9B8A3E] font-semibold uppercase tracking-wider">
+                {activeCard.subTagline}
+              </p>
+            </div>
 
-              {/* Visual Banner */}
-              <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden border border-[#1E3227]/15">
+            {/* Modal Body */}
+            <div className="space-y-5">
+              {/* Image banner */}
+              <div className="relative aspect-[16/8] w-full rounded-2xl overflow-hidden bg-black/5 shadow-inner">
                 <img
                   src={activeCard.image}
                   alt={activeCard.alt}
@@ -351,11 +362,11 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
                 />
               </div>
 
-              {/* Complete Checklist from Image */}
+              {/* Complete Checklist */}
               <div className="bg-white/70 p-5 rounded-2xl border border-[#1E3227]/10 space-y-3">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#1E3227] uppercase tracking-wider">
                   <FileText className="w-4 h-4 text-[#9B8A3E]" />
-                  <span>Key Investigations Included</span>
+                  <span>Key Formulations &amp; Supplies Included</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {activeCard.checklist.map((item, idx) => (
@@ -367,11 +378,11 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
                 </div>
               </div>
 
-              {/* Detailed Breakdown of Investigations */}
+              {/* Detailed Breakdown */}
               <div className="space-y-4 pt-1">
                 <h4 className="font-sans text-base font-bold text-[#1E3227] flex items-center gap-2">
                   <Activity className="w-4 h-4 text-[#9B8A3E]" />
-                  <span>Comprehensive Clinical Scope</span>
+                  <span>Category &amp; Therapeutic Scope</span>
                 </h4>
                 <div className="space-y-3">
                   {activeCard.detailedSections.map((sec, i) => (
@@ -387,18 +398,18 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
                 </div>
               </div>
 
-              {/* Test Guidelines Grid */}
+              {/* Guidelines Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div className="p-3.5 rounded-xl bg-white/50 border border-[#1E3227]/10">
-                  <span className="font-semibold text-[#1E3227] block mb-0.5">Sample Required:</span>
+                  <span className="font-semibold text-[#1E3227] block mb-0.5">Availability:</span>
                   <span className="text-[#3F5447]">{activeCard.sampleType}</span>
                 </div>
                 <div className="p-3.5 rounded-xl bg-white/50 border border-[#1E3227]/10">
-                  <span className="font-semibold text-[#1E3227] block mb-0.5">Fasting Advice:</span>
+                  <span className="font-semibold text-[#1E3227] block mb-0.5">Storage &amp; Handling:</span>
                   <span className="text-[#3F5447]">{activeCard.fastingGuidelines}</span>
                 </div>
                 <div className="p-3.5 rounded-xl bg-white/50 border border-[#1E3227]/10 sm:col-span-2">
-                  <span className="font-semibold text-[#1E3227] block mb-0.5">Turnaround &amp; Delivery:</span>
+                  <span className="font-semibold text-[#1E3227] block mb-0.5">Delivery &amp; Refill:</span>
                   <span className="text-[#3F5447]">{activeCard.turnaroundTime}</span>
                 </div>
               </div>
@@ -413,7 +424,7 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
                   className="w-full sm:flex-1 py-3.5 px-6 rounded-full bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white text-xs font-semibold uppercase tracking-wider shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
                 >
                   <Calendar className="w-3.5 h-3.5" />
-                  <span>Book Consultation</span>
+                  <span>Enquire / Order Stock</span>
                 </button>
 
                 <a

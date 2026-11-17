@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Clock, Video, ArrowRight, Star, Sparkles } from "lucide-react";
+import { Clock, ArrowRight, Star, Building2, Truck, ShieldCheck, Pill, CheckCircle2 } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -20,55 +20,55 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
   const sessions = [
     {
       id: "card1",
-      name: "Dr. Roshna",
-      specialty: "Specialized in General Medicine",
-      format: "In-person",
-      duration: "Medical Consultant",
+      name: "Prescription Verification & Dispensing",
+      specialty: "Licensed Pharmacist Supervision",
+      format: "All Branch Locations",
+      duration: "100% Genuine Sealed Stock",
       rating: "5.0",
-      reviews: "128",
+      reviews: "1,200+",
       image:
-        "https://framerusercontent.com/images/5uKjhPMJVcFmUVuASA2n1GkX1C8.png?width=476&height=443",
+        "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=800&q=80",
       description:
-        "Personalised medical consultations and healthcare services to help you understand your health, receive the right treatment, and maintain a healthier lifestyle.",
+        "Every doctor prescription is meticulously verified by our registered chief pharmacists for correct chemical dosage, potential contraindications, and patient safety before being dispensed from our temperature-controlled branch inventory.",
     },
     {
       id: "card2",
-      name: "Lena Hart",
-      specialty: "Specialized in Cardiology",
-      format: "In-person",
-      duration: "Medical Consultant",
+      name: "Doorstep Medicine Delivery on Enquiry",
+      specialty: "Fast Stock Dispatch to Your Location",
+      format: "Prompt Courier Delivery",
+      duration: "Direct from Nearest Branch",
       rating: "4.9",
-      reviews: "94",
+      reviews: "980+",
       image:
-        "https://framerusercontent.com/images/zU2tDQNiN0iH1kbIecTRuwC0Ao.png?width=476&height=443",
+        "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
       description:
-        "Therapeutic somatic bodywork designed to calm the nervous system, release deeply held musculoskeletal tension, and restore posture and emotional equilibrium.",
+        "Simply send your prescription or required medicine list via WhatsApp or website enquiry. Our pharmacy team coordinates with the nearest physical branch to safely package and deliver authentic medications directly to your home.",
     },
     {
       id: "card3",
-      name: "Aarav Desai",
-      specialty: "Specialized in Neurology",
-      format: "In-person",
-      duration: "Medical Consultant",
+      name: "Chronic Disease Medicine Refills",
+      specialty: "Diabetes, Cardiac, BP & Thyroid Care",
+      format: "Automated Monthly Schedule",
+      duration: "Never Miss a Critical Dose",
       rating: "5.0",
-      reviews: "115",
+      reviews: "850+",
       image:
-        "https://framerusercontent.com/images/YKsdox7sQ4exnAqCAE8LhEZloss.png?width=476&height=443",
+        "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
       description:
-        "Integrative wellness blending ancient Ayurvedic dosha balance with personalized nutrition, sleep hygiene, and holistic lifestyle routines for lifelong vitality.",
+        "Structured subscription refilling for long-term health maintenance. We maintain cold-chain storage for insulins and biologics, dispatching your recurring monthly medication package right before your current supply runs out.",
     },
     {
       id: "card4",
-      name: "Sofia Callen",
-      specialty: "Specialized in Gastroenterology",
-      format: "In-person",
-      duration: "Medical Consultant",
+      name: "Surgicals, Monitoring Devices & Wellness",
+      specialty: "Medical Equipment & Family Health",
+      format: "In-Store & Delivery",
+      duration: "Certified Healthcare Brands",
       rating: "4.9",
-      reviews: "142",
+      reviews: "640+",
       image:
-        "https://framerusercontent.com/images/OjEwt2OUY8IX43OAfPOY7rfMw.png?width=476&height=443",
+        "https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=800&q=80",
       description:
-        "Vibrational sound frequency balancing and subtle energetic clearing that clears stagnant emotional blockages and re-aligns your subtle biofield.",
+        "Extensive branch stock of digital blood pressure monitors, glucometers, nebulizers, orthopedic braces, wound care consumables, adult diapers, mother & baby healthcare essentials, and certified nutritional wellness supplements.",
     },
   ];
 
@@ -113,14 +113,15 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-            Patient-Centred Care
+            <Pill className="w-3.5 h-3.5 text-[#9B8A3E]" />
+            <span>Pharmacy Care &amp; Branch Services</span>
           </div>
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
-            Medical Consultations, <br />
-            <span className="font-normal text-[#1E3227]">Right Here at Our Clinic</span>
+            Expert Pharmacy Services, <br />
+            <span className="font-normal text-[#1E3227]">Across Our Branch Network</span>
           </h2>
           <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
-            Our dedicated medical team provides attentive care and reliable support to help you maintain better health.
+            Our registered pharmacists and branch locations ensure certified medicine dispensing, safety checks, chronic refill management, and fast doorstep delivery on enquiry.
           </p>
         </div>
 
@@ -152,7 +153,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                 className="w-full rounded-[24px] sm:rounded-[28px] p-5 sm:p-7 md:p-9 transition-shadow duration-300 overflow-hidden will-change-transform"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-                  {/* Left Column: Practitioner Photo */}
+                  {/* Left Column: Pharmacy Service Photo */}
                   <div className="lg:col-span-5 relative">
                     <div className="relative aspect-[476/443] w-full rounded-[20px] overflow-hidden bg-[#CBCFB8]/40 shadow-inner">
                       <img
@@ -164,16 +165,14 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                       {/* Rating pill */}
                       <div className="absolute top-4 left-4 bg-[#1E3227]/90 backdrop-blur-xs text-[#CBCFB8] text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
                         <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        <span>{item.rating} ({item.reviews} reviews)</span>
+                        <span>{item.rating} ({item.reviews} satisfied customers)</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Right Column: Details & Booking */}
+                  {/* Right Column: Details & Enquiry */}
                   <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
                     <div>
-
-
                       {/* Name */}
                       <h3 className="font-sans text-3xl sm:text-4xl font-semibold text-[#1E3227] tracking-tight mb-2">
                         {item.name}
@@ -187,11 +186,11 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                       {/* Meta Pills (Format & Duration) */}
                       <div className="flex flex-wrap items-center gap-3 text-xs text-[#1E3227] mb-5">
                         <div className="flex items-center gap-1.5 bg-white/60 border border-[#1E3227]/12 px-3 py-1.5 rounded-full font-medium">
-                          <Video className="w-3.5 h-3.5 text-[#1E3227]" />
+                          <Building2 className="w-3.5 h-3.5 text-[#1E3227]" />
                           <span>{item.format}</span>
                         </div>
                         <div className="flex items-center gap-1.5 bg-white/60 border border-[#1E3227]/12 px-3 py-1.5 rounded-full font-medium">
-                          <Clock className="w-3.5 h-3.5 text-[#1E3227]" />
+                          <ShieldCheck className="w-3.5 h-3.5 text-[#1E3227]" />
                           <span>{item.duration}</span>
                         </div>
                       </div>
@@ -205,13 +204,13 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                     {/* Action Button */}
                     <div className="pt-4 border-t border-[#1E3227]/12 flex flex-wrap items-center justify-between gap-4">
                       <div className="text-xs text-[#3F5447]">
-                        Free Initial Health Consultation Available
+                        Verified &amp; Temperature-Controlled Stock
                       </div>
                       <button
                         onClick={() => onBookPractitioner(item.name, item.specialty)}
                         className="inline-flex items-center gap-2 bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white py-3.5 px-7 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-200 hover:scale-[1.02] shadow-md hover:shadow-lg cursor-pointer"
                       >
-                        <span>get appointment now</span>
+                        <span>Enquire for Stock / Delivery</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>

@@ -30,7 +30,7 @@ export default function FooterSection() {
             </Link>
 
             <p className="text-sm text-[#CBCFB8]/75 font-light leading-relaxed max-w-sm">
-              Integrated clinical care, specialist consultations, and holistic healing unified with trusted medicine.
+              A premier chain of retail pharmacies delivering 100% genuine medicines to your location upon enquiry across multiple branches, backed by integrated clinical consultations and diagnostic care.
             </p>
 
             {/* Social Media Links */}
@@ -101,8 +101,18 @@ export default function FooterSection() {
                 </a>
               </li>
               <li>
-                <a href="/#about" className="hover:text-white transition-colors">
-                  About Us
+                <a href="/about" className="hover:text-white transition-colors">
+                  About Us (Mission &amp; Vision)
+                </a>
+              </li>
+              <li>
+                <a href="/#service" className="hover:text-white transition-colors">
+                  Pharmacy Chain &amp; Services
+                </a>
+              </li>
+              <li>
+                <a href="/#coming-soon" className="hover:text-white transition-colors">
+                  Online Store (Coming Soon)
                 </a>
               </li>
               <li>
@@ -113,11 +123,6 @@ export default function FooterSection() {
               <li>
                 <a href="/#faq" className="hover:text-white transition-colors">
                   FAQ
-                </a>
-              </li>
-              <li>
-                <a href="/#blog" className="hover:text-white transition-colors">
-                  Lab Investigations
                 </a>
               </li>
             </ul>
@@ -141,12 +146,12 @@ export default function FooterSection() {
               </li>
               <li>
                 <a href="/#blog" className="hover:text-white transition-colors">
-                  Lab Testing
+                  Medicine Categories
                 </a>
               </li>
               <li>
                 <a href="/#session" className="hover:text-white transition-colors">
-                  Doctor Consultation
+                  Pharmacy Care &amp; Refills
                 </a>
               </li>
             </ul>

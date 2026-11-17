@@ -11,27 +11,27 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
   const steps = [
     {
       step: "01",
-      title: "Explore Our Medical Facilities",
+      title: "Visit a Branch or Send an Enquiry",
       description:
-        "Explore a wide range of medical services and qualified healthcare professionals—from general consultations to specialised treatments—all in one place.",
+        "Walk into any of our neighborhood pharmacy branches, or simply submit an enquiry with your doctor's prescription via WhatsApp or our website from the comfort of your home.",
       image:
         "https://framerusercontent.com/images/679tInF0XPNSXngXGtZkQWznfPs.png?width=464&height=330",
       reversed: false,
     },
     {
       step: "02",
-      title: "Meet Our Medical Experts",
+      title: "Pharmacist Verification & Stock Allocation",
       description:
-        "Explore doctor profiles, read patient reviews, and connect with the right doctor for your health and well-being.",
+        "Our licensed pharmacists meticulously review your prescription, verify availability from our certified branch inventory, and prepare 100% genuine sealed medicines with clear dosage instructions.",
       image:
         "https://framerusercontent.com/images/aCqdBiZcEPK1pOkSLlwQgcYNE.png?width=464&height=330",
       reversed: true,
     },
     {
       step: "03",
-      title: "Book Your Medical Appointment",
+      title: "Fast Doorstep Delivery to Your Location",
       description:
-        "Easily book your appointment online or in person. Receive personalised medical care and compassionate support throughout your healthcare journey.",
+        "We safely dispatch your medicine order directly to your location with temperature-safe handling and prompt courier tracking, so you never miss a dose.",
       image:
         "https://framerusercontent.com/images/IwBKwYFuoz1J3GZT94nyRs6HOjM.png?width=464&height=330",
       reversed: false,
@@ -44,14 +44,14 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-24 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-            Your Healthcare Journey
+            How It Works
           </div>
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
-            Your Journey to Better Health <br />
-            <span className="font-normal text-[#1E3227]">Starts Here</span>
+            Getting Your Medicines <br />
+            <span className="font-normal text-[#1E3227]">Is Fast &amp; Reliable</span>
           </h2>
           <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
-            Getting quality healthcare should be simple. Our easy three-step process helps you connect with the right medical professionals and receive the care you need.
+            Whether visiting our retail pharmacy branches or requesting delivery to your location upon enquiry, our 3-step process ensures dependable healthcare for your family.
           </p>
         </div>
 

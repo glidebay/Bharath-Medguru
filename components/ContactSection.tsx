@@ -8,7 +8,7 @@ export default function ContactSection() {
     name: "",
     email: "",
     phone: "",
-    service: "Doctor Consultation",
+    service: "Medicine Delivery on Enquiry (Prescription)",
     message: "",
   });
 
@@ -25,12 +25,12 @@ export default function ContactSection() {
 
     // Format pre-filled WhatsApp message for Bharath MedGuru
     const formattedText =
-      `*New Inquiry - Bharath MedGuru*\n\n` +
-      `*Patient Name:* ${formData.name}\n` +
+      `*New Inquiry - Bharath MedGuru Pharmacy & Healthcare*\n\n` +
+      `*Name:* ${formData.name}\n` +
       `*Phone Number:* ${formData.phone || "Not provided"}\n` +
       `*Email:* ${formData.email}\n` +
       `*Service Required:* ${formData.service}\n` +
-      `*Message:* ${formData.message}`;
+      `*Prescription / Location / Details:* ${formData.message}`;
 
     const whatsappUrl = `https://wa.me/917994066647?text=${encodeURIComponent(formattedText)}`;
 
@@ -70,14 +70,14 @@ export default function ContactSection() {
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-                <span>Get In Touch</span>
+                <span>Medicine Delivery &amp; Inquiries</span>
               </div>
               <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1E3227] leading-tight">
-                We’re Here to Support <br />
-                <span className="font-normal text-[#1E3227]">Your Healthcare Needs</span>
+                We Deliver Medicines <br />
+                <span className="font-normal text-[#1E3227]">Directly to Your Location</span>
               </h2>
               <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
-                Connect with our clinic reception, diagnostic laboratory, or pharmacy desk. Our dedicated healthcare team is available to assist you with appointments, test inquiries, and medicine orders.
+                Send us your prescription or required medicine list. Our licensed pharmacists check stock across our branch network and deliver authentic medications right to your address, with integrated doctor consultation and lab test support.
               </p>
             </div>
 
@@ -266,10 +266,10 @@ export default function ContactSection() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="border-b border-[#1E3227]/10 pb-4 mb-2">
                   <h3 className="font-sans text-2xl font-semibold text-[#1E3227]">
-                    Book a Consultation or Inquiry
+                    Medicine Delivery &amp; Health Enquiry
                   </h3>
                   <p className="text-xs text-[#3F5447]">
-                    Fill in your details below to schedule an appointment with our specialist doctors, book laboratory tests, or order medicines.
+                    Fill in your details below to request prescription delivery to your location, ask about pharmacy branch stock, or book doctor and lab appointments.
                   </p>
                 </div>
 
@@ -303,10 +303,11 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-[#1E3227] uppercase tracking-wider mb-1.5">
-                      Phone Number
+                      Phone Number *
                     </label>
                     <input
                       type="tel"
+                      required
                       placeholder="+91 79940 66647"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -324,21 +325,23 @@ export default function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                     className="w-full bg-white/80 px-4 py-3 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none focus:ring-2 focus:ring-[#1E3227]/30 focus:border-[#1E3227] transition-all"
                   >
+                    <option value="Medicine Delivery on Enquiry (Prescription)">Medicine Delivery on Enquiry (Prescription / Stock)</option>
+                    <option value="Pharmacy Branch Stock Inquiry">Pharmacy Branch Stock &amp; Location Inquiry</option>
+                    <option value="Chronic Medicine Monthly Refill">Chronic Medicine Monthly Refill Plan</option>
                     <option value="Doctor Consultation">Doctor Consultation (Specialist OPD)</option>
                     <option value="Diagnostic Lab Testing">Diagnostic Lab Testing &amp; Profiles</option>
-                    <option value="Pharmacy & Home Delivery">Pharmacy &amp; Prescription Home Delivery</option>
-                    <option value="General Health Inquiry">General Health &amp; Clinic Inquiry</option>
+                    <option value="General Health Inquiry">General Health &amp; Healthcare Inquiry</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-[#1E3227] uppercase tracking-wider mb-1.5">
-                    Your Message / Health Goals *
+                    Your Delivery Address / Required Medicines / Message *
                   </label>
                   <textarea
                     required
                     rows={4}
-                    placeholder="Tell us what challenges you're experiencing or what you are looking to achieve..."
+                    placeholder="List the required medicines, prescription details, or delivery address and location..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-white/80 px-4 py-3 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none focus:ring-2 focus:ring-[#1E3227]/30 focus:border-[#1E3227] transition-all resize-none"
@@ -351,10 +354,10 @@ export default function ContactSection() {
                   className="w-full inline-flex items-center justify-center gap-2 bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white py-4 rounded-xl text-sm font-semibold tracking-wide uppercase transition-all duration-200 shadow-md hover:shadow-lg hover:scale-[1.01] cursor-pointer"
                 >
                   {isSubmitting ? (
-                    <span>Submitting request...</span>
+                    <span>Submitting enquiry...</span>
                   ) : (
                     <>
-                      <span>Submit Consultation / Inquiry</span>
+                      <span>Submit Medicine &amp; Health Enquiry</span>
                       <Send className="w-4 h-4" />
                     </>
                   )}

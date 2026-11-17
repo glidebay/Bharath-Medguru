@@ -29,13 +29,13 @@ export default function CtaSection({ onOpenBooking }: CtaSectionProps) {
           <div className="relative z-10 max-w-3xl space-y-5">
             {/* Clean, Minimal Headline in Two Lines */}
             <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white leading-[1.2]">
-              Doctor Consultations &amp; Lab Testing <br />
-              <span className="font-normal text-[#CBCFB8]">Online Orders &amp; Home Delivery</span>
+              Need Medicine Stock Delivered? <br />
+              <span className="font-normal text-[#CBCFB8]">Send Your Enquiry for Fast Doorstep Delivery</span>
             </h2>
 
             {/* Shortened, Minimal Description */}
             <p className="text-sm sm:text-base text-[#CBCFB8]/85 font-light leading-relaxed max-w-xl">
-              Specialist OPD appointments, precision diagnostic investigations, and seamless online pharmacy orders delivered directly to your home across Kerala.
+              Our expanding retail pharmacy chain provides 100% genuine medications, prescription fulfillment, and doorstep delivery directly to your location, with specialist doctor consultations and diagnostic lab support.
             </p>
 
             {/* Action Buttons */}
@@ -44,7 +44,7 @@ export default function CtaSection({ onOpenBooking }: CtaSectionProps) {
                 onClick={onOpenBooking}
                 className="inline-flex items-center gap-2.5 bg-[#CBCFB8] text-[#1E3227] hover:bg-white hover:text-[#1E3227] px-7 py-3.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-[1.02] cursor-pointer"
               >
-                <span>Book Doctor Appointment</span>
+                <span>Enquire for Medicine Delivery</span>
                 <ArrowRight className="w-4 h-4 text-[#1E3227]" />
               </button>
 
@@ -53,7 +53,7 @@ export default function CtaSection({ onOpenBooking }: CtaSectionProps) {
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-[#CBCFB8] px-6 py-3.5 rounded-full text-xs sm:text-sm font-medium border border-white/20 transition-all duration-200"
               >
                 <PhoneCall className="w-4 h-4" />
-                <span>Contact Clinic Desk</span>
+                <span>Contact Nearest Branch</span>
               </a>
             </div>
           </div>

@@ -1,7 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ArrowRight, ShieldCheck, Users, Activity, HeartHandshake } from "lucide-react";
+import {
+  ArrowRight,
+  ShieldCheck,
+  Building2,
+  Truck,
+  HeartHandshake,
+  Compass,
+  Eye,
+  Pill,
+} from "lucide-react";
 
 interface AboutSectionProps {
   onOpenBooking: () => void;
@@ -22,9 +31,9 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
 
       const counterInterval = setInterval(() => {
         step++;
-        setCount1(Math.min(10, Math.floor((10 / steps) * step)));
-        setCount2(Math.min(10, Math.floor((5 / steps) * step)));
-        setCount3(Math.min(98, Math.floor((98 / steps) * step)));
+        setCount1(Math.min(15, Math.floor((15 / steps) * step)));
+        setCount2(Math.min(50, Math.floor((50 / steps) * step)));
+        setCount3(Math.min(100, Math.floor((100 / steps) * step)));
 
         if (step >= steps) {
           clearInterval(counterInterval);
@@ -39,27 +48,27 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
 
   const stats = [
     {
-      icon: <Users className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
-      label: "MEDICAL PROFESSIONALS",
+      icon: <Building2 className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
+      label: "PHARMACY BRANCHES",
       value: `${count1}+`,
-      sub: "HEALTHCARE EXPERTS",
-      desc: "Dedicated to quality patient care.",
+      sub: "MULTI-LOCATION STORES",
+      desc: "Strategically located for convenient neighbourhood access.",
       gold: true,
     },
     {
-      icon: <Activity className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
-      label: "CONSULTATIONS COMPLETED",
+      icon: <Truck className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
+      label: "DOORSTEP DELIVERIES",
       value: `${count2}k+`,
-      sub: "PATIENT CARE",
-      desc: "Dedicated to accessible and quality healthcare.",
+      sub: "DELIVERED ON ENQUIRY",
+      desc: "Prompt prescription medicine delivery to your location.",
       gold: true,
     },
     {
-      icon: <HeartHandshake className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
-      label: "PATIENT SATISFACTION",
-      value: `${count3}%+`,
-      sub: "QUALITY HEALTHCARE",
-      desc: "Committed to compassionate patient care.",
+      icon: <ShieldCheck className="w-4 h-4 flex-shrink-0 text-[#1E3227]" />,
+      label: "AUTHENTIC MEDICINES",
+      value: `${count3}%`,
+      sub: "LICENSED & VERIFIED",
+      desc: "100% genuine pharmaceutical stock directly from certified makers.",
       gold: false,
     },
   ];
@@ -78,8 +87,8 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
             <div className="relative mx-auto max-w-[500px]">
               <div className="relative overflow-hidden rounded-[28px] border-4 border-white/50 shadow-xl bg-white/20 aspect-[588/564]">
                 <img
-                  src="https://framerusercontent.com/images/N6o6ZLH0yVENL5EJ2RfmAOBFDU.png?width=588&height=564"
-                  alt="Holistic therapy and counseling"
+                  src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=1200&q=80"
+                  alt="Bharath MedGuru Pharmacy Chain and Medicine Dispensing"
                   className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700 ease-out"
                   loading="lazy"
                 />
@@ -87,25 +96,27 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
 
               {/* Decorative badge overlay (crisp white frosted glass) */}
               <div
-                className="absolute -bottom-5 -right-5 p-5 rounded-2xl shadow-xl max-w-[210px] hidden sm:block"
+                className="absolute -bottom-5 -right-5 p-5 rounded-2xl shadow-xl max-w-[220px] hidden sm:block"
                 style={{
-                  background: "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.28) 100%)",
+                  background:
+                    "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.28) 100%)",
                   backdropFilter: "blur(24px)",
                   WebkitBackdropFilter: "blur(24px)",
                   border: "1px solid rgba(255, 255, 255, 0.75)",
                   borderTop: "1px solid rgba(255, 255, 255, 0.95)",
-                  boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 12px 30px rgba(30, 50, 39, 0.12)",
+                  boxShadow:
+                    "inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 12px 30px rgba(30, 50, 39, 0.12)",
                   color: "#1E3227",
                 }}
               >
                 <div className="flex items-center gap-2 mb-1.5">
-                  <ShieldCheck className="w-5 h-5 text-[#9B8A3E]" />
+                  <Pill className="w-5 h-5 text-[#9B8A3E]" />
                   <span className="font-semibold text-xs tracking-wider uppercase text-[#1E3227]">
-                    Qualified Doctors
+                    Pharmacy Chain
                   </span>
                 </div>
                 <p className="text-xs text-[#3F5447] leading-snug">
-                  Verified medical expertise &amp; professional healthcare.
+                  100% genuine medicines &amp; fast doorstep dispatch on enquiry.
                 </p>
               </div>
             </div>
@@ -114,38 +125,110 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
           {/* Right Content */}
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-              Our Vision
+              <span>About Bharath MedGuru</span>
             </div>
 
             <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227] leading-tight">
-              Where Expert Care Meets <br />
-              <span className="font-normal text-[#1E3227]">Compassionate Healthcare</span>
+              An Established Chain of Pharmacies <br />
+              <span className="font-normal text-[#1E3227]">
+                Multi-Branch Care &amp; Doorstep Delivery
+              </span>
             </h2>
 
             <div className="space-y-4 text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
               <p>
-                With years of dedication to healthcare, our commitment is to provide quality medical services through expert consultations and compassionate care. Combining medical expertise with modern facilities, we make healthcare more accessible and convenient for everyone.
+                Bharath MedGuru is primarily an expanding retail chain of modern community pharmacies with multiple branches situated across key locations. We are built on the foundational promise of delivering genuine, temperature-regulated, and certified medications to every family.
               </p>
               <p>
-                Whether it's routine check-ups, preventive healthcare, medical consultations, or specialised treatments, our experienced team is dedicated to guiding you towards a healthier, happier life.
+                Whenever you enquire with us through WhatsApp, phone, or online, our licensed pharmacy team confirms availability and delivers your complete medicine stock directly to your location. For holistic healthcare support, we also facilitate outpatient specialist doctor consultations and automated diagnostic laboratory checkups.
               </p>
-              
             </div>
 
-            <div className="pt-2">
-              <button
-                onClick={onOpenBooking}
+            <div className="pt-2 flex flex-wrap items-center gap-3.5">
+              <a
+                href="/about"
                 className="inline-flex items-center gap-2 bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white px-7 py-3.5 rounded-full text-sm font-medium shadow-sm transition-all duration-200 hover:scale-[1.02] cursor-pointer"
               >
-                <span>Discover Our Services</span>
+                <span>Explore Mission, Vision &amp; Story</span>
                 <ArrowRight className="w-4 h-4" />
+              </a>
+              <button
+                onClick={onOpenBooking}
+                className="inline-flex items-center gap-2 bg-white/70 hover:bg-white text-[#1E3227] border border-[#1E3227]/20 px-6 py-3.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer"
+              >
+                <span>Enquire for Medicine Delivery</span>
               </button>
             </div>
           </div>
         </div>
 
+        {/* ── Mission & Vision Showcase ── */}
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Mission Card */}
+          <div
+            className="p-8 rounded-[24px] relative overflow-hidden transition-all duration-300 hover:scale-[1.01]"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.28) 100%)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: "1px solid rgba(255, 255, 255, 0.75)",
+              borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
+              borderLeft: "1.5px solid rgba(255, 255, 255, 0.85)",
+              boxShadow:
+                "inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 12px 30px rgba(30, 50, 39, 0.08)",
+            }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-[#1E3227] text-[#CBCFB8] flex items-center justify-center flex-shrink-0 shadow-xs">
+                <Compass className="w-5 h-5 text-[#CBCFB8]" />
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-[11px] font-semibold tracking-wider uppercase">
+                Our Mission
+              </div>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-semibold text-[#1E3227] mb-3 leading-snug">
+              Accessible, Authentic Medicines for Every Neighborhood
+            </h3>
+            <p className="text-sm sm:text-base text-[#3F5447] font-light leading-relaxed">
+              To guarantee that safe, verified, and affordable medications are always within reach. Through our expanding chain of retail pharmacy branches and dedicated enquiry-based doorstep delivery, we remove geographical barriers to healthcare and ensure uninterrupted chronic and emergency medicine supplies for every household.
+            </p>
+          </div>
+
+          {/* Vision Card */}
+          <div
+            className="p-8 rounded-[24px] relative overflow-hidden transition-all duration-300 hover:scale-[1.01]"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.28) 100%)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: "1px solid rgba(255, 255, 255, 0.75)",
+              borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
+              borderLeft: "1.5px solid rgba(255, 255, 255, 0.85)",
+              boxShadow:
+                "inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 12px 30px rgba(30, 50, 39, 0.08)",
+            }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-[#9B8A3E] text-white flex items-center justify-center flex-shrink-0 shadow-xs">
+                <Eye className="w-5 h-5 text-white" />
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9B8A3E]/15 text-[#9B8A3E] text-[11px] font-semibold tracking-wider uppercase">
+                Our Vision
+              </div>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-semibold text-[#1E3227] mb-3 leading-snug">
+              The Most Trusted Community Pharmacy &amp; Digital Health Network
+            </h3>
+            <p className="text-sm sm:text-base text-[#3F5447] font-light leading-relaxed">
+              To be the benchmark for omnichannel pharmacy care by evolving our physical branch network into a full-scale e-commerce web and mobile platform (akin to Apollo Pharmacy). We envision seamless one-click ordering, real-time prescription tracking, and integrated clinic-lab care, empowering communities to lead healthier lives.
+            </p>
+          </div>
+        </div>
+
         {/* Counter Div — TRUE Frosted Glass Metric Cards (HRV Style) */}
-        <div className="mt-20 pt-14 border-t border-[#1E3227]/15 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="mt-16 pt-12 border-t border-[#1E3227]/15 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {stats.map((stat, i) => (
             <div
               key={i}
