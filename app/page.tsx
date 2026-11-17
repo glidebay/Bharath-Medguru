@@ -7,7 +7,6 @@ import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import GallerySection from "@/components/GallerySection";
 import PathSection from "@/components/PathSection";
-import ComingSoonSection from "@/components/ComingSoonSection";
 import ServicesSection from "@/components/ServicesSection";
 import SessionsSection from "@/components/SessionsSection";
 import CtaSection from "@/components/CtaSection";
@@ -48,9 +47,6 @@ export default function Home() {
 
         {/* 3-Step Process for Medicine & Delivery (#path) */}
         <PathSection onOpenBooking={scrollToContact} />
-
-        {/* Online E-Commerce Pharmacy Coming Soon (#coming-soon) */}
-        <ComingSoonSection onOpenBooking={scrollToContact} />
 
         {/* 3D Visual Gallery Corridor (#gallery) */}
         <ServicesSection onSelectService={scrollToContact} />

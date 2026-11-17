@@ -31,18 +31,15 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
         element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      window.location.hash = "#contact";
+      window.location.href = "/#contact";
     }
   };
 
   const navLinks = [
     { name: "About", href: "/about" },
-    { name: "Pharmacy & Services", href: "/#service" },
-    { name: "Online Store (Coming Soon)", href: "/#coming-soon" },
-    { name: "Gallery", href: "/#gallery" },
-    { name: "Pharmacy Care", href: "/#session" },
-    { name: "Medicine Categories", href: "/#blog" },
-    { name: "FAQ", href: "/#faq" },
+    { name: "Services", href: "/#service" },
+    { name: "Store", href: "/online-store" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (

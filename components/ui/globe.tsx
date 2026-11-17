@@ -14,7 +14,6 @@ export default function Globe({ className }: GlobeProps) {
     if (!canvasRef.current) return;
 
     let phi = 0;
-    let animId: number;
     let t = 0;
 
     // Accurate land map coordinates for Bharath MedGuru pharmacy branch locations
@@ -42,40 +41,27 @@ export default function Globe({ className }: GlobeProps) {
       baseColor: [0.796, 0.812, 0.722],
       markerColor: [0.96, 0.45, 0.1], // Crisp vibrant orange
       glowColor: [0.80, 0.82, 0.73],
-      markerElevation: 0, // Flush on the land map surface, not an overlay
       markers: branchLocations.map((loc) => ({
         location: loc,
         size: 0.03,
       })),
+      onRender: (state) => {
+        state.phi = phi;
+        phi += 0.0035;
+        t += 0.06;
+
+        state.markers = branchLocations.map((loc, idx) => {
+          const blinkPhase = t + idx * 0.9;
+          const currentSize = 0.016 + 0.024 * Math.pow(0.5 + 0.5 * Math.sin(blinkPhase), 2);
+          return {
+            location: loc,
+            size: currentSize,
+          };
+        });
+      },
     });
 
-    const animate = () => {
-      phi += 0.0035;
-      t += 0.06;
-
-      // Dynamic blinking radar pulse on the land map markers
-      const animatedMarkers = branchLocations.map((loc, idx) => {
-        // Individual phase offset for subtle realistic blinking
-        const blinkPhase = t + idx * 0.9;
-        const currentSize = 0.016 + 0.024 * Math.pow(0.5 + 0.5 * Math.sin(blinkPhase), 2);
-        return {
-          location: loc,
-          size: currentSize,
-          color: [0.96, 0.45, 0.1] as [number, number, number],
-        };
-      });
-
-      globe.update({
-        phi,
-        markers: animatedMarkers,
-      });
-
-      animId = requestAnimationFrame(animate);
-    };
-    animId = requestAnimationFrame(animate);
-
     return () => {
-      cancelAnimationFrame(animId);
       globe.destroy();
     };
   }, []);

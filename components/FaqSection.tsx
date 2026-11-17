@@ -20,7 +20,7 @@ export default function FaqSection() {
     {
       question: "Are you launching an online e-commerce pharmacy web app?",
       answer:
-        "Yes! We are actively upgrading our pharmacy chain to include a full e-commerce web and mobile platform, inspired by leading online pharmacy systems like Apollo Pharmacy. This will enable instant medicine search, 1-click prescription upload, automated monthly refill subscriptions, and real-time live order tracking from your nearest branch.",
+        "Yes! We are actively upgrading our pharmacy chain to include a full digital e-commerce web and mobile platform. This will enable instant medicine search, 1-click prescription upload, automated monthly refill subscriptions, and real-time live order tracking from your nearest branch.",
     },
     {
       question: "Do you also provide clinic and diagnostic lab services?",

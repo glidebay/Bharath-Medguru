@@ -111,7 +111,7 @@ export default function FooterSection() {
                 </a>
               </li>
               <li>
-                <a href="/#coming-soon" className="hover:text-white transition-colors">
+                <a href="/online-store" className="hover:text-white transition-colors">
                   Online Store (Coming Soon)
                 </a>
               </li>

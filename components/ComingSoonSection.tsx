@@ -34,7 +34,7 @@ export default function ComingSoonSection({ onOpenBooking }: ComingSoonSectionPr
     {
       icon: <ShoppingBag className="w-5 h-5 text-[#9B8A3E]" />,
       title: "50,000+ Medicine Catalog & Search",
-      tag: "Apollo-Style E-Commerce",
+      tag: "Online Pharmacy Platform",
       description:
         "Comprehensive online catalog of prescription drugs, OTC products, daily wellness supplements, and surgical essentials with real-time branch inventory availability.",
       status: "In Active Development",
@@ -76,13 +76,12 @@ export default function ComingSoonSection({ onOpenBooking }: ComingSoonSectionPr
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
             <Sparkles className="w-3.5 h-3.5 text-[#9B8A3E]" />
-            <span>Digital Healthcare Upgrade</span>
           </div>
 
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227] leading-tight">
             Coming Soon: Online E-Commerce Pharmacy <br />
             <span className="font-normal text-[#1E3227]">
-              Order Medicines Online, Just Like Apollo Pharmacy
+              Fast, Reliable Medicine Ordering Delivered to Your Doorstep
             </span>
           </h2>
 
@@ -188,7 +187,7 @@ export default function ComingSoonSection({ onOpenBooking }: ComingSoonSectionPr
                 <span>Get Notified on Launch</span>
               </h4>
               <p className="text-xs text-[#CBCFB8]/80 mb-4 leading-relaxed">
-                Be the first to access our Apollo-style web app, app discounts, and free first delivery vouchers.
+                Be the first to access our new web app, app discounts, and free first delivery vouchers.
               </p>
 
               {notified ? (

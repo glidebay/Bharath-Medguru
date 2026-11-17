@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import Globe from "@/components/ui/globe";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Sparkles, Building2, Truck, ShieldCheck, Heart } from "lucide-react";
+import { ArrowRight, Building2, Truck, ShieldCheck, Heart } from "lucide-react";
 
 // Reusable ScrollGlobe component customized for Bharath MedGuru brand theme
 export interface ScrollGlobeSection {
@@ -47,7 +47,6 @@ export default function ScrollGlobe({
   className,
 }: ScrollGlobeProps) {
   const [activeSection, setActiveSection] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [globeTransform, setGlobeTransform] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
@@ -65,11 +64,6 @@ export default function ScrollGlobe({
   // Direct scroll tracking
   const updateScrollPosition = useCallback(() => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
-
-    setScrollProgress(progress);
-
     // Section detection
     const viewportCenter = window.innerHeight / 2;
     let newActiveSection = 0;
@@ -110,15 +104,44 @@ export default function ScrollGlobe({
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Synchronize directly with Lenis smooth scroll if available
+    const lenis = typeof window !== "undefined" ? (window as any).__lenis : null;
+    if (lenis) {
+      lenis.on("scroll", handleScroll);
+    }
+
     updateScrollPosition();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (lenis) {
+        lenis.off("scroll", handleScroll);
+      }
       if (animationFrameId.current) {
         cancelAnimationFrame(animationFrameId.current);
       }
     };
   }, [updateScrollPosition]);
+
+  // Smooth scroll to a target section using Lenis or native smooth fallback
+  const scrollToSection = useCallback((index: number) => {
+    const target = sectionRefs.current[index];
+    if (!target) return;
+
+    const lenis = typeof window !== "undefined" ? (window as any).__lenis : null;
+    if (lenis) {
+      lenis.scrollTo(target, {
+        offset: 0,
+        duration: 1.2,
+      });
+    } else {
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, []);
 
   // Initial globe position
   useEffect(() => {
@@ -137,18 +160,6 @@ export default function ScrollGlobe({
         className
       )}
     >
-      {/* Top Progress Bar styled in Bharath MedGuru Forest Green & Gold */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-[#1E3227]/15 z-50">
-        <div
-          className="h-full bg-gradient-to-r from-[#1E3227] via-[#9B8A3E] to-[#1E3227] will-change-transform shadow-xs"
-          style={{
-            transform: `scaleX(${scrollProgress})`,
-            transformOrigin: "left center",
-            transition: "transform 0.15s ease-out",
-          }}
-        />
-      </div>
-
       {/* Enhanced Navigation Dots with Labels */}
       <div className="hidden sm:flex fixed right-3 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-40">
         <div className="space-y-4 lg:space-y-6">
@@ -158,7 +169,7 @@ export default function ScrollGlobe({
               <div
                 className={cn(
                   "nav-label absolute right-7 sm:right-9 top-1/2 -translate-y-1/2",
-                  "px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap",
+                  "px-2.5 py-1 rounded-full text-[11px] font-medium whitespace-nowrap",
                   "bg-[#1E3227] text-[#CBCFB8] border border-white/20 shadow-xl z-50 pointer-events-none transition-all duration-300",
                   activeSection === index
                     ? "opacity-100 translate-x-0"
@@ -173,12 +184,7 @@ export default function ScrollGlobe({
 
               {/* Dot Button */}
               <button
-                onClick={() => {
-                  sectionRefs.current[index]?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                  });
-                }}
+                onClick={() => scrollToSection(index)}
                 className={cn(
                   "relative w-3 h-3 rounded-full border-2 transition-all duration-300 hover:scale-125 cursor-pointer",
                   activeSection === index
@@ -212,6 +218,7 @@ export default function ScrollGlobe({
       {sections.map((section, index) => (
         <section
           key={section.id}
+          id={section.id}
           ref={(el) => {
             sectionRefs.current[index] = el;
           }}
@@ -225,14 +232,13 @@ export default function ScrollGlobe({
         >
           <div
             className={cn(
-              "w-full max-w-xl sm:max-w-2xl lg:max-w-3xl will-change-transform transition-all duration-700",
+              "w-full max-w-xl sm:max-w-2xl will-change-transform transition-all duration-700",
               "opacity-100 translate-y-0"
             )}
           >
             {/* Badge */}
             {section.badge && (
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15 mb-4 backdrop-blur-md">
-                <Sparkles className="w-3.5 h-3.5 text-[#9B8A3E]" />
+              <div className="inline-flex items-center px-3 py-0.5 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-[11px] font-semibold tracking-wider uppercase border border-[#1E3227]/15 mb-3 backdrop-blur-md">
                 <span>{section.badge}</span>
               </div>
             )}
@@ -240,16 +246,16 @@ export default function ScrollGlobe({
             {/* Title / Subtitle */}
             <h1
               className={cn(
-                "font-semibold mb-6 sm:mb-8 leading-[1.12] tracking-tight text-[#1E3227]",
+                "font-semibold mb-4 sm:mb-6 leading-[1.18] tracking-tight text-[#1E3227]",
                 index === 0
-                  ? "text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-                  : "text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
+                  ? "text-2xl sm:text-3xl md:text-4xl lg:text-[42px]"
+                  : "text-xl sm:text-2xl md:text-3xl lg:text-[34px]"
               )}
             >
               {section.subtitle ? (
-                <div className="space-y-1 sm:space-y-2">
+                <div className="space-y-1">
                   <div className="text-[#1E3227]">{section.title}</div>
-                  <div className="text-[#3F5447] font-normal text-[0.6em] sm:text-[0.65em] tracking-normal">
+                  <div className="text-[#3F5447] font-normal text-[0.55em] sm:text-[0.6em] tracking-normal mt-1">
                     {section.subtitle}
                   </div>
                 </div>
@@ -261,35 +267,40 @@ export default function ScrollGlobe({
             {/* Description */}
             <div
               className={cn(
-                "text-[#3F5447] leading-relaxed mb-8 sm:mb-10 text-base sm:text-lg lg:text-xl font-light",
+                "text-[#3F5447] leading-relaxed mb-6 sm:mb-8 text-sm sm:text-[15px] lg:text-base font-normal",
                 section.align === "center" ? "max-w-full mx-auto text-center" : "max-w-full"
               )}
             >
-              <p className="mb-3 sm:mb-4">{section.description}</p>
+              <p className="mb-2.5 sm:mb-3">{section.description}</p>
               {index === 0 && (
-                <div className="flex flex-wrap items-center gap-4 text-xs text-[#3F5447]/80 mt-4 sm:mt-6">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-3.5 text-[11px] sm:text-xs text-[#3F5447]/80 mt-3 sm:mt-5">
+                  <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#9B8A3E] animate-pulse" />
                     <span>Regional Pharmacy Branch Network</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => scrollToSection(1)}
+                    className="flex items-center gap-1.5 hover:opacity-80 transition-opacity cursor-pointer text-left"
+                  >
                     <div
                       className="w-1.5 h-1.5 rounded-full bg-[#1E3227] animate-pulse"
                       style={{ animationDelay: "0.5s" }}
                     />
                     <span>Scroll to Explore Mission &amp; Vision</span>
-                  </div>
+                    <ArrowRight className="w-3 h-3 text-[#1E3227] ml-0.5" />
+                  </button>
                 </div>
               )}
             </div>
 
             {/* Features Grid - Frosted Glass Cards */}
             {section.features && (
-              <div className="grid gap-4 mb-8 sm:mb-10">
+              <div className="grid gap-3 sm:gap-3.5 mb-6 sm:mb-8">
                 {section.features.map((feature, featureIndex) => (
                   <div
                     key={feature.title}
-                    className="p-5 sm:p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1"
+                    className="p-4 sm:p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-0.5"
                     style={{
                       background:
                         "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.30) 100%)",
@@ -301,13 +312,13 @@ export default function ScrollGlobe({
                       animationDelay: `${featureIndex * 0.1}s`,
                     }}
                   >
-                    <div className="flex items-start gap-3.5">
-                      <div className="w-2 h-2 rounded-full bg-[#9B8A3E] mt-2 flex-shrink-0" />
+                    <div className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#9B8A3E] mt-2 flex-shrink-0" />
                       <div className="flex-1 space-y-1">
-                        <h3 className="font-semibold text-[#1E3227] text-base sm:text-lg">
+                        <h3 className="font-semibold text-[#1E3227] text-sm sm:text-[15px]">
                           {feature.title}
                         </h3>
-                        <p className="text-[#3F5447] leading-relaxed text-sm sm:text-base font-light">
+                        <p className="text-[#3F5447] leading-relaxed text-xs sm:text-[13px] font-normal">
                           {feature.description}
                         </p>
                       </div>
@@ -321,7 +332,7 @@ export default function ScrollGlobe({
             {section.actions && (
               <div
                 className={cn(
-                  "flex flex-col sm:flex-row flex-wrap gap-3.5",
+                  "flex flex-col sm:flex-row flex-wrap gap-3",
                   section.align === "center" && "justify-center",
                   section.align === "right" && "justify-end",
                   (!section.align || section.align === "left") && "justify-start"
@@ -334,14 +345,14 @@ export default function ScrollGlobe({
                         key={action.label}
                         href={action.href}
                         className={cn(
-                          "inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base cursor-pointer",
+                          "inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm cursor-pointer",
                           action.variant === "primary"
                             ? "bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white shadow-md"
                             : "border border-[#1E3227]/25 bg-white/60 backdrop-blur-md text-[#1E3227] hover:bg-white"
                         )}
                       >
                         <span>{action.label}</span>
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </a>
                     );
                   }
@@ -350,14 +361,14 @@ export default function ScrollGlobe({
                       key={action.label}
                       onClick={action.onClick}
                       className={cn(
-                        "inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-sm sm:text-base cursor-pointer",
+                        "inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm cursor-pointer",
                         action.variant === "primary"
                           ? "bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white shadow-md"
                           : "border border-[#1E3227]/25 bg-white/60 backdrop-blur-md text-[#1E3227] hover:bg-white"
                       )}
                     >
                       <span>{action.label}</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   );
                 })}

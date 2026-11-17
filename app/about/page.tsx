@@ -66,7 +66,7 @@ export default function AboutPage() {
         {
           title: "Next-Gen E-Commerce (Coming Soon)",
           description:
-            "Developing an Apollo Pharmacy-style web and mobile application with 1-click prescription upload, automated refills, and real-time order tracking.",
+            "Developing our dedicated digital e-commerce web and mobile application with 1-click prescription upload, automated refills, and real-time order tracking.",
         },
         {
           title: "Supportive Clinical & Diagnostic Integration",
