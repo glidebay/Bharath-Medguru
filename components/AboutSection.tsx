@@ -10,7 +10,6 @@ interface AboutSectionProps {
 export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
   return (
     <section id="about" className="py-24 sm:py-28 bg-[#CBCFB8] relative overflow-hidden">
-      {/* Soft ambient light spots behind cards for authentic glass refraction */}
       <div className="pointer-events-none absolute bottom-8 left-1/4 -translate-x-1/2 w-[600px] h-[350px] bg-white/45 rounded-full blur-3xl opacity-90" />
       <div className="pointer-events-none absolute bottom-8 right-1/4 translate-x-1/2 w-[600px] h-[350px] bg-[#9B8A3E]/25 rounded-full blur-3xl opacity-80" />
 
