@@ -23,15 +23,10 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
   const scrollToContact = (e?: React.MouseEvent) => {
     e?.preventDefault();
     setMobileMenuOpen(false);
-    const element = document.getElementById("contact");
-    if (element) {
-      if (typeof window !== "undefined" && (window as any).__lenis) {
-        (window as any).__lenis.scrollTo(element, { offset: -30, duration: 1.2 });
-      } else {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+    if (onOpenBooking) {
+      onOpenBooking();
     } else {
-      window.location.href = "/#contact";
+      window.location.href = "/contact";
     }
   };
 
@@ -39,7 +34,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
     { name: "About", href: "/about" },
     { name: "Services", href: "/#service" },
     { name: "Store", href: "/online-store" },
-    { name: "Contact", href: "/#contact" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (

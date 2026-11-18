@@ -8,7 +8,7 @@ import ScrollGlobe, { ScrollGlobeSection } from "@/components/ScrollGlobe";
 
 export default function AboutPage() {
   const scrollToContact = () => {
-    window.location.href = "/#contact";
+    window.location.href = "/contact";
   };
 
   const aboutSections: ScrollGlobeSection[] = [
@@ -21,7 +21,7 @@ export default function AboutPage() {
         "Bharath MedGuru was founded with a dedicated commitment to community health: ensuring every family has reliable access to 100% genuine medications, chronic care formulations, and essential health supplies. Across our expanding retail pharmacy branches, we unite verified pharmaceutical quality with personal care and prompt delivery directly to your location on enquiry.",
       align: "left",
       actions: [
-        { label: "Enquire for Medicine Delivery", variant: "primary", href: "/#contact" },
+        { label: "Enquire for Medicine Delivery", variant: "primary", href: "/contact" },
         { label: "View Our Services", variant: "secondary", href: "/#service" },
       ],
     },
@@ -84,7 +84,7 @@ export default function AboutPage() {
         "While our full digital store is actively in development, you never have to wait for medicine delivery. Inquire with our nearest pharmacy branch today for immediate doorstep fulfillment, and be among the first to experience our forthcoming digital e-commerce platform.",
       align: "center",
       actions: [
-        { label: "Order Medicines / Inquire Now", variant: "primary", href: "/#contact" },
+        { label: "Order Medicines / Inquire Now", variant: "primary", href: "/contact" },
         { label: "Return to Home", variant: "secondary", href: "/" },
       ],
     },
