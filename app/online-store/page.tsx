@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import FooterSection from "@/components/FooterSection";
@@ -19,6 +20,8 @@ import {
   ShieldCheck,
   Check,
 } from "lucide-react";
+
+const smoothEase = [0.22, 1, 0.36, 1] as const;
 
 export default function OnlineStorePage() {
   const [notified, setNotified] = useState(false);
@@ -142,34 +145,51 @@ export default function OnlineStorePage() {
         <Navbar onOpenBooking={scrollToContact} />
 
         {/* ================= SECTION 1: HERO ================= */}
-        <section className="hero" id="product">
-          <div className="wrap">
+        <section className="hero relative overflow-hidden" id="product">
+          {/* Ambient background glows matching contact page */}
+          <div className="pointer-events-none absolute top-16 left-1/4 w-[600px] h-[350px] bg-white/40 rounded-full blur-3xl opacity-80" />
+          <div className="pointer-events-none absolute bottom-10 right-1/4 w-[600px] h-[350px] bg-[#9B8A3E]/20 rounded-full blur-3xl opacity-70" />
+
+          <div className="wrap relative z-10">
             <div className="hero-head">
-              <br />
-
-              {/* Robust, non-clipping Top Heading */}
-              <h1 className="hero-title rv in" style={{ "--base": "150ms" } as React.CSSProperties}>
-                Coming Soon: Online E-Commerce Pharmacy
+              {/* Initial Entrance Animation: Title */}
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.15, ease: smoothEase }}
+                className="hero-title"
+              >
+                Coming Soon: Online
                 <span className="hero-subtitle">
-                  Fast, Reliable Medicine Ordering Delivered to Your Doorstep
+                  E-Commerce Pharmacy
                 </span>
-              </h1>
+              </motion.h1>
 
-              {/* Lead Paragraph */}
-              <p className="hero-sub rv in" style={{ "--base": "300ms" } as React.CSSProperties}>
+              {/* Initial Entrance Animation: Lead Paragraph */}
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: 0.32, ease: smoothEase }}
+                className="hero-sub"
+              >
                 We are upgrading our retail pharmacy chain with a full-featured digital e-commerce web and mobile application. Soon, you will be able to order medicines with 1-click prescription upload, track orders in real-time, and enjoy automated monthly refills.
-              </p>
+              </motion.p>
             </div>
 
-            {/* Hero Banner Card */}
-            <div className="hero-card rv rv-scale" style={{ "--base": "450ms" } as React.CSSProperties}>
+            {/* Initial Entrance Animation: Hero Banner Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 28, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1.0, delay: 0.48, ease: smoothEase }}
+              className="hero-card"
+            >
               <img
                 className="media hero-img"
                 id="hero-banner"
                 src="/coming-soon-hero.jpg"
                 alt="Stay Tuned Coming Soon - Bharath MedGuru Online Pharmacy"
               />
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -610,7 +630,9 @@ export default function OnlineStorePage() {
 
           /* Reveal animations */
           .velia-page .rv {
-            transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1), filter 1.1s cubic-bezier(.22,1,.36,1);
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 1.0s cubic-bezier(.22,1,.36,1), transform 1.0s cubic-bezier(.22,1,.36,1), filter 1.0s cubic-bezier(.22,1,.36,1);
             transition-delay: calc(var(--d,0) * 90ms + var(--base,0ms));
           }
           .velia-page .rv.in { opacity: 1; transform: none; filter: none; }
@@ -625,19 +647,19 @@ export default function OnlineStorePage() {
           .velia-page .split .w > span { display: inline-block; will-change: transform; }
 
           .velia-page .h2 {
-            font-weight: 500;
-            font-size: clamp(32px, 4.2vw, 56px);
-            line-height: 1.08;
-            letter-spacing: -.035em;
-            margin-top: 16px;
+            font-weight: 600;
+            font-size: clamp(24px, 3.2vw, 44px);
+            line-height: 1.16;
+            letter-spacing: -.025em;
+            margin-top: 14px;
             color: #1E3227;
           }
-          .velia-page .h2 .lt { color: #53685b; font-weight: 300; }
+          .velia-page .h2 .lt { color: #53685b; font-weight: 400; }
           .velia-page .cta h2 {
-            font-weight: 500;
-            font-size: clamp(48px, 7vw, 104px);
-            line-height: .92;
-            letter-spacing: -.045em;
+            font-weight: 600;
+            font-size: clamp(32px, 4.2vw, 58px);
+            line-height: 1.05;
+            letter-spacing: -.03em;
             color: #1E3227;
           }
 
@@ -683,8 +705,26 @@ export default function OnlineStorePage() {
           }
 
           /* HERO */
-          .velia-page .hero { padding-top: 110px; }
-          .velia-page .hero-head { text-align: center; padding: 0 16px; max-width: 1080px; margin: 0 auto; }
+          .velia-page .hero {
+            padding-top: 176px;
+            padding-bottom: 24px;
+          }
+          @media (min-width: 640px) {
+            .velia-page .hero { padding-top: 208px; }
+          }
+          @media (min-width: 1024px) {
+            .velia-page .hero { padding-top: 224px; }
+          }
+          .velia-page .hero-head {
+            text-align: center;
+            padding: 0 16px;
+            max-width: 720px;
+            margin: 0 auto 52px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+          }
           
           .velia-page .hero-badge {
             display: inline-flex;
@@ -703,27 +743,28 @@ export default function OnlineStorePage() {
           }
 
           .velia-page .hero-title {
+            font-family: inherit;
             font-weight: 600;
-            font-size: clamp(34px, 4.6vw, 62px);
-            line-height: 1.1;
-            letter-spacing: -.035em;
+            font-size: clamp(28px, 3.8vw, 56px);
+            line-height: 1.15;
+            letter-spacing: -0.025em;
             color: #1E3227;
-            margin-bottom: 14px;
+            margin-bottom: 0;
           }
           .velia-page .hero-subtitle {
             display: block;
             font-weight: 400;
-            font-size: clamp(22px, 2.7vw, 36px);
-            color: #3F5447;
-            letter-spacing: -.02em;
+            font-size: clamp(20px, 2.5vw, 36px);
+            color: #1E3227;
+            letter-spacing: -0.015em;
             margin-top: 6px;
           }
 
           .velia-page .hero-sub {
-            font-size: clamp(14.5px, 1.35vw, 17.5px);
-            line-height: 1.6;
+            font-size: clamp(15px, 1.15vw, 18px);
+            line-height: 1.68;
             color: #3F5447;
-            max-width: 820px;
+            max-width: 672px;
             margin: 0 auto;
             font-weight: 300;
           }
@@ -1309,9 +1350,9 @@ export default function OnlineStorePage() {
           }
 
           @media (max-width: 640px) {
-            .velia-page .hero { padding-top: 90px; }
-            .velia-page .hero-title { font-size: 30px; }
-            .velia-page .hero-subtitle { font-size: 20px; }
+            .velia-page .hero { padding-top: 176px; }
+            .velia-page .hero-title { font-size: 28px; }
+            .velia-page .hero-subtitle { font-size: 19px; }
             .velia-page .hero-card {
               border-radius: 20px;
               margin-top: 24px;
