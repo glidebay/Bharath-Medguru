@@ -142,8 +142,8 @@ export default function ArcCardCarousel({
       const c = getCardPlacement(d, g);
       const dist = Math.abs(d);
 
-      // Only render cards that are on or near the visible arc
-      if (dist > 7) {
+      // Only render cards that are on or near the visible front arc
+      if (dist > 2.5) {
         card.style.opacity = "0";
         card.style.pointerEvents = "none";
         continue;
@@ -151,7 +151,19 @@ export default function ArcCardCarousel({
 
       card.style.pointerEvents = "auto";
       const scale = Math.max(0.74, 1 - dist * 0.055);
-      const opacity = Math.max(0.3, 1 - dist * 0.16);
+      const baseOpacity = dist <= 1 ? 1 - dist * 0.12 : Math.max(0, 0.88 * (1 - (dist - 1) / 1.5));
+
+      // Dissolve smoothly before touching top/bottom boundaries so cards never get clipped abruptly
+      const cardTop = c.y - g.cardH / 2;
+      const cardBottom = c.y + g.cardH / 2;
+      let edgeFade = 1;
+      if (cardTop < 75) {
+        edgeFade = Math.max(0, cardTop / 75);
+      } else if (cardBottom > h - 75) {
+        edgeFade = Math.max(0, (h - cardBottom) / 75);
+      }
+      const finalOpacity = Math.max(0, baseOpacity * edgeFade);
+
       const zIndex = Math.round(100 - dist * 10);
 
       card.style.transform = `translate3d(${(c.x - g.cardW / 2).toFixed(
@@ -160,7 +172,7 @@ export default function ArcCardCarousel({
         3
       )}deg) scale(${scale.toFixed(3)})`;
 
-      card.style.opacity = opacity.toFixed(3);
+      card.style.opacity = finalOpacity.toFixed(3);
       card.style.zIndex = String(zIndex);
       card.style.width = `${g.cardW}px`;
       card.style.height = `${g.cardH}px`;
@@ -344,7 +356,7 @@ export default function ArcCardCarousel({
               Specialized Divisions
             </div>
             <p className="font-mono text-xs tracking-widest text-[#9B8A3E] font-semibold uppercase">
-              {String(mobileIndex + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+              SERVICES
             </p>
           </div>
 
@@ -501,10 +513,16 @@ export default function ArcCardCarousel({
         role="region"
         aria-label={ariaLabel}
       >
-        {/* Sticky Fullscreen Stage Container */}
+        {/* Sticky Fullscreen Stage Container with soft edge dissolves */}
         <div
           ref={stageRef}
           className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[#CBCFB8]"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
+          }}
         >
           {/* Connected Circular Ring of Cards - Never Shows an Empty End */}
           {ringCards.map((it, i) => {
@@ -512,7 +530,14 @@ export default function ArcCardCarousel({
             const c0 = getCardPlacement(d0, initG);
             const dist0 = Math.abs(d0);
             const scale0 = Math.max(0.74, 1 - dist0 * 0.055);
-            const opacity0 = dist0 > 7 ? 0 : Math.max(0.3, 1 - dist0 * 0.16);
+            const baseOp0 = dist0 > 2.5 ? 0 : (dist0 <= 1 ? 1 - dist0 * 0.12 : Math.max(0, 0.88 * (1 - (dist0 - 1) / 1.5)));
+            const top0 = c0.y - initG.cardH / 2;
+            const btm0 = c0.y + initG.cardH / 2;
+            const stageH0 = initG.hubY * 2;
+            let ef0 = 1;
+            if (top0 < 75) ef0 = Math.max(0, top0 / 75);
+            else if (btm0 > stageH0 - 75) ef0 = Math.max(0, (stageH0 - btm0) / 75);
+            const opacity0 = Math.max(0, baseOp0 * ef0);
             const zIndex0 = Math.round(100 - dist0 * 10);
 
             return (
@@ -557,9 +582,9 @@ export default function ArcCardCarousel({
             }}
             className="absolute z-40 max-w-[580px] pointer-events-auto"
           >
-            {/* Number Counter (01 / 04) */}
+            {/* Eyebrow Label: SERVICES */}
             <p className="acc-num font-mono text-xs md:text-sm tracking-[0.22em] text-[#9B8A3E] mb-3 font-semibold uppercase">
-              {String(currentIndex + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}
+              SERVICES
             </p>
 
             {/* Editorial Serif Headline */}

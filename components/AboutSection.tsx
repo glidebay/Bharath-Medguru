@@ -9,9 +9,9 @@ interface AboutSectionProps {
 
 export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
   return (
-    <section id="about" className="py-24 sm:py-28 bg-[#CBCFB8] relative overflow-hidden">
-      <div className="pointer-events-none absolute bottom-8 left-1/4 -translate-x-1/2 w-[600px] h-[350px] bg-white/45 rounded-full blur-3xl opacity-90" />
-      <div className="pointer-events-none absolute bottom-8 right-1/4 translate-x-1/2 w-[600px] h-[350px] bg-[#9B8A3E]/25 rounded-full blur-3xl opacity-80" />
+    <section id="about" className="pt-20 sm:pt-24 pb-8 sm:pb-12 bg-[#CBCFB8] relative overflow-visible">
+      <div className="pointer-events-none absolute top-1/2 -translate-y-1/2 left-1/4 -translate-x-1/2 w-[600px] h-[350px] bg-white/45 rounded-full blur-3xl opacity-90" />
+      <div className="pointer-events-none absolute top-1/2 -translate-y-1/2 right-1/4 translate-x-1/2 w-[600px] h-[350px] bg-[#9B8A3E]/25 rounded-full blur-3xl opacity-80" />
 
       <div className="max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Split: Image + Story */}

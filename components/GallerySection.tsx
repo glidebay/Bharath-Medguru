@@ -44,21 +44,7 @@ const HEALTHCARE_SERVICES: ArcCardItem[] = [
 
 export default function GallerySection({ onSelectExperience }: GallerySectionProps) {
   return (
-    <section id="service" className="relative bg-[#CBCFB8] overflow-visible pt-20 sm:pt-28">
-      {/* Header: Clean & Simple, Matching PathSection */}
-      <div className="text-center max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14 space-y-3 sm:space-y-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
-          Our Services
-        </div>
-        <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
-          Pharmacy Chain &amp; <br />
-          <span className="font-normal text-[#1E3227]">Healthcare Services</span>
-        </h2>
-        <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed max-w-xl mx-auto">
-          Our core retail pharmacy chain brings genuine medicines and doorstep delivery on enquiry, with clinic and lab support when you need medical care.
-        </p>
-      </div>
-
+    <section id="service" className="relative bg-[#CBCFB8] overflow-visible pt-0">
       {/* Arc Card Carousel - Continuous Connected Ring */}
       <ArcCardCarousel
         items={HEALTHCARE_SERVICES}
