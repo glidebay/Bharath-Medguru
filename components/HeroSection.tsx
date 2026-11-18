@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ArrowRight, Pill, Truck, Building2, ShieldCheck, MapPin } from "lucide-react";
+import { ArrowRight, Truck, Building2, ShieldCheck } from "lucide-react";
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
@@ -29,7 +29,7 @@ function GlassCard({ icon, label, value, unit, unitHighlight }: GlassCardProps) 
         borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
         borderLeft: "1.5px solid rgba(255, 255, 255, 0.90)",
         boxShadow:
-          "inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), 0 10px 25px -4px rgba(30, 50, 39, 0.08)",
+          "inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), 0 16px 36px -4px rgba(30, 50, 39, 0.14), 0 4px 12px rgba(30, 50, 39, 0.08)",
       }}
     >
       {/* Label: Icon + Text */}
@@ -176,31 +176,35 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
       id="hero"
       className="relative w-full min-h-[100dvh] bg-[#CBCFB8] overflow-hidden flex flex-col justify-center"
     >
-      {/* ── LAYER 0: Ambient Reception Background ── */}
+      {/* ── LAYER 0: Ambient Reception Background (Full bleed, unified, focal shifted) ── */}
       <div
         data-anim="bg"
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none z-0 overflow-hidden"
       >
-        {/* Clean, sharp reception center focal */}
+        {/* Full unified base background color layer across 100% width */}
+        <div className="absolute inset-0 bg-[#CBCFB8]" />
+
+        {/* Full-bleed background image with right-shifted focal point (.hero-bg-focal) framing the desk logo */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
+          className="hero-bg-focal absolute inset-0 bg-cover bg-no-repeat opacity-85 sm:opacity-90"
           style={{
             backgroundImage: "url('/hero-reception.png')",
+            maskImage:
+              "linear-gradient(to right, transparent 0%, transparent 6%, rgba(0, 0, 0, 0.35) 18%, rgba(0, 0, 0, 0.85) 36%, black 52%, black 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent 0%, transparent 6%, rgba(0, 0, 0, 0.35) 18%, rgba(0, 0, 0, 0.85) 36%, black 52%, black 100%)",
           }}
         />
 
-        {/* Soft, clean atmospheric tint */}
-        <div className="absolute inset-0 bg-[#CBCFB8]/28" />
+        {/* Continuous full-width gradient wash keeping background layer 100% unified without separation */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#CBCFB8]/90 via-[#CBCFB8]/45 to-transparent" />
 
-        {/* Left legibility gradient framing the copy */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#CBCFB8] via-[#CBCFB8]/85 to-transparent lg:w-[58%]" />
-
-        {/* Right subtle gradient framing the metric cards */}
-        <div className="absolute inset-0 bg-gradient-to-l from-[#CBCFB8] via-[#CBCFB8]/70 to-transparent lg:w-[32%] ml-auto" />
+        {/* Right side shadow framing the metric cards with soft ambient depth */}
+        <div className="absolute inset-y-0 right-0 w-full sm:w-[45%] lg:w-[32%] xl:w-[28%] bg-gradient-to-l from-[#CBCFB8] via-[#CBCFB8]/70 to-transparent pointer-events-none" />
 
         {/* Gentle bottom boundary fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-[#CBCFB8] via-[#CBCFB8]/40 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#CBCFB8] via-[#CBCFB8]/60 to-transparent" />
       </div>
 
       {/* ── LAYER 1: Main Responsive Content Layout ── */}
@@ -211,20 +215,20 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             {/* Eyebrow */}
             <div
               data-anim="eyebrow"
-              className="flex items-center gap-2 text-xs font-semibold tracking-[0.18em] uppercase text-[#1E3227]"
+              className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-[#1E3227]"
             >
               <span
                 data-anim="dot"
-                className="w-2 h-2 bg-[#1E3227] rounded-xs inline-block"
+                className="w-1.5 h-1.5 bg-[#1E3227] inline-block"
               />
-              <span>Chain of Pharmacies · Doorstep Delivery</span>
+              <span>Expanding Pharmacies · Doorstep Delivery</span>
             </div>
 
             {/* Headline with Masked Rise: Refined font size & lighter weight */}
             <h1 className="text-4xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-medium tracking-tight text-[#1E3227] leading-[1.08]">
               <span className="block overflow-hidden py-0.5">
                 <span data-anim="h1line" className="block">
-                  Your Trusted Pharmacy Chain.
+                  Quality Medicines.
                 </span>
               </span>
               <span className="block overflow-hidden py-0.5">
@@ -232,35 +236,28 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
                   data-anim="h1line"
                   className="block font-normal text-[#1E3227]/90"
                 >
-                  Delivering to Your Doorstep.
+                  Care You Can Trust.
                 </span>
               </span>
             </h1>
 
-            {/* Paragraph: Refined font size matching reference */}
+            {/* Paragraph: Exactly matched length (~135 chars) and width to reference image (2 lines) */}
             <p
               data-anim="para"
-              className="text-sm sm:text-[15px] text-[#3F5447] font-normal leading-relaxed max-w-lg"
+              className="text-sm sm:text-[15px] text-[#3F5447] font-normal leading-relaxed max-w-[500px]"
             >
-              An expanding network of pharmacies across multiple branch locations with 100% genuine medicines. Enquire with your prescription to receive prompt medicine stock delivery directly to your location, backed by integrated clinical consultations and diagnostics.
+              Expanding pharmacy chain across branch locations with 100% genuine medicines — delivering prompt prescription care directly to your doorstep.
             </p>
 
-            {/* CTA Button */}
-            <div data-anim="cta" className="pt-2 flex flex-wrap items-center gap-3.5">
+            {/* CTA Button: Single pill button matching reference image */}
+            <div data-anim="cta" className="pt-2">
               <button
                 onClick={onOpenBooking}
-                className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#1E3227] hover:bg-[#15241c] text-[#CBCFB8] hover:text-white font-medium text-sm shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.02]"
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#1E3227] hover:bg-[#15241c] text-[#CBCFB8] hover:text-white font-medium text-sm shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.02]"
               >
                 <span>Enquire &amp; Order Medicines</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </button>
-              <a
-                href="#service"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#1E3227]/25 text-[#1E3227] hover:bg-[#1E3227]/10 font-medium text-sm transition-all duration-300"
-              >
-                <MapPin className="w-4 h-4 text-[#1E3227]" />
-                <span>Our Branch Network</span>
-              </a>
             </div>
           </div>
 

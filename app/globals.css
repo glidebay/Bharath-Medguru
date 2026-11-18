@@ -91,3 +91,26 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(30, 50, 39, 0.45);
 }
+
+/* Hero reception background image focal shift - adjusted 2cm left */
+.hero-bg-focal {
+  background-position: center center;
+}
+
+@media (min-width: 1024px) {
+  .hero-bg-focal {
+    background-position: calc(50% + 115px) 52%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-bg-focal {
+    background-position: calc(50% + 130px) 52%;
+  }
+}
+
+@media (min-width: 1536px) {
+  .hero-bg-focal {
+    background-position: calc(50% + 150px) 52%;
+  }
+}
