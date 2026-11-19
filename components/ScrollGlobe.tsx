@@ -29,42 +29,88 @@ export interface ScrollGlobeProps {
   className?: string;
 }
 
-const defaultGlobeConfig = {
-  positions: [
-    { top: "50%", left: "75%", scale: 1.3 }, // Hero/Welcome: Right side
-    { top: "25%", left: "50%", scale: 0.95 }, // Mission: Centered top
-    { top: "20%", left: "85%", scale: 1.6 }, // Vision: Right side
-    { top: "50%", left: "50%", scale: 1.4 }, // Future: Center backdrop
-  ],
-};
+interface GlobeSectionConfig {
+  topPercent: number;
+  leftPercent: number;
+  scale: number;
+}
 
-// Parse percentage string to number
-const parsePercent = (str: string): number => parseFloat(str.replace("%", ""));
+const desktopGlobePositions: GlobeSectionConfig[] = [
+  { topPercent: 0.50, leftPercent: 0.70, scale: 1.20 }, // Section 0: Heritage (right side)
+  { topPercent: 0.25, leftPercent: 0.50, scale: 0.95 }, // Section 1: Mission (centered)
+  { topPercent: 0.26, leftPercent: 0.70, scale: 1.20 }, // Section 2: Vision (right side)
+  { topPercent: 0.50, leftPercent: 0.50, scale: 1.30 }, // Section 3: Future (centered)
+];
+
+const tabletGlobePositions: GlobeSectionConfig[] = [
+  { topPercent: 0.50, leftPercent: 0.68, scale: 0.95 },
+  { topPercent: 0.25, leftPercent: 0.50, scale: 0.85 },
+  { topPercent: 0.25, leftPercent: 0.68, scale: 0.95 },
+  { topPercent: 0.50, leftPercent: 0.50, scale: 1.05 },
+];
+
+const mobileGlobePositions: GlobeSectionConfig[] = [
+  { topPercent: 0.50, leftPercent: 0.68, scale: 0.85 }, // Section 0: Heritage (right side)
+  { topPercent: 0.22, leftPercent: 0.50, scale: 0.75 }, // Section 1: Mission (centered)
+  { topPercent: 0.25, leftPercent: 0.68, scale: 0.85 }, // Section 2: Vision (right side)
+  { topPercent: 0.50, leftPercent: 0.50, scale: 0.90 }, // Section 3: Future (centered)
+];
+
+// Calculate safe transform preventing the globe from breaking or clipping on any screen
+function getSafeTransform(sectionIndex: number, width: number, height: number): string {
+  const isMobile = width < 640;
+  const isTablet = width >= 640 && width < 1024;
+
+  const positions = isMobile
+    ? mobileGlobePositions
+    : isTablet
+    ? tabletGlobePositions
+    : desktopGlobePositions;
+
+  const cfg = positions[sectionIndex] || positions[0];
+
+  // Base rendered dimensions based on container breakpoints
+  const baseDiameter = isMobile ? 340 * 0.75 : isTablet ? 480 * 0.90 : 600;
+  const margin = isMobile ? 16 : isTablet ? 24 : 32;
+
+  let scale = cfg.scale;
+  const maxDiameter = width - margin * 2;
+  let currentDiameter = baseDiameter * scale;
+  if (currentDiameter > maxDiameter) {
+    scale = maxDiameter / baseDiameter;
+    currentDiameter = maxDiameter;
+  }
+
+  const radius = currentDiameter / 2;
+  const targetX = width * cfg.leftPercent;
+  const targetY = height * cfg.topPercent;
+
+  // Clamping ensures the globe's left and right bounds stay 100% inside the viewport
+  const safeX = Math.max(radius + margin, Math.min(width - radius - margin, targetX));
+  const safeY = targetY;
+
+  return `translate3d(${safeX}px, ${safeY}px, 0) translate3d(-50%, -50%, 0) scale3d(${scale}, ${scale}, 1)`;
+}
 
 export default function ScrollGlobe({
   sections,
-  globeConfig = defaultGlobeConfig,
   className,
 }: ScrollGlobeProps) {
   const [activeSection, setActiveSection] = useState(0);
-  const [globeTransform, setGlobeTransform] = useState("");
+  const [globeTransform, setGlobeTransform] = useState(() => {
+    if (typeof window !== "undefined") {
+      return getSafeTransform(0, window.innerWidth, window.innerHeight);
+    }
+    return "translate3d(70vw, 50vh, 0) translate3d(-50%, -50%, 0) scale3d(1.2, 1.2, 1)";
+  });
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const animationFrameId = useRef<number | null>(null);
 
-  // Pre-calculate positions for performance
-  const calculatedPositions = useMemo(() => {
-    return globeConfig.positions.map((pos) => ({
-      top: parsePercent(pos.top),
-      left: parsePercent(pos.left),
-      scale: pos.scale,
-    }));
-  }, [globeConfig.positions]);
-
-  // Direct scroll tracking
+  // Direct scroll & viewport tracking
   const updateScrollPosition = useCallback(() => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    // Section detection
+    if (typeof window === "undefined") return;
+
     const viewportCenter = window.innerHeight / 2;
     let newActiveSection = 0;
     let minDistance = Infinity;
@@ -82,12 +128,25 @@ export default function ScrollGlobe({
       }
     });
 
-    const currentPos = calculatedPositions[newActiveSection] || calculatedPositions[0];
-    const transform = `translate3d(${currentPos.left}vw, ${currentPos.top}vh, 0) translate3d(-50%, -50%, 0) scale3d(${currentPos.scale}, ${currentPos.scale}, 1)`;
+    const transform = getSafeTransform(
+      newActiveSection,
+      window.innerWidth,
+      window.innerHeight
+    );
 
     setGlobeTransform(transform);
     setActiveSection(newActiveSection);
-  }, [calculatedPositions]);
+  }, []);
+
+  // Window resize handler to maintain exact unbroken positioning
+  useEffect(() => {
+    const handleResize = () => {
+      updateScrollPosition();
+    };
+    window.addEventListener("resize", handleResize, { passive: true });
+    updateScrollPosition();
+    return () => window.removeEventListener("resize", handleResize);
+  }, [updateScrollPosition]);
 
   // Scroll handler with RAF
   useEffect(() => {
@@ -142,15 +201,6 @@ export default function ScrollGlobe({
       });
     }
   }, []);
-
-  // Initial globe position
-  useEffect(() => {
-    const initialPos = calculatedPositions[0];
-    if (initialPos) {
-      const initialTransform = `translate3d(${initialPos.left}vw, ${initialPos.top}vh, 0) translate3d(-50%, -50%, 0) scale3d(${initialPos.scale}, ${initialPos.scale}, 1)`;
-      setGlobeTransform(initialTransform);
-    }
-  }, [calculatedPositions]);
 
   return (
     <div
