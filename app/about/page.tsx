@@ -97,7 +97,7 @@ export default function AboutPage() {
         <Navbar onOpenBooking={scrollToContact} />
 
         {/* ScrollGlobe 3D Interactive Screen */}
-        <div className="pt-20 sm:pt-24">
+        <div className="pt-14 sm:pt-20 lg:pt-24">
           <ScrollGlobe sections={aboutSections} />
         </div>
 

@@ -50,10 +50,10 @@ const tabletGlobePositions: GlobeSectionConfig[] = [
 ];
 
 const mobileGlobePositions: GlobeSectionConfig[] = [
-  { topPercent: 0.48, leftPercent: 0.50, scale: 0.80 }, // Section 0: Heritage (fully centered, unbroken)
-  { topPercent: 0.22, leftPercent: 0.50, scale: 0.72 }, // Section 1: Mission (centered, unbroken)
-  { topPercent: 0.24, leftPercent: 0.50, scale: 0.72 }, // Section 2: Vision (centered, unbroken)
-  { topPercent: 0.48, leftPercent: 0.50, scale: 0.85 }, // Section 3: Future (centered, unbroken)
+  { topPercent: 0.42, leftPercent: 0.50, scale: 0.75 }, // Section 0: Heritage (centered, compact)
+  { topPercent: 0.18, leftPercent: 0.50, scale: 0.68 }, // Section 1: Mission (centered, compact)
+  { topPercent: 0.20, leftPercent: 0.50, scale: 0.68 }, // Section 2: Vision (centered, compact)
+  { topPercent: 0.42, leftPercent: 0.50, scale: 0.78 }, // Section 3: Future (centered, compact)
 ];
 
 // Calculate safe transform preventing the globe from breaking or clipping on any screen
@@ -273,7 +273,7 @@ export default function ScrollGlobe({
             sectionRefs.current[index] = el;
           }}
           className={cn(
-            "relative min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-14 lg:px-20 z-20 py-20 sm:py-24 lg:py-28",
+            "relative min-h-[auto] sm:min-h-[85vh] lg:min-h-screen flex flex-col justify-start sm:justify-center px-4 sm:px-8 md:px-14 lg:px-20 z-20 py-8 sm:py-16 lg:py-24 xl:py-28",
             "w-full max-w-full overflow-hidden",
             section.align === "center" && "items-center text-center",
             section.align === "right" && "items-end text-right",
@@ -288,7 +288,7 @@ export default function ScrollGlobe({
           >
             {/* Badge */}
             {section.badge && (
-              <div className="inline-flex items-center px-3 py-0.5 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-[11px] font-semibold tracking-wider uppercase border border-[#1E3227]/15 mb-3 backdrop-blur-md">
+              <div className="inline-flex items-center px-3 py-0.5 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-[11px] font-semibold tracking-wider uppercase border border-[#1E3227]/15 mb-2.5 sm:mb-3 backdrop-blur-md">
                 <span>{section.badge}</span>
               </div>
             )}
@@ -296,7 +296,7 @@ export default function ScrollGlobe({
             {/* Title / Subtitle */}
             <h1
               className={cn(
-                "font-semibold mb-4 sm:mb-6 leading-[1.18] tracking-tight text-[#1E3227]",
+                "font-semibold mb-3 sm:mb-5 lg:mb-6 leading-[1.18] tracking-tight text-[#1E3227]",
                 index === 0
                   ? "text-2xl sm:text-3xl md:text-4xl lg:text-[42px]"
                   : "text-xl sm:text-2xl md:text-3xl lg:text-[34px]"
@@ -317,13 +317,13 @@ export default function ScrollGlobe({
             {/* Description */}
             <div
               className={cn(
-                "text-[#3F5447] leading-relaxed mb-6 sm:mb-8 text-sm sm:text-[15px] lg:text-base font-normal",
+                "text-[#3F5447] leading-relaxed mb-4 sm:mb-6 lg:mb-8 text-sm sm:text-[15px] lg:text-base font-normal",
                 section.align === "center" ? "max-w-full mx-auto text-center" : "max-w-full"
               )}
             >
-              <p className="mb-2.5 sm:mb-3">{section.description}</p>
+              <p className="mb-2 sm:mb-3">{section.description}</p>
               {index === 0 && (
-                <div className="flex flex-wrap items-center gap-3.5 text-[11px] sm:text-xs text-[#3F5447]/80 mt-3 sm:mt-5">
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5 text-[11px] sm:text-xs text-[#3F5447]/80 mt-2 sm:mt-4">
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#9B8A3E] animate-pulse" />
                     <span>Regional Pharmacy Branch Network</span>
@@ -346,11 +346,11 @@ export default function ScrollGlobe({
 
             {/* Features Grid - Frosted Glass Cards */}
             {section.features && (
-              <div className="grid gap-3 sm:gap-3.5 mb-6 sm:mb-8">
+              <div className="grid gap-2.5 sm:gap-3.5 mb-4 sm:mb-6 lg:mb-8">
                 {section.features.map((feature, featureIndex) => (
                   <div
                     key={feature.title}
-                    className="p-4 sm:p-5 rounded-2xl border transition-all duration-300 hover:-translate-y-0.5"
+                    className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border transition-all duration-300 hover:-translate-y-0.5"
                     style={{
                       background:
                         "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.30) 100%)",
@@ -382,7 +382,7 @@ export default function ScrollGlobe({
             {section.actions && (
               <div
                 className={cn(
-                  "flex flex-col sm:flex-row flex-wrap gap-3",
+                  "flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3",
                   section.align === "center" && "justify-center",
                   section.align === "right" && "justify-end",
                   (!section.align || section.align === "left") && "justify-start"
@@ -395,7 +395,7 @@ export default function ScrollGlobe({
                         key={action.label}
                         href={action.href}
                         className={cn(
-                          "inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm cursor-pointer",
+                          "inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm cursor-pointer",
                           action.variant === "primary"
                             ? "bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white shadow-md"
                             : "border border-[#1E3227]/25 bg-white/60 backdrop-blur-md text-[#1E3227] hover:bg-white"
@@ -411,7 +411,7 @@ export default function ScrollGlobe({
                       key={action.label}
                       onClick={action.onClick}
                       className={cn(
-                        "inline-flex items-center justify-center gap-2 px-6 py-2.5 sm:px-7 sm:py-3 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm cursor-pointer",
+                        "inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-xs sm:text-sm cursor-pointer",
                         action.variant === "primary"
                           ? "bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white shadow-md"
                           : "border border-[#1E3227]/25 bg-white/60 backdrop-blur-md text-[#1E3227] hover:bg-white"
