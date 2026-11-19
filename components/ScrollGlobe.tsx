@@ -35,13 +35,6 @@ interface GlobeSectionConfig {
   scale: number;
 }
 
-const desktopGlobePositions: GlobeSectionConfig[] = [
-  { topPercent: 0.50, leftPercent: 0.70, scale: 1.15 }, // Section 0: Heritage (right side)
-  { topPercent: 0.25, leftPercent: 0.50, scale: 0.95 }, // Section 1: Mission (centered)
-  { topPercent: 0.26, leftPercent: 0.70, scale: 1.15 }, // Section 2: Vision (right side)
-  { topPercent: 0.50, leftPercent: 0.50, scale: 1.25 }, // Section 3: Future (centered)
-];
-
 const tabletGlobePositions: GlobeSectionConfig[] = [
   { topPercent: 0.50, leftPercent: 0.55, scale: 0.90 },
   { topPercent: 0.24, leftPercent: 0.50, scale: 0.80 },
@@ -56,22 +49,29 @@ const mobileGlobePositions: GlobeSectionConfig[] = [
   { topPercent: 0.42, leftPercent: 0.50, scale: 0.78 }, // Section 3: Future (centered, compact)
 ];
 
-// Calculate safe transform preventing the globe from breaking or clipping on any screen
+// Calculate transform: EXACT original on large screen, safe unbroken on small screen
 function getSafeTransform(sectionIndex: number, width: number, height: number): string {
   const isMobile = width < 640;
   const isTablet = width >= 640 && width < 1024;
 
-  const positions = isMobile
-    ? mobileGlobePositions
-    : isTablet
-    ? tabletGlobePositions
-    : desktopGlobePositions;
+  // On large screen (>= 1024px), preserve the EXACT original positions and transforms
+  if (!isMobile && !isTablet) {
+    const origPositions = [
+      { top: "50vh", left: "75vw", scale: 1.3 }, // Section 0: Heritage
+      { top: "25vh", left: "50vw", scale: 0.95 }, // Section 1: Mission
+      { top: "20vh", left: "85vw", scale: 1.6 }, // Section 2: Vision
+      { top: "50vh", left: "50vw", scale: 1.4 }, // Section 3: Future
+    ];
+    const pos = origPositions[sectionIndex] || origPositions[0];
+    return `translate3d(${pos.left}, ${pos.top}, 0) translate3d(-50%, -50%, 0) scale3d(${pos.scale}, ${pos.scale}, 1)`;
+  }
 
+  // On small screens (< 1024px), use centered unbroken positioning with safe margins
+  const positions = isMobile ? mobileGlobePositions : tabletGlobePositions;
   const cfg = positions[sectionIndex] || positions[0];
 
-  // Base rendered dimensions based on container breakpoints
-  const baseDiameter = isMobile ? 280 * 0.75 : isTablet ? 420 * 0.90 : 560;
-  const margin = isMobile ? 20 : isTablet ? 24 : 32;
+  const baseDiameter = isMobile ? 280 * 0.75 : 420 * 0.90;
+  const margin = isMobile ? 20 : 24;
 
   let scale = cfg.scale;
   const maxDiameter = width - margin * 2;
@@ -101,7 +101,7 @@ export default function ScrollGlobe({
     if (typeof window !== "undefined") {
       return getSafeTransform(0, window.innerWidth, window.innerHeight);
     }
-    return "translate3d(50vw, 48vh, 0) translate3d(-50%, -50%, 0) scale3d(0.8, 0.8, 1)";
+    return "translate3d(75vw, 50vh, 0) translate3d(-50%, -50%, 0) scale3d(1.3, 1.3, 1)";
   });
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
