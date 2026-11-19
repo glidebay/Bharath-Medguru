@@ -27,13 +27,13 @@ export default function CtaSection({ onOpenBooking }: CtaSectionProps) {
 
           {/* Content Container */}
           <div className="relative z-10 max-w-3xl space-y-4 sm:space-y-5">
-            {/* Clean, Minimal Headline in Two Lines */}
+            {/* Headline */}
             <h2 className="font-sans text-2xl sm:text-4xl md:text-5xl font-medium tracking-tight text-white leading-[1.2]">
               Need Medicine Stock Delivered? <br />
               <span className="font-normal text-[#CBCFB8]">Send Your Enquiry for Fast Doorstep Delivery</span>
             </h2>
 
-            {/* Shortened, Minimal Description */}
+            {/* Description */}
             <p className="text-sm sm:text-base text-[#CBCFB8]/85 font-light leading-relaxed max-w-xl">
               Our expanding retail pharmacy chain provides 100% genuine medications, prescription fulfillment, and doorstep delivery directly to your location, with specialist doctor consultations and diagnostic lab support.
             </p>

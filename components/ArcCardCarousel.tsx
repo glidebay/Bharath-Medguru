@@ -389,7 +389,7 @@ export default function ArcCardCarousel({
             })}
           </div>
 
-          {/* Interactive Card Slider with Touch Swipe & Next/Prev Controls */}
+          {/* Mobile Card Slider */}
           <div
             className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-[22px] overflow-hidden shadow-[0_16px_36px_-10px_rgba(30,50,39,0.22)] bg-[#1E3227]/10 touch-pan-y"
             onTouchStart={handleTouchStart}
@@ -462,7 +462,7 @@ export default function ArcCardCarousel({
             </div>
           </div>
 
-          {/* Typography & Editorial Content (Clean, Legible, No Overflow) */}
+          {/* Content */}
           <div className="mt-5 transition-all duration-300">
             {/* Meta */}
             {mobileCurrent.meta && (
@@ -513,7 +513,7 @@ export default function ArcCardCarousel({
         role="region"
         aria-label={ariaLabel}
       >
-        {/* Sticky Fullscreen Stage Container with soft edge dissolves */}
+        {/* Stage Container */}
         <div
           ref={stageRef}
           className="sticky top-0 h-screen w-full overflow-hidden flex items-center bg-[#CBCFB8]"
@@ -524,7 +524,7 @@ export default function ArcCardCarousel({
               "linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%)",
           }}
         >
-          {/* Connected Circular Ring of Cards - Never Shows an Empty End */}
+          {/* Circular Ring */}
           {ringCards.map((it, i) => {
             const d0 = offsetOf(i, 0, n);
             const c0 = getCardPlacement(d0, initG);
@@ -571,7 +571,7 @@ export default function ArcCardCarousel({
             );
           })}
 
-          {/* Clean, Spacious Typography Caption beside Flat Card */}
+          {/* Caption */}
           <div
             ref={capRef}
             style={{
@@ -582,12 +582,12 @@ export default function ArcCardCarousel({
             }}
             className="absolute z-40 max-w-[580px] pointer-events-auto"
           >
-            {/* Eyebrow Label: SERVICES */}
+            {/* Eyebrow */}
             <p className="acc-num font-mono text-xs md:text-sm tracking-[0.22em] text-[#9B8A3E] mb-3 font-semibold uppercase">
               SERVICES
             </p>
 
-            {/* Editorial Serif Headline */}
+            {/* Headline */}
             <h3 className="acc-title font-sans text-3xl sm:text-5xl lg:text-[62px] font-normal text-[#1E3227] tracking-tight leading-[1.05] mb-4">
               {currentItem.title}
             </h3>

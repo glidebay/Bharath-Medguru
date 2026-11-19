@@ -152,7 +152,6 @@ export default function OnlineStorePage() {
 
           <div className="wrap relative z-10">
             <div className="hero-head">
-              {/* Initial Entrance Animation: Title */}
               <motion.h1
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -165,7 +164,6 @@ export default function OnlineStorePage() {
                 </span>
               </motion.h1>
 
-              {/* Initial Entrance Animation: Lead Paragraph */}
               <motion.p
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -176,7 +174,6 @@ export default function OnlineStorePage() {
               </motion.p>
             </div>
 
-            {/* Initial Entrance Animation: Hero Banner Card */}
             <motion.div
               initial={{ opacity: 0, y: 28, scale: 0.97 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -465,7 +462,7 @@ export default function OnlineStorePage() {
                   </div>
                 </div>
 
-                {/* CENTRE HAND IMAGE - Properly contained without breaking into footer */}
+                {/* Center Visual */}
                 <div className="hand rv" style={{ "--d": 2 } as React.CSSProperties}>
                   <img
                     id="hand-img"
@@ -604,8 +601,7 @@ export default function OnlineStorePage() {
           </div>
         </section>
 
-        {/* ================= FULL-WIDTH FOOTER ================= */}
-        {/* Rendered full-bleed outside of any wrapper, identical to the homepage */}
+        {/* Footer */}
         <FooterSection />
 
         {/* Global Page Styles */}
