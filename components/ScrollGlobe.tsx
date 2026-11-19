@@ -36,24 +36,24 @@ interface GlobeSectionConfig {
 }
 
 const desktopGlobePositions: GlobeSectionConfig[] = [
-  { topPercent: 0.50, leftPercent: 0.70, scale: 1.20 }, // Section 0: Heritage (right side)
+  { topPercent: 0.50, leftPercent: 0.70, scale: 1.15 }, // Section 0: Heritage (right side)
   { topPercent: 0.25, leftPercent: 0.50, scale: 0.95 }, // Section 1: Mission (centered)
-  { topPercent: 0.26, leftPercent: 0.70, scale: 1.20 }, // Section 2: Vision (right side)
-  { topPercent: 0.50, leftPercent: 0.50, scale: 1.30 }, // Section 3: Future (centered)
+  { topPercent: 0.26, leftPercent: 0.70, scale: 1.15 }, // Section 2: Vision (right side)
+  { topPercent: 0.50, leftPercent: 0.50, scale: 1.25 }, // Section 3: Future (centered)
 ];
 
 const tabletGlobePositions: GlobeSectionConfig[] = [
-  { topPercent: 0.50, leftPercent: 0.68, scale: 0.95 },
-  { topPercent: 0.25, leftPercent: 0.50, scale: 0.85 },
-  { topPercent: 0.25, leftPercent: 0.68, scale: 0.95 },
-  { topPercent: 0.50, leftPercent: 0.50, scale: 1.05 },
+  { topPercent: 0.50, leftPercent: 0.55, scale: 0.90 },
+  { topPercent: 0.24, leftPercent: 0.50, scale: 0.80 },
+  { topPercent: 0.25, leftPercent: 0.55, scale: 0.90 },
+  { topPercent: 0.50, leftPercent: 0.50, scale: 0.95 },
 ];
 
 const mobileGlobePositions: GlobeSectionConfig[] = [
-  { topPercent: 0.50, leftPercent: 0.68, scale: 0.85 }, // Section 0: Heritage (right side)
-  { topPercent: 0.22, leftPercent: 0.50, scale: 0.75 }, // Section 1: Mission (centered)
-  { topPercent: 0.25, leftPercent: 0.68, scale: 0.85 }, // Section 2: Vision (right side)
-  { topPercent: 0.50, leftPercent: 0.50, scale: 0.90 }, // Section 3: Future (centered)
+  { topPercent: 0.48, leftPercent: 0.50, scale: 0.80 }, // Section 0: Heritage (fully centered, unbroken)
+  { topPercent: 0.22, leftPercent: 0.50, scale: 0.72 }, // Section 1: Mission (centered, unbroken)
+  { topPercent: 0.24, leftPercent: 0.50, scale: 0.72 }, // Section 2: Vision (centered, unbroken)
+  { topPercent: 0.48, leftPercent: 0.50, scale: 0.85 }, // Section 3: Future (centered, unbroken)
 ];
 
 // Calculate safe transform preventing the globe from breaking or clipping on any screen
@@ -70,8 +70,8 @@ function getSafeTransform(sectionIndex: number, width: number, height: number): 
   const cfg = positions[sectionIndex] || positions[0];
 
   // Base rendered dimensions based on container breakpoints
-  const baseDiameter = isMobile ? 340 * 0.75 : isTablet ? 480 * 0.90 : 600;
-  const margin = isMobile ? 16 : isTablet ? 24 : 32;
+  const baseDiameter = isMobile ? 280 * 0.75 : isTablet ? 420 * 0.90 : 560;
+  const margin = isMobile ? 20 : isTablet ? 24 : 32;
 
   let scale = cfg.scale;
   const maxDiameter = width - margin * 2;
@@ -101,7 +101,7 @@ export default function ScrollGlobe({
     if (typeof window !== "undefined") {
       return getSafeTransform(0, window.innerWidth, window.innerHeight);
     }
-    return "translate3d(70vw, 50vh, 0) translate3d(-50%, -50%, 0) scale3d(1.2, 1.2, 1)";
+    return "translate3d(50vw, 48vh, 0) translate3d(-50%, -50%, 0) scale3d(0.8, 0.8, 1)";
   });
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);

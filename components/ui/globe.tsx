@@ -15,10 +15,23 @@ export default function Globe({ className }: GlobeProps) {
 
     let phi = 0;
     let t = 0;
-    let width = canvasRef.current.offsetWidth || 600;
+    
+    // Accurate initial width detection based on viewport breakpoint
+    const getInitialWidth = () => {
+      if (canvasRef.current && canvasRef.current.offsetWidth > 0) {
+        return canvasRef.current.offsetWidth;
+      }
+      if (typeof window !== "undefined") {
+        if (window.innerWidth < 640) return 300;
+        if (window.innerWidth < 1024) return 440;
+      }
+      return 600;
+    };
+
+    let width = getInitialWidth();
 
     const onResize = () => {
-      if (canvasRef.current && canvasRef.current.offsetWidth) {
+      if (canvasRef.current && canvasRef.current.offsetWidth > 0) {
         width = canvasRef.current.offsetWidth;
       }
     };
@@ -57,6 +70,14 @@ export default function Globe({ className }: GlobeProps) {
         state.phi = phi;
         phi += 0.0035;
         t += 0.06;
+
+        // Ensure width stays perfectly synchronized with canvas dimensions
+        if (canvasRef.current && canvasRef.current.offsetWidth > 0) {
+          const currentWidth = canvasRef.current.offsetWidth;
+          if (currentWidth !== width) {
+            width = currentWidth;
+          }
+        }
         state.width = width * 2;
         state.height = width * 2;
 
@@ -78,7 +99,7 @@ export default function Globe({ className }: GlobeProps) {
   }, []);
 
   return (
-    <div className={`relative w-[340px] sm:w-[480px] lg:w-[600px] aspect-square mx-auto flex items-center justify-center ${className || ""}`}>
+    <div className={`relative w-[300px] sm:w-[440px] lg:w-[600px] max-w-full aspect-square mx-auto flex items-center justify-center ${className || ""}`}>
       <canvas
         ref={canvasRef}
         style={{ width: "100%", height: "100%", maxWidth: "100%", aspectRatio: 1 }}
