@@ -344,8 +344,7 @@ export default function ScrollGlobe({
               )}
             </div>
 
-            {/* Features Grid - Frosted Glass Cards */}
-            {section.features && (
+             {section.features && (
               <div className="grid gap-2.5 sm:gap-3.5 mb-4 sm:mb-6 lg:mb-8">
                 {section.features.map((feature, featureIndex) => (
                   <div
