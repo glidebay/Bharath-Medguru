@@ -15,6 +15,14 @@ export default function Globe({ className }: GlobeProps) {
 
     let phi = 0;
     let t = 0;
+    let width = canvasRef.current.offsetWidth || 600;
+
+    const onResize = () => {
+      if (canvasRef.current && canvasRef.current.offsetWidth) {
+        width = canvasRef.current.offsetWidth;
+      }
+    };
+    window.addEventListener("resize", onResize);
 
     // Accurate land map coordinates for Bharath MedGuru pharmacy branch locations
     const branchLocations: [number, number][] = [
@@ -29,8 +37,8 @@ export default function Globe({ className }: GlobeProps) {
 
     const globe = createGlobe(canvasRef.current, {
       devicePixelRatio: 2,
-      width: 600 * 2,
-      height: 600 * 2,
+      width: width * 2,
+      height: width * 2,
       phi: 0,
       theta: 0.25,
       dark: 0,
@@ -49,6 +57,8 @@ export default function Globe({ className }: GlobeProps) {
         state.phi = phi;
         phi += 0.0035;
         t += 0.06;
+        state.width = width * 2;
+        state.height = width * 2;
 
         state.markers = branchLocations.map((loc, idx) => {
           const blinkPhase = t + idx * 0.9;
@@ -62,6 +72,7 @@ export default function Globe({ className }: GlobeProps) {
     });
 
     return () => {
+      window.removeEventListener("resize", onResize);
       globe.destroy();
     };
   }, []);
