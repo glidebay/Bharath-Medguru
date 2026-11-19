@@ -428,11 +428,11 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
                 </button>
 
                 <a
-                  href="tel:+917994066647"
+                  href="tel:+918078881234"
                   className="w-full sm:w-auto py-3.5 px-6 rounded-full bg-white/90 hover:bg-white text-[#1E3227] text-xs font-semibold uppercase tracking-wider border border-[#1E3227]/15 transition-all flex items-center justify-center gap-2"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#9B8A3E]" />
-                  <span>Call +91 79940 66647</span>
+                  <span>Call +91 80788 81234</span>
                 </a>
               </div>
             </div>

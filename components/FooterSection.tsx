@@ -175,13 +175,13 @@ export default function FooterSection() {
                   admin@bharathmedguru.com
                 </a>
               </p>
-              <div className="flex flex-col gap-0.5 pt-1">
-                <a href="tel:+917994066647" className="text-white font-semibold text-sm hover:underline">
-                  +91 79940 66647
+              <div className="flex flex-col gap-1 pt-1">
+                <a href="tel:+918078881234" className="text-white font-semibold text-sm hover:underline">
+                  +91 80788 81234
                 </a>
-                <p className="text-[11px] text-[#CBCFB8]/60">
-                  Lab: +91 75590 33000 / 66000
-                </p>
+                <a href="tel:+919894839640" className="text-white font-semibold text-sm hover:underline">
+                  +91 98948 39640
+                </a>
               </div>
               <div className="pt-2 border-t border-white/10 text-[11px] text-[#CBCFB8]/80 space-y-0.5">
                 <p><span className="text-white font-medium">Facility:</span> 7:00 AM – 8:00 PM</p>

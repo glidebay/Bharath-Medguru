@@ -165,7 +165,7 @@ export default function TermsConditionsPage() {
                 6. Appointment Rescheduling &amp; Cancellations
               </h2>
               <p>
-                We understand that schedules change. To respect clinical resources and assist fellow patients, we request at least 2 hours of advance notice for consultation rescheduling or cancellations by contacting our clinic desk at <strong>+91 79940 66647</strong>.
+                We understand that schedules change. To respect clinical resources and assist fellow patients, we request at least 2 hours of advance notice for consultation rescheduling or cancellations by contacting our clinic desk at <strong>+91 80788 81234</strong> / <strong>+91 98948 39640</strong>.
               </p>
             </section>
 
@@ -200,10 +200,15 @@ export default function TermsConditionsPage() {
                   <Phone className="w-4 h-4 text-[#9B8A3E] flex-shrink-0" />
                   <div>
                     <strong>Direct Helpline &amp; WhatsApp:</strong>{" "}
-                    <a href="tel:+917994066647" className="underline font-semibold hover:text-[#15241c]">
-                      +91 79940 66647
+                    <a href="tel:+918078881234" className="underline font-semibold hover:text-[#15241c]">
+                      +91 80788 81234
                     </a>{" "}
-                    <span className="text-[#3F5447] text-xs">(Lab Lines: +91 75590 33000 / 66000)</span>
+                    <span className="text-[#3F5447] text-xs">
+                      /{" "}
+                      <a href="tel:+919894839640" className="underline hover:text-[#15241c]">
+                        +91 98948 39640
+                      </a>
+                    </span>
                   </div>
                 </div>
               </div>

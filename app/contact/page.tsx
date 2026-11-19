@@ -28,13 +28,13 @@ const CONTACT_LINKS: ContactLink[] = [
   },
   {
     icon: Phone,
-    label: "+91 79940 66647",
-    href: "tel:+917994066647",
+    label: "+91 80788 81234",
+    href: "tel:+918078881234",
   },
   {
     icon: Headphones,
-    label: "+91 75590 33000 / 66000",
-    href: "tel:+917559033000",
+    label: "+91 98948 39640",
+    href: "tel:+919894839640",
   },
 ];
 
@@ -225,7 +225,7 @@ export default function ContactPage() {
 
     try {
       window.open(
-        `https://wa.me/917994066647?text=${encodeURIComponent(formattedText)}`,
+        `https://wa.me/918078881234?text=${encodeURIComponent(formattedText)}`,
         "_blank",
         "noopener,noreferrer",
       );
@@ -427,7 +427,7 @@ export default function ContactPage() {
                         <input
                           type="tel"
                           required
-                          placeholder="+91 79940 66647"
+                          placeholder="+91 80788 81234"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           className="w-full bg-white/80 border border-[#1E3227]/15 rounded-xl px-4 py-2.5 text-sm text-[#1E3227] placeholder:text-[#1E3227]/40 outline-none focus:bg-white focus:border-[#1E3227] focus:ring-2 focus:ring-[#9B8A3E]/20 transition-all duration-200"

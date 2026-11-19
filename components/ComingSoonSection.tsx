@@ -175,7 +175,7 @@ export default function ComingSoonSection({ onOpenBooking }: ComingSoonSectionPr
                   <ArrowRight className="w-4 h-4 text-[#1E3227]" />
                 </a>
                 <span className="text-xs text-[#CBCFB8]/70">
-                  Or WhatsApp prescription to +91 79940 66647
+                  Or WhatsApp prescription to +91 80788 81234
                 </span>
               </div>
             </div>

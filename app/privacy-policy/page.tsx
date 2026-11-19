@@ -190,10 +190,15 @@ export default function PrivacyPolicyPage() {
                   <Phone className="w-4 h-4 text-[#9B8A3E] flex-shrink-0" />
                   <div>
                     <strong>Direct Helpline &amp; WhatsApp:</strong>{" "}
-                    <a href="tel:+917994066647" className="underline font-semibold hover:text-[#15241c]">
-                      +91 79940 66647
+                    <a href="tel:+918078881234" className="underline font-semibold hover:text-[#15241c]">
+                      +91 80788 81234
                     </a>{" "}
-                    <span className="text-[#3F5447] text-xs">(Lab Lines: +91 75590 33000 / 66000)</span>
+                    <span className="text-[#3F5447] text-xs">
+                      /{" "}
+                      <a href="tel:+919894839640" className="underline hover:text-[#15241c]">
+                        +91 98948 39640
+                      </a>
+                    </span>
                   </div>
                 </div>
               </div>

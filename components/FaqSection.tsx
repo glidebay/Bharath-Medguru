@@ -15,7 +15,7 @@ export default function FaqSection() {
     {
       question: "How does your medicine delivery on enquiry work?",
       answer:
-        "If you enquire with us via WhatsApp (+91 79940 66647), phone, or through our website form, our licensed pharmacists immediately review your medicine list or prescription. We verify branch stock availability and dispatch genuine sealed medications directly to your home or office address promptly.",
+        "If you enquire with us via WhatsApp (+91 80788 81234), phone (+91 98948 39640), or through our website form, our licensed pharmacists immediately review your medicine list or prescription. We verify branch stock availability and dispatch genuine sealed medications directly to your home or office address promptly.",
     },
     {
       question: "Are you launching an online e-commerce pharmacy web app?",

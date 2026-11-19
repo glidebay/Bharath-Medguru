@@ -32,7 +32,7 @@ export default function ContactSection() {
       `*Service Required:* ${formData.service}\n` +
       `*Prescription / Location / Details:* ${formData.message}`;
 
-    const whatsappUrl = `https://wa.me/917994066647?text=${encodeURIComponent(formattedText)}`;
+    const whatsappUrl = `https://wa.me/918078881234?text=${encodeURIComponent(formattedText)}`;
 
     // Open WhatsApp in a separate tab so the current website never navigates away
     try {
@@ -103,13 +103,20 @@ export default function ContactSection() {
                   <div className="text-xs font-semibold text-[#9B8A3E] uppercase tracking-wider">
                     Direct Phone &amp; WhatsApp
                   </div>
-                  <a
-                    href="tel:+917994066647"
-                    className="font-sans text-lg font-semibold text-[#1E3227] hover:underline"
-                  >
-                    +91 79940 66647
-                  </a>
-                   
+                  <div className="flex flex-col gap-1">
+                    <a
+                      href="tel:+918078881234"
+                      className="font-sans text-lg font-semibold text-[#1E3227] hover:underline"
+                    >
+                      +91 80788 81234
+                    </a>
+                    <a
+                      href="tel:+919894839640"
+                      className="font-sans text-sm font-semibold text-[#3F5447] hover:underline"
+                    >
+                      +91 98948 39640
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -245,14 +252,14 @@ export default function ContactSection() {
 
                 <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
                   <a
-                    href={`https://wa.me/917994066647?text=${encodeURIComponent(
+                    href={`https://wa.me/918078881234?text=${encodeURIComponent(
                       `*New Inquiry - Bharath MedGuru*\n\n*Patient Name:* ${formData.name}\n*Phone:* ${formData.phone || "Not provided"}\n*Email:* ${formData.email}\n*Service:* ${formData.service}\n*Message:* ${formData.message}`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 bg-[#1E3227] text-white hover:bg-[#15241c] px-6 py-3 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors shadow-sm"
                   >
-                    <span>Chat on WhatsApp (+91 79940 66647)</span>
+                    <span>Chat on WhatsApp (+91 80788 81234)</span>
                   </a>
                   <button
                     onClick={handleReset}
@@ -308,7 +315,7 @@ export default function ContactSection() {
                     <input
                       type="tel"
                       required
-                      placeholder="+91 79940 66647"
+                      placeholder="+91 80788 81234"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full bg-white/80 px-4 py-3 rounded-xl border border-[#1E3227]/15 text-sm text-[#1E3227] focus:outline-none focus:ring-2 focus:ring-[#1E3227]/30 focus:border-[#1E3227] transition-all"

@@ -127,7 +127,7 @@ const structuredData = {
       "image": "https://bharathmedguru.com/hero-reception.png",
       "description":
         "BharathMedguru is an expanding retail chain of modern community pharmacies delivering 100% genuine medicines directly to your location on enquiry.",
-      "telephone": "+91-79940-66647",
+      "telephone": "+91-80788-81234",
       "email": "admin@bharathmedguru.com",
       "priceRange": "$$",
       "currenciesAccepted": "INR",

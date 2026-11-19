@@ -241,7 +241,7 @@ export default function OnlineStorePage() {
                       </div>
                       <span className="text-white font-normal">Serving 25,000+ patients across South India</span>
                     </div>
-                    <a className="btn-white" href="https://wa.me/917994066647" target="_blank" rel="noopener noreferrer">
+                    <a className="btn-white" href="https://wa.me/918078881234" target="_blank" rel="noopener noreferrer">
                       Enquire on WhatsApp Today
                     </a>
                   </div>
@@ -492,8 +492,8 @@ export default function OnlineStorePage() {
                         </ul>
                       </div>
                     </div>
-                    <a className="view" href="https://wa.me/917994066647" target="_blank" rel="noopener noreferrer">
-                      WhatsApp +91 79940 66647 <span>→</span>
+                    <a className="view" href="https://wa.me/918078881234" target="_blank" rel="noopener noreferrer">
+                      WhatsApp +91 80788 81234 <span>→</span>
                     </a>
                   </div>
 
@@ -549,7 +549,7 @@ export default function OnlineStorePage() {
                     <ArrowRight className="w-3.5 h-3.5 text-[#9B8A3E]" />
                   </a>
                   <a
-                    href="https://wa.me/917994066647"
+                    href="https://wa.me/918078881234"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white text-[#1E3227] hover:bg-white/80 border border-[#1E3227]/20 text-xs font-semibold uppercase tracking-wider transition-all"
