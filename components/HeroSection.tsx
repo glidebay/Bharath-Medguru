@@ -68,7 +68,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
 
     const run = () => {
       if (done) return;
-      // Smooth cubic bezier matching editorial iOS/Framer motion
+      // Smooth cubic bezier easing
       const ease = {
         easing: "cubic-bezier(0.22, 1, 0.36, 1)",
         fill: "backwards" as FillMode,
@@ -185,7 +185,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
         {/* Full unified base background color layer across 100% width */}
         <div className="absolute inset-0 bg-[#CBCFB8]" />
 
-        {/* Full-bleed background image with right-shifted focal point (.hero-bg-focal) framing the desk logo */}
+        {/* Background image */}
         <div
           className="hero-bg-focal absolute inset-0 bg-cover bg-no-repeat opacity-85 sm:opacity-90"
           style={{
@@ -210,7 +210,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
       {/* ── LAYER 1: Main Responsive Content Layout ── */}
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 flex-1 flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center my-auto">
-          {/* LEFT: Copy block with refined font sizes from reference image */}
+          {/* Main Copy */}
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col items-start space-y-4 sm:space-y-6 max-w-xl">
             {/* Eyebrow */}
             <div
@@ -224,7 +224,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
               <span>Expanding Pharmacies · Doorstep Delivery</span>
             </div>
 
-            {/* Headline with Masked Rise: Refined font size & lighter weight */}
+            {/* Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-medium tracking-tight text-[#1E3227] leading-[1.08]">
               <span className="block overflow-hidden py-0.5">
                 <span data-anim="h1line" className="block">
@@ -241,15 +241,15 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
               </span>
             </h1>
 
-            {/* Paragraph: Exactly matched length (~135 chars) and width to reference image (2 lines) */}
             <p
               data-anim="para"
               className="text-sm sm:text-[15px] text-[#3F5447] font-normal leading-relaxed max-w-[500px]"
             >
-              Expanding pharmacy chain across branch locations with 100% genuine medicines — delivering prompt prescription care directly to your doorstep.
+              Expanding pharmacy chain across branch locations with 100% genuine medicines — delivering prompt prescription care 
+              <br />directly to your doorstep.
             </p>
 
-            {/* CTA Button: Single pill button matching reference image */}
+            {/* CTA Button */}
             <div data-anim="cta" className="pt-1 sm:pt-2">
               <button
                 onClick={onOpenBooking}
@@ -261,7 +261,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* RIGHT: Frosted Glass Metric Cards in ONE ROW on mobile & tablet, vertical stack on desktop */}
+          {/* Frosted Glass Metric Cards */}
           <div className="lg:col-span-5 xl:col-span-4 grid grid-cols-3 lg:flex lg:flex-col gap-1.5 sm:gap-3 items-stretch lg:items-end justify-center w-full pt-2 sm:pt-0">
             {/* Card 1: Pharmacy Chain */}
             <GlassCard

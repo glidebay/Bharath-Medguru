@@ -146,7 +146,7 @@ export default function OnlineStorePage() {
 
         {/* ================= SECTION 1: HERO ================= */}
         <section className="hero relative overflow-hidden" id="product">
-          {/* Ambient background glows matching contact page */}
+          {/* Ambient background glows */}
           <div className="pointer-events-none absolute top-16 left-1/4 w-[600px] h-[350px] bg-white/40 rounded-full blur-3xl opacity-80" />
           <div className="pointer-events-none absolute bottom-10 right-1/4 w-[600px] h-[350px] bg-[#9B8A3E]/20 rounded-full blur-3xl opacity-70" />
 
