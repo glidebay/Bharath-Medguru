@@ -39,10 +39,10 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
   ];
 
   return (
-    <section id="path" className="py-28 bg-[#CBCFB8] relative overflow-hidden">
+    <section id="path" className="py-12 sm:py-18 lg:py-28 bg-[#CBCFB8] relative overflow-hidden">
       <div className="max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-24 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-24 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
             How It Works
           </div>
@@ -56,16 +56,16 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
         </div>
 
         {/* 3 Alternating Steps */}
-        <div className="space-y-20 lg:space-y-28">
+        <div className="space-y-12 sm:space-y-18 lg:space-y-28">
           {steps.map((item) => (
             <div
               key={item.step}
               className={`flex flex-col ${item.reversed ? "lg:flex-row-reverse" : "lg:flex-row"
-                } items-center gap-10 lg:gap-20`}
+                } items-center gap-6 sm:gap-10 lg:gap-20`}
             >
               {/* Image Frame */}
               <div className="w-full lg:w-1/2 flex justify-center">
-                <div className="relative w-full max-w-[464px] aspect-[464/330] rounded-[28px] overflow-hidden bg-white/20 shadow-xl border-4 border-white/50 group">
+                <div className="relative w-full max-w-[464px] aspect-[464/330] rounded-[24px] sm:rounded-[28px] overflow-hidden bg-white/20 shadow-xl border-4 border-white/50 group">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -76,13 +76,13 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
               </div>
 
               {/* Content with Number and Vertical Decorative Bar */}
-              <div className="w-full lg:w-1/2 flex items-start gap-6 sm:gap-8">
+              <div className="w-full lg:w-1/2 flex items-start gap-5 sm:gap-8">
                 {/* Number & Vertical Accent Line */}
                 <div className="flex flex-col items-center flex-shrink-0">
-                  <div className="font-sans text-4xl sm:text-5xl font-light text-[#1E3227] leading-none mb-3">
+                  <div className="font-sans text-3xl sm:text-5xl font-light text-[#1E3227] leading-none mb-2 sm:mb-3">
                     {item.step}
                   </div>
-                  <div className="w-[2px] h-24 bg-gradient-to-b from-[#1E3227] via-[#1E3227]/40 to-transparent rounded-full" />
+                  <div className="w-[2px] h-14 sm:h-24 bg-gradient-to-b from-[#1E3227] via-[#1E3227]/40 to-transparent rounded-full" />
                 </div>
 
                 {/* Text Content */}

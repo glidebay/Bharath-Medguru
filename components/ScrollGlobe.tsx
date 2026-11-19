@@ -38,6 +38,15 @@ const defaultGlobeConfig = {
   ],
 };
 
+const mobileGlobeConfig = {
+  positions: [
+    { top: "78%", left: "50%", scale: 0.65 }, // Hero/Welcome: Lower half cleanly below buttons
+    { top: "80%", left: "50%", scale: 0.65 }, // Mission: Centered lower
+    { top: "78%", left: "50%", scale: 0.65 }, // Vision: Centered lower
+    { top: "75%", left: "50%", scale: 0.70 }, // Future: Lower center backdrop
+  ],
+};
+
 // Parse percentage string to number
 const parsePercent = (str: string): number => parseFloat(str.replace("%", ""));
 
@@ -47,24 +56,31 @@ export default function ScrollGlobe({
   className,
 }: ScrollGlobeProps) {
   const [activeSection, setActiveSection] = useState(0);
-  const [globeTransform, setGlobeTransform] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+  const [globeTransform, setGlobeTransform] = useState(() => {
+    const isClient = typeof window !== "undefined";
+    const mobile = isClient ? window.innerWidth < 1024 : false;
+    const pos = (mobile ? mobileGlobeConfig : defaultGlobeConfig).positions[0];
+    return `translate3d(${parsePercent(pos.left)}vw, ${parsePercent(pos.top)}vh, 0) translate3d(-50%, -50%, 0) scale3d(${pos.scale}, ${pos.scale}, 1)`;
+  });
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const animationFrameId = useRef<number | null>(null);
 
-  // Pre-calculate positions for performance
-  const calculatedPositions = useMemo(() => {
-    return globeConfig.positions.map((pos) => ({
+  // Pre-calculate positions based on mobile/desktop
+  const getCalculatedPositions = useCallback(() => {
+    const mobile = typeof window !== "undefined" ? window.innerWidth < 1024 : isMobile;
+    const activeCfg = mobile ? mobileGlobeConfig : globeConfig;
+    return activeCfg.positions.map((pos) => ({
       top: parsePercent(pos.top),
       left: parsePercent(pos.left),
       scale: pos.scale,
     }));
-  }, [globeConfig.positions]);
+  }, [isMobile, globeConfig]);
 
   // Direct scroll tracking
   const updateScrollPosition = useCallback(() => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    // Section detection
+    const calcPositions = getCalculatedPositions();
     const viewportCenter = window.innerHeight / 2;
     let newActiveSection = 0;
     let minDistance = Infinity;
@@ -82,12 +98,24 @@ export default function ScrollGlobe({
       }
     });
 
-    const currentPos = calculatedPositions[newActiveSection] || calculatedPositions[0];
+    const currentPos = calcPositions[newActiveSection] || calcPositions[0];
     const transform = `translate3d(${currentPos.left}vw, ${currentPos.top}vh, 0) translate3d(-50%, -50%, 0) scale3d(${currentPos.scale}, ${currentPos.scale}, 1)`;
 
     setGlobeTransform(transform);
     setActiveSection(newActiveSection);
-  }, [calculatedPositions]);
+  }, [getCalculatedPositions]);
+
+  // Responsive device check
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      updateScrollPosition();
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, [updateScrollPosition]);
 
   // Scroll handler with RAF
   useEffect(() => {
@@ -143,15 +171,6 @@ export default function ScrollGlobe({
     }
   }, []);
 
-  // Initial globe position
-  useEffect(() => {
-    const initialPos = calculatedPositions[0];
-    if (initialPos) {
-      const initialTransform = `translate3d(${initialPos.left}vw, ${initialPos.top}vh, 0) translate3d(-50%, -50%, 0) scale3d(${initialPos.scale}, ${initialPos.scale}, 1)`;
-      setGlobeTransform(initialTransform);
-    }
-  }, [calculatedPositions]);
-
   return (
     <div
       ref={containerRef}
@@ -203,13 +222,13 @@ export default function ScrollGlobe({
 
       {/* Interactive 3D Globe with Responsive Positioning */}
       <div
-        className="fixed z-10 pointer-events-none will-change-transform transition-all duration-[1400ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
+        className="fixed z-10 pointer-events-none will-change-transform transition-all duration-[1200ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
         style={{
           transform: globeTransform,
-          filter: `opacity(${activeSection === 3 ? 0.35 : 0.88})`,
+          filter: `opacity(${activeSection === 3 ? 0.30 : (isMobile ? 0.45 : 0.88)})`,
         }}
       >
-        <div className="scale-75 sm:scale-90 lg:scale-100 drop-shadow-2xl">
+        <div className="scale-65 sm:scale-75 md:scale-90 lg:scale-100 drop-shadow-2xl">
           <Globe />
         </div>
       </div>
@@ -223,7 +242,7 @@ export default function ScrollGlobe({
             sectionRefs.current[index] = el;
           }}
           className={cn(
-            "relative min-h-screen flex flex-col justify-center px-6 sm:px-10 md:px-14 lg:px-20 z-20 py-20 sm:py-24 lg:py-28",
+            "relative min-h-[100dvh] flex flex-col justify-start lg:justify-center px-4 sm:px-8 md:px-14 lg:px-20 z-20 pt-20 sm:pt-24 lg:py-28 pb-14",
             "w-full max-w-full overflow-hidden",
             section.align === "center" && "items-center text-center",
             section.align === "right" && "items-end text-right",
@@ -233,7 +252,8 @@ export default function ScrollGlobe({
           <div
             className={cn(
               "w-full max-w-xl sm:max-w-2xl will-change-transform transition-all duration-700",
-              "opacity-100 translate-y-0"
+              "opacity-100 translate-y-0",
+              "p-5 sm:p-7 lg:p-0 rounded-[22px] lg:rounded-none bg-white/50 lg:bg-transparent backdrop-blur-md lg:backdrop-blur-none border border-white/60 lg:border-none shadow-sm lg:shadow-none"
             )}
           >
             {/* Badge */}

@@ -353,7 +353,7 @@ export default function ArcCardCarousel({
           <div className="flex items-center justify-between mb-3.5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1E3227]/8 text-[#1E3227] text-[11px] font-semibold tracking-wider uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-[#9B8A3E]" />
-              Specialized Divisions
+              Healthcare Services
             </div>
             <p className="font-mono text-xs tracking-widest text-[#9B8A3E] font-semibold uppercase">
               SERVICES
@@ -417,7 +417,7 @@ export default function ArcCardCarousel({
 
                   {/* Top-left pill badge */}
                   <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-[10px] font-medium tracking-wider uppercase pointer-events-none">
-                    Division {String(idx + 1).padStart(2, "0")}
+                    Service {String(idx + 1).padStart(2, "0")}
                   </div>
                 </div>
               ))}

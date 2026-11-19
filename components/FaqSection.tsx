@@ -49,14 +49,14 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-[#CBCFB8] relative overflow-hidden">
+    <section id="faq" className="py-12 sm:py-18 lg:py-24 bg-[#CBCFB8] relative overflow-hidden">
       {/* Ambient glass refraction glows */}
       <div className="pointer-events-none absolute top-1/3 left-1/10 w-[450px] h-[350px] bg-white/30 rounded-full blur-3xl opacity-75" />
       <div className="pointer-events-none absolute bottom-1/4 right-1/10 w-[450px] h-[350px] bg-[#9B8A3E]/15 rounded-full blur-3xl opacity-60" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
             <HelpCircle className="w-3.5 h-3.5 text-[#9B8A3E]" />
             <span>Got Questions?</span>

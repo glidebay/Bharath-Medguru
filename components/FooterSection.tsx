@@ -10,12 +10,12 @@ export default function FooterSection() {
   };
 
   return (
-    <footer id="footer" className="bg-[#1E3227] text-[#CBCFB8] pt-20 pb-12 relative overflow-hidden">
+    <footer id="footer" className="bg-[#1E3227] text-[#CBCFB8] pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-12 relative overflow-hidden">
       {/* Background soft ambient radial glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-48 bg-white/5 blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-10 sm:pb-16 border-b border-white/10">
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-5 space-y-5">
             <Link href="#hero" className="flex items-center gap-3">

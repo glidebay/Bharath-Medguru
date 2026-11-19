@@ -1347,6 +1347,36 @@
         display: none;
       }
 
+      body.menu-open .nav-l {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 16px;
+        right: 16px;
+        margin-top: 8px;
+        padding: 16px;
+        background: rgba(203, 207, 184, 0.95);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-radius: 20px;
+        border: 1px solid rgba(30, 50, 39, 0.15);
+        box-shadow: 0 16px 36px rgba(30, 50, 39, 0.15);
+        gap: 12px;
+      }
+
+      body.menu-open .burger span {
+        background: transparent;
+      }
+
+      body.menu-open .burger span::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      body.menu-open .burger span::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
       .burger {
         display: flex;
       }

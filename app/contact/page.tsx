@@ -340,7 +340,7 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.0, delay: 0.35, ease: smoothEase }}
-                className="p-7 sm:p-9 rounded-[28px] flex flex-col justify-between gap-6"
+                className="p-5 sm:p-9 rounded-[24px] sm:rounded-[28px] flex flex-col justify-between gap-6"
                 style={{
                   background:
                     "linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.35) 100%)",

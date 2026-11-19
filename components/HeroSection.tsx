@@ -19,33 +19,33 @@ function GlassCard({ icon, label, value, unit, unitHighlight }: GlassCardProps) 
   return (
     <div
       data-anim="card"
-      className="w-[155px] sm:w-[165px] lg:w-[175px] min-h-[96px] sm:min-h-[104px] lg:min-h-[110px] p-3.5 sm:p-4 rounded-[20px] flex flex-col justify-between transition-all duration-300 hover:scale-[1.02]"
+      className="w-full sm:w-[165px] lg:w-[175px] min-h-[76px] sm:min-h-[104px] lg:min-h-[110px] p-2 sm:p-3.5 lg:p-4 rounded-[14px] sm:rounded-[20px] flex flex-col justify-between transition-all duration-300 hover:scale-[1.02]"
       style={{
         background:
-          "linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.38) 100%)",
+          "linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.40) 100%)",
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
         border: "1px solid rgba(255, 255, 255, 0.85)",
         borderTop: "1.5px solid rgba(255, 255, 255, 0.95)",
         borderLeft: "1.5px solid rgba(255, 255, 255, 0.90)",
         boxShadow:
-          "inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), 0 16px 36px -4px rgba(30, 50, 39, 0.14), 0 4px 12px rgba(30, 50, 39, 0.08)",
+          "inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), 0 12px 28px -4px rgba(30, 50, 39, 0.12), 0 4px 10px rgba(30, 50, 39, 0.06)",
       }}
     >
       {/* Label: Icon + Text */}
-      <div className="flex items-center gap-1.5 text-[9px] font-semibold tracking-[0.12em] uppercase text-[#1E3227]/70">
-        <span className="text-[#1E3227]">{icon}</span>
-        <span>{label}</span>
+      <div className="flex items-center gap-1 sm:gap-1.5 text-[7.5px] sm:text-[9px] font-semibold tracking-wider sm:tracking-[0.12em] uppercase text-[#1E3227]/75">
+        <span className="text-[#1E3227] flex-shrink-0">{icon}</span>
+        <span className="truncate">{label}</span>
       </div>
 
       {/* Big Numeral / Value */}
-      <div className="text-base sm:text-lg lg:text-[19px] font-normal text-[#1E3227] tracking-tight leading-tight my-0.5">
+      <div className="text-[13px] sm:text-lg lg:text-[19px] font-medium text-[#1E3227] tracking-tight leading-tight my-0.5 whitespace-nowrap">
         {value}
       </div>
 
       {/* Unit / Rating */}
       <div
-        className={`text-[8px] sm:text-[8.5px] font-semibold tracking-wider uppercase leading-tight ${
+        className={`text-[6.5px] sm:text-[8px] lg:text-[8.5px] font-semibold tracking-tight sm:tracking-wider uppercase leading-tight truncate ${
           unitHighlight ? "text-[#9B8A3E]" : "text-[#1E3227]/55"
         }`}
       >
@@ -174,7 +174,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
     <section
       ref={secRef}
       id="hero"
-      className="relative w-full min-h-[100dvh] bg-[#CBCFB8] overflow-hidden flex flex-col justify-center"
+      className="relative w-full min-h-[100dvh] bg-[#CBCFB8] overflow-hidden flex flex-col justify-center pt-20 sm:pt-28 pb-10 sm:pb-16"
     >
       {/* ── LAYER 0: Ambient Reception Background (Full bleed, unified, focal shifted) ── */}
       <div
@@ -208,14 +208,14 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
       </div>
 
       {/* ── LAYER 1: Main Responsive Content Layout ── */}
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 pt-28 sm:pt-32 pb-16 flex-1 flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center my-auto">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center my-auto">
           {/* LEFT: Copy block with refined font sizes from reference image */}
-          <div className="lg:col-span-7 xl:col-span-8 flex flex-col items-start space-y-5 sm:space-y-6 max-w-xl">
+          <div className="lg:col-span-7 xl:col-span-8 flex flex-col items-start space-y-4 sm:space-y-6 max-w-xl">
             {/* Eyebrow */}
             <div
               data-anim="eyebrow"
-              className="flex items-center gap-2 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase text-[#1E3227]"
+              className="flex items-center gap-2 text-[10px] sm:text-xs font-semibold tracking-[0.16em] sm:tracking-[0.2em] uppercase text-[#1E3227]"
             >
               <span
                 data-anim="dot"
@@ -225,7 +225,7 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             </div>
 
             {/* Headline with Masked Rise: Refined font size & lighter weight */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-medium tracking-tight text-[#1E3227] leading-[1.08]">
+            <h1 className="text-3xl sm:text-5xl lg:text-[56px] xl:text-[62px] font-medium tracking-tight text-[#1E3227] leading-[1.08]">
               <span className="block overflow-hidden py-0.5">
                 <span data-anim="h1line" className="block">
                   Quality Medicines.
@@ -250,10 +250,10 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             </p>
 
             {/* CTA Button: Single pill button matching reference image */}
-            <div data-anim="cta" className="pt-2">
+            <div data-anim="cta" className="pt-1 sm:pt-2">
               <button
                 onClick={onOpenBooking}
-                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#1E3227] hover:bg-[#15241c] text-[#CBCFB8] hover:text-white font-medium text-sm shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.02]"
+                className="group inline-flex items-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#1E3227] hover:bg-[#15241c] text-[#CBCFB8] hover:text-white font-medium text-xs sm:text-sm shadow-md transition-all duration-300 cursor-pointer hover:scale-[1.02]"
               >
                 <span>Enquire &amp; Order Medicines</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -261,8 +261,8 @@ export default function HeroSection({ onOpenBooking }: HeroSectionProps) {
             </div>
           </div>
 
-          {/* RIGHT: Frosted Glass Metric Cards with refined compact font scaling */}
-          <div className="lg:col-span-5 xl:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-2.5 sm:gap-3 items-stretch sm:items-center lg:items-end justify-center w-full">
+          {/* RIGHT: Frosted Glass Metric Cards in ONE ROW on mobile & tablet, vertical stack on desktop */}
+          <div className="lg:col-span-5 xl:col-span-4 grid grid-cols-3 lg:flex lg:flex-col gap-1.5 sm:gap-3 items-stretch lg:items-end justify-center w-full pt-2 sm:pt-0">
             {/* Card 1: Pharmacy Chain */}
             <GlassCard
               icon={<Building2 className="w-3 h-3" />}

@@ -9,7 +9,7 @@ interface AboutSectionProps {
 
 export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
   return (
-    <section id="about" className="pt-20 sm:pt-24 pb-8 sm:pb-12 bg-[#CBCFB8] relative overflow-visible">
+    <section id="about" className="pt-12 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 bg-[#CBCFB8] relative overflow-hidden">
       <div className="pointer-events-none absolute top-1/2 -translate-y-1/2 left-1/4 -translate-x-1/2 w-[600px] h-[350px] bg-white/45 rounded-full blur-3xl opacity-90" />
       <div className="pointer-events-none absolute top-1/2 -translate-y-1/2 right-1/4 translate-x-1/2 w-[600px] h-[350px] bg-[#9B8A3E]/25 rounded-full blur-3xl opacity-80" />
 
@@ -78,17 +78,17 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
               </p>
             </div>
 
-            <div className="pt-2 flex flex-wrap items-center gap-3.5">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href="/about"
-                className="inline-flex items-center gap-2 bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white px-7 py-3.5 rounded-full text-sm font-medium shadow-sm transition-all duration-200 hover:scale-[1.02] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-[#1E3227] text-[#CBCFB8] hover:bg-[#15241c] hover:text-white px-7 py-3 sm:py-3.5 rounded-full text-sm font-medium shadow-sm transition-all duration-200 hover:scale-[1.02] cursor-pointer"
               >
                 <span>Explore More</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
               <button
                 onClick={onOpenBooking}
-                className="inline-flex items-center gap-2 bg-white/70 hover:bg-white text-[#1E3227] border border-[#1E3227]/20 px-6 py-3.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 bg-white/70 hover:bg-white text-[#1E3227] border border-[#1E3227]/20 px-6 py-3 sm:py-3.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer"
               >
                 <span>Enquire for Medicine Delivery</span>
               </button>

@@ -204,14 +204,14 @@ export default function BlogSection({ onOpenBooking }: BlogSectionProps) {
   };
 
   return (
-    <section id="blog" className="py-24 bg-[#CBCFB8] relative overflow-hidden">
+    <section id="blog" className="py-12 sm:py-18 lg:py-24 bg-[#CBCFB8] relative overflow-hidden">
       {/* Ambient glass refraction glows */}
       <div className="pointer-events-none absolute top-1/4 left-1/10 w-[500px] h-[350px] bg-white/35 rounded-full blur-3xl opacity-80" />
       <div className="pointer-events-none absolute bottom-1/4 right-1/10 w-[500px] h-[350px] bg-[#9B8A3E]/15 rounded-full blur-3xl opacity-60" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 lg:mb-16 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
             <Pill className="w-3.5 h-3.5 text-[#9B8A3E]" />
             <span>Pharmacy Categories</span>

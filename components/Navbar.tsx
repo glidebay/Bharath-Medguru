@@ -39,23 +39,24 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? "bg-[#CBCFB8]/85 backdrop-blur-md shadow-xs py-3.5 border-b border-[#1E3227]/10"
-        : "bg-transparent py-5 sm:py-6"
-        }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-[#CBCFB8]/95 backdrop-blur-md shadow-xs py-2.5 sm:py-3 border-b border-[#1E3227]/10"
+          : "bg-[#CBCFB8]/95 md:bg-transparent backdrop-blur-md md:backdrop-blur-none py-2.5 sm:py-4 md:py-6 border-b border-[#1E3227]/10 md:border-b-0"
+      }`}
     >
-      <div className="w-full max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20">
-        <div className="flex items-center justify-between">
+      <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-16 xl:px-20">
+        <div className="flex items-center justify-between w-full">
 
           {/* ── LEFT: Official Bharath MedGuru Logo ── */}
           <Link
             href="/"
-            className="flex items-center gap-3 group text-decoration-none select-none py-1"
+            className="flex items-center gap-2 sm:gap-3 group text-decoration-none select-none py-1 flex-shrink-0"
           >
             <img
               src="/logo.png"
               alt="Bharath MedGuru"
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className="h-8 sm:h-11 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               style={{
                 filter: "drop-shadow(0 2px 4px rgba(30, 50, 39, 0.35))",
               }}
@@ -85,19 +86,19 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
             </button>
           </div>
 
-          {/* ── MOBILE MENU BUTTON (Round burger button) ── */}
-          <div className="flex md:hidden items-center">
+          {/* ── MOBILE MENU BUTTON (High-contrast, bold, always visible) ── */}
+          <div className="flex md:hidden items-center flex-shrink-0">
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="w-10 h-10 rounded-full flex items-center justify-center text-[#1E3227] transition-all cursor-pointer"
-              style={{
-                backgroundColor: "rgba(203, 207, 184, 0.5)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(30, 50, 39, 0.15)",
-              }}
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center bg-[#1E3227] text-white hover:bg-[#15241c] active:scale-95 transition-all cursor-pointer shadow-md border border-[#1E3227]"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5 text-white" strokeWidth={2.5} />
+              ) : (
+                <Menu className="w-5 h-5 text-white" strokeWidth={2.5} />
+              )}
             </button>
           </div>
 

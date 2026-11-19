@@ -53,14 +53,14 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <section id="testimonial" className="py-28 bg-[#CBCFB8] relative overflow-hidden">
+    <section id="testimonial" className="py-12 sm:py-18 lg:py-28 bg-[#CBCFB8] relative overflow-hidden">
       {/* Ambient glass refraction glows */}
       <div className="pointer-events-none absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[350px] bg-white/30 rounded-full blur-3xl opacity-80" />
       <div className="pointer-events-none absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[350px] bg-[#9B8A3E]/15 rounded-full blur-3xl opacity-60" />
 
-      <div className="max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
+      <div className="max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 lg:mb-16 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
+        <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
             <MessageSquareHeart className="w-3.5 h-3.5 text-[#9B8A3E]" />
             <span>Seeker Voices</span>

@@ -102,7 +102,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
   }, []);
 
   return (
-    <section id="session" className="py-28 bg-[#CBCFB8] relative">
+    <section id="session" className="py-12 sm:py-18 lg:py-28 bg-[#CBCFB8] relative overflow-hidden">
       {/* Ambient glass refraction glows isolated in an overflow-hidden backdrop */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/10 w-[550px] h-[400px] bg-white/35 rounded-full blur-3xl opacity-80" />
@@ -111,7 +111,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
 
       <div className="max-w-[1296px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 lg:mb-20 space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
             <Pill className="w-3.5 h-3.5 text-[#9B8A3E]" />
             <span>Pharmacy Care &amp; Branch Services</span>
@@ -126,7 +126,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
         </div>
 
         {/* 3D Stacking Cards Deck (Overlaying Frosted Sage Glass Cards) */}
-        <div ref={containerRef} className="relative pb-24">
+        <div ref={containerRef} className="relative pb-12 sm:pb-16 lg:pb-24">
           {sessions.map((item, index) => {
             return (
               <div
@@ -139,7 +139,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                   position: "sticky",
                   top: `calc(76px + ${index * 14}px)`,
                   zIndex: index + 10,
-                  marginBottom: index === sessions.length - 1 ? "32px" : "12vh",
+                  marginBottom: index === sessions.length - 1 ? "32px" : "8vh",
                   transformOrigin: "top center",
                   background: "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.30) 100%)",
                   backdropFilter: "blur(28px)",
@@ -152,7 +152,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                 }}
                 className="w-full rounded-[24px] sm:rounded-[28px] p-5 sm:p-7 md:p-9 transition-shadow duration-300 overflow-hidden will-change-transform"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-8 lg:gap-14 items-center">
                   {/* Left Column: Pharmacy Service Photo */}
                   <div className="lg:col-span-5 relative">
                     <div className="relative aspect-[476/443] w-full rounded-[20px] overflow-hidden bg-[#CBCFB8]/40 shadow-inner">
