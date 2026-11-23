@@ -147,7 +147,7 @@ const PHARMACY_CATEGORY_CARDS: PharmacyCategoryCardData[] = [
     title: "Home Medical Devices & Surgical Supplies",
     excerpt:
       "Precision home health diagnostic instruments, surgical disposables, wound care dressing materials, and orthopedic aids for post-operative and home patient care.",
-    image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=800&q=80",
+    image: "/surgicals-medical-devices.jpg",
     alt: "Home Medical Devices and Surgical Supplies at Bharath MedGuru",
     checklist: [
       "Digital BP Monitors & Fingertip Pulse Oximeters",
