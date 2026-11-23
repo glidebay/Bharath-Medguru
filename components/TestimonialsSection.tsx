@@ -7,48 +7,48 @@ export default function TestimonialsSection() {
   const testimonials = [
     {
       quote:
-        "The energy healing session with Lena was absolutely life-changing. I felt lighter, clearer, and deeply seen. This platform helped me reconnect with myself in ways I never expected.",
-      name: "Amelia Jones",
-      role: "Marketing Consultant",
+        "Ordering my parents' diabetic medications and insulins is effortless now. I just WhatsApp the prescription to Bharath MedGuru, and the sealed medicines arrive at our doorstep in Palakkad with proper temperature-regulated cooling packs.",
+      name: "Mathew Varghese",
+      role: "Palakkad • Monthly Refill Customer",
       rating: 5,
-      image: "https://framerusercontent.com/images/lx4Rn0VnV8SjGTXOsrNK92R5W0k.jpg",
-      modality: "Energy Healing",
+      image: "/customer-1.jpg",
+      modality: "Cold-Chain Delivery",
     },
     {
       quote:
-        "Working with Lena opened a door I didn’t even know was closed. Her presence was calming, and the energy work peeled layers I had been carrying for years. I walked away feeling empowered.",
-      name: "Luna park",
-      role: "Marketing Head",
+        "Finding specialized cardiac drugs locally was always stressful until I reached out to Bharath MedGuru. Their licensed pharmacist verified branch inventory across Kerala and dispatched genuine sealed batches to Kochi the very same afternoon.",
+      name: "Sujatha Warrier",
+      role: "Kochi • Cardiac Care Caregiver",
       rating: 5,
-      image: "https://framerusercontent.com/images/W35y2oAusnY8GfUNfuhPboYHtr8.jpg",
-      modality: "Sound Therapy",
+      image: "/customer-2.jpg",
+      modality: "Prescription Care",
     },
     {
       quote:
-        "Dr. Maya’s life coaching gave me the mental framework to dismantle 5 years of chronic imposter syndrome and burnout. Truly transformational guidance.",
-      name: "Marcus Vance",
-      role: "Tech Founder",
+        "I manage BP, cholesterol, and thyroid prescriptions for our whole family. Their automated monthly refill service ensures we never miss a dose. The pharmacy team verifies every batch before prompt dispatch.",
+      name: "Dr. Radhakrishnan Nair",
+      role: "Kozhikode • Regular Family Customer",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
-      modality: "Life Coaching",
+      image: "/customer-3.jpg",
+      modality: "Monthly Refills",
     },
     {
       quote:
-        "The Himalayan bowl sound bath alleviated my chronic sleep struggles within two sessions. MedGuru is truly an oasis of calm in a chaotic world.",
-      name: "Dr. Sarah Chen",
-      role: "Holistic Practitioner",
+        "During a late-evening emergency for pediatric antibiotic syrups, their branch team verified the prescription immediately and coordinated doorstep delivery. Having authenticated, tamper-proof medicine delivery in Thrissur is a blessing.",
+      name: "Fathima Shihab",
+      role: "Thrissur • Mother & Homemaker",
       rating: 5,
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
-      modality: "Sound Bath",
+      modality: "Prompt Dispatch",
     },
     {
       quote:
-        "Aarav’s Ayurvedic guidance completely reset my digestive fire and chronic fatigue. Ancient wisdom delivered with compassionate modern clarity.",
-      name: "Priya Sharma",
-      role: "Author & Advocate",
+        "What stands out about Bharath MedGuru is their strict adherence to 100% genuine pharmaceuticals. The pharmacist personally explained the dosage regimen and delivered post-surgery orthopedic recovery supplies right to our home.",
+      name: "Anoop Menon",
+      role: "Thiruvananthapuram • Post-Op Recovery",
       rating: 5,
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
-      modality: "Ayurveda",
+      modality: "Genuine Medicines",
     },
   ];
 
@@ -63,13 +63,13 @@ export default function TestimonialsSection() {
         <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#1E3227]/10 text-[#1E3227] text-xs font-semibold tracking-wide uppercase border border-[#1E3227]/15">
             <MessageSquareHeart className="w-3.5 h-3.5 text-[#9B8A3E]" />
-            <span>Seeker Voices</span>
+            <span>Customer Voices</span>
           </div>
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
-            What are they talking about?
+            Trusted by Families Across Kerala
           </h2>
           <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
-            Hear from clients who’ve found healing, clarity, and balance through our holistic offerings.
+            Real experiences from patients and caregivers across Kerala who rely on Bharath MedGuru for 100% genuine medicines, monthly refills, and prompt doorstep delivery.
           </p>
         </div>
       </div>
