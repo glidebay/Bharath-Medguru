@@ -100,7 +100,7 @@ const PHARMACY_CATEGORY_CARDS: PharmacyCategoryCardData[] = [
     title: "Vitamins, Supplements & Preventive Wellness",
     excerpt:
       "Certified dietary supplements, immunity boosters, ayurvedic preparations, and health nutrition products curated to support everyday health and family vitality.",
-    image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80",
+    image: "/wellness-vitamins-supplements.jpg",
     alt: "Wellness and Over the Counter Health Supplies at Bharath MedGuru",
     checklist: [
       "Multivitamins, Minerals & Antioxidant Complexes",
