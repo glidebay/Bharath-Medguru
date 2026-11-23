@@ -414,11 +414,6 @@ export default function ArcCardCarousel({
                   />
                   {/* Subtle vignette gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-
-                  {/* Top-left pill badge */}
-                  <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md text-white text-[10px] font-medium tracking-wider uppercase pointer-events-none">
-                    Service {String(idx + 1).padStart(2, "0")}
-                  </div>
                 </div>
               ))}
             </div>

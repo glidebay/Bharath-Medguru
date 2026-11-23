@@ -186,11 +186,6 @@ function TunnelCard({
           className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
         />
 
-        {/* Top Badge: Sequential Service Number */}
-        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-white text-[10px] font-mono tracking-widest uppercase pointer-events-none">
-          Service {String(card.index + 1).padStart(2, "0")}
-        </div>
-
         {/* Card Overlay with Title and Subtitle */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#1E3227] via-[#1E3227]/55 to-transparent flex flex-col justify-end p-4 sm:p-5">
           <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-[#9B8A3E] font-medium mb-1 drop-shadow-sm">
