@@ -80,6 +80,8 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
     if (!cards.length) return;
 
     const ctx = gsap.context(() => {
+      ScrollTrigger.refresh();
+
       cards.forEach((card, i) => {
         if (i < cards.length - 1) {
           const nextCard = cards[i + 1];
@@ -102,7 +104,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
   }, []);
 
   return (
-    <section id="session" className="py-12 sm:py-18 lg:py-28 bg-[#CBCFB8] relative overflow-hidden">
+    <section id="session" className="py-12 sm:py-18 lg:py-28 bg-[#CBCFB8] relative">
       {/* Ambient glass refraction glows isolated in an overflow-hidden backdrop */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/10 w-[550px] h-[400px] bg-white/35 rounded-full blur-3xl opacity-80" />
@@ -126,7 +128,7 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
         </div>
 
         {/* 3D Stacking Cards Deck (Overlaying Frosted Sage Glass Cards) */}
-        <div ref={containerRef} className="relative pb-12 sm:pb-16 lg:pb-24">
+        <div ref={containerRef} className="relative pb-16 sm:pb-24 lg:pb-32">
           {sessions.map((item, index) => {
             return (
               <div
@@ -137,9 +139,9 @@ export default function SessionsSection({ onBookPractitioner }: SessionsSectionP
                 }}
                 style={{
                   position: "sticky",
-                  top: `calc(76px + ${index * 14}px)`,
+                  top: `calc(76px + ${index * 16}px)`,
                   zIndex: index + 10,
-                  marginBottom: index === sessions.length - 1 ? "32px" : "8vh",
+                  marginBottom: index === sessions.length - 1 ? "32px" : "12vh",
                   transformOrigin: "top center",
                   background: "linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.30) 100%)",
                   backdropFilter: "blur(28px)",
