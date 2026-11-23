@@ -24,7 +24,7 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
       description:
         "Our licensed pharmacists meticulously review your prescription, verify availability from our certified branch inventory, and prepare 100% genuine sealed medicines with clear dosage instructions.",
       image:
-        "https://framerusercontent.com/images/aCqdBiZcEPK1pOkSLlwQgcYNE.png?width=464&height=330",
+        "/step-02-verification.jpg",
       reversed: true,
     },
     {
