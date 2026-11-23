@@ -33,7 +33,7 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
       description:
         "We safely dispatch your medicine order directly to your location with temperature-safe handling and prompt courier tracking, so you never miss a dose.",
       image:
-        "https://framerusercontent.com/images/IwBKwYFuoz1J3GZT94nyRs6HOjM.png?width=464&height=330",
+        "/step-03-delivery.jpg",
       reversed: false,
     },
   ];
