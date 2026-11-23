@@ -66,7 +66,7 @@ export default function TestimonialsSection() {
             <span>Customer Voices</span>
           </div>
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#1E3227]">
-            Trusted by Families Across Kerala
+            Trusted by Families Across India
           </h2>
           <p className="text-base sm:text-lg text-[#3F5447] font-light leading-relaxed">
             Real experiences from patients and caregivers across Kerala who rely on Bharath MedGuru for 100% genuine medicines, monthly refills, and prompt doorstep delivery.
