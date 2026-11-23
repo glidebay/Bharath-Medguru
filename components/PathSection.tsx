@@ -15,7 +15,7 @@ export default function PathSection({ onOpenBooking }: PathSectionProps) {
       description:
         "Walk into any of our neighborhood pharmacy branches, or simply submit an enquiry with your doctor's prescription via WhatsApp or our website from the comfort of your home.",
       image:
-        "https://framerusercontent.com/images/679tInF0XPNSXngXGtZkQWznfPs.png?width=464&height=330",
+        "/step-01-enquiry.jpg",
       reversed: false,
     },
     {
