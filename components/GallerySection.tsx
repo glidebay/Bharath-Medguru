@@ -33,7 +33,7 @@ const HEALTHCARE_SERVICES: ArcCardItem[] = [
     alt: "Bharath MedGuru Outpatient Doctor Consultations",
   },
   {
-    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
+    src: "/service-pharmacy-shelves.jpg",
     title: "Automated Diagnostic Laboratory",
     meta: "Supportive Diagnostics • Biochemistry, Pathology & Blood Screening",
     description:
