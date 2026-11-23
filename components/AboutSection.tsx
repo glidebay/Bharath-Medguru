@@ -21,7 +21,7 @@ export default function AboutSection({ onOpenBooking }: AboutSectionProps) {
             <div className="relative mx-auto max-w-[500px]">
               <div className="relative overflow-hidden rounded-[28px] border-4 border-white/50 shadow-xl bg-white/20 aspect-[588/564]">
                 <img
-                  src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=1200&q=80"
+                  src="/about-pharmacy-shelves.jpg"
                   alt="Bharath MedGuru Pharmacy Chain and Medicine Dispensing"
                   className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700 ease-out"
                   loading="lazy"
