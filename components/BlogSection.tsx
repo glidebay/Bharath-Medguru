@@ -53,7 +53,7 @@ const PHARMACY_CATEGORY_CARDS: PharmacyCategoryCardData[] = [
     title: "Prescription Drugs & Specialized Chronic Care",
     excerpt:
       "100% genuine medications for diabetes, cardiology, neurology, respiratory health, and chronic illness stored under strict temperature-controlled cold chains.",
-    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80",
+    image: "/chronic-care-pharmacy-shelves.jpg",
     alt: "Prescription Medicines and Chronic Disease Treatments at Bharath MedGuru",
     checklist: [
       "Diabetic Care (Insulins, Metformin, Gliptins)",
