@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Star, MessageSquareHeart } from "lucide-react";
+import { Star, MessageSquareHeart, User, CheckCircle2 } from "lucide-react";
 
 export default function TestimonialsSection() {
   const testimonials = [
@@ -11,7 +11,6 @@ export default function TestimonialsSection() {
       name: "Mathew Varghese",
       role: "Palakkad • Monthly Refill Customer",
       rating: 5,
-      image: "/customer-1.jpg",
       modality: "Cold-Chain Delivery",
     },
     {
@@ -20,7 +19,6 @@ export default function TestimonialsSection() {
       name: "Sujatha Warrier",
       role: "Kochi • Cardiac Care Caregiver",
       rating: 5,
-      image: "/customer-2.jpg",
       modality: "Prescription Care",
     },
     {
@@ -29,7 +27,6 @@ export default function TestimonialsSection() {
       name: "Dr. Radhakrishnan Nair",
       role: "Kozhikode • Regular Family Customer",
       rating: 5,
-      image: "/customer-3.jpg",
       modality: "Monthly Refills",
     },
     {
@@ -38,7 +35,6 @@ export default function TestimonialsSection() {
       name: "Fathima Shihab",
       role: "Thrissur • Mother & Homemaker",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
       modality: "Prompt Dispatch",
     },
     {
@@ -47,7 +43,6 @@ export default function TestimonialsSection() {
       name: "Anoop Menon",
       role: "Thiruvananthapuram • Post-Op Recovery",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
       modality: "Genuine Medicines",
     },
   ];
@@ -117,16 +112,16 @@ export default function TestimonialsSection() {
 
               {/* Author Row */}
               <div className="flex items-center gap-3.5 pt-4 border-t border-[#1E3227]/10">
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-[#1E3227]/20"
-                  loading="lazy"
-                />
+                <div className="w-11 h-11 rounded-full bg-[#1E3227]/10 border border-[#1E3227]/15 flex items-center justify-center flex-shrink-0 text-[#1E3227] shadow-xs">
+                  <User className="w-5 h-5 text-[#1E3227]/85" />
+                </div>
                 <div>
-                  <h4 className="font-sans text-base font-semibold text-[#1E3227]">
-                    {item.name}
-                  </h4>
+                  <div className="flex items-center gap-1.5">
+                    <h4 className="font-sans text-base font-semibold text-[#1E3227]">
+                      {item.name}
+                    </h4>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#9B8A3E]" />
+                  </div>
                   <p className="text-xs text-[#3F5447]">{item.role}</p>
                 </div>
               </div>
